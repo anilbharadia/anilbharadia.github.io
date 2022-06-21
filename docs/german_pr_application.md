@@ -147,4 +147,18 @@ Got a letter with PIN on 2022.05.28
 
 Got the PR card on 2022.06.09
 
-        
+## Activated the OnlineID Function of the Resident Permit 
+
+Checked if my card is activated for the online ID function via AusweisApp2 android app.
+
+![](./images/AusweisApp2_check_card.png)
+
+So this confirms that online ID feature of my card is disabled. Hence I tried to activate it.
+![](./images/AusweisApp2_activation_attempt_failed.png)
+
+I found [here](https://www.ausweisapp.bund.de/en/online-identification/what-you-need) that there is anther way to activate, which is to visit Bürgeramt.
+![](./images/What if the eID function of my ID card is deactivated.png)
+
+I booked an appointment via the [Berlin service portal](https://service.berlin.de/dienstleistung/329830/)
+
+This is an upcoming appointment, I'll update the details after the visit to Bürgeramt
