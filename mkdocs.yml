@@ -1,3 +1,7 @@
 site_name: Anil Bharadia
 theme:
   name: material
+  features:
+    - navigation.instant
+nav:
+  - Git: git.md
