@@ -6,3 +6,5 @@ theme:
 nav:
   - Git: git.md
   - How I applied for German PR: german_pr_application.md
+markdown_extensions:
+  - attr_list

@@ -1,4 +1,10 @@
 
+# How I applied for German PR
+
+On 2019.03.01 I came to Germany and started my employment at Zalando.
+By the 2021.12.01 I was eligible to apply for PR with A1 level.
+
+I referred to the [Permanent settlement permit for EU Blue Card holders](https://service.berlin.de/dienstleistung/326556/en/){target=_blank} page on Berlin Service Portal to prepare the documents.
 
 ## Sent an email to Landesmt on 2022.03.20
 
@@ -34,9 +40,9 @@ Mit freundlichen Grüße,
 Anil Bharadia
 ```
 
-Details about attachments:
+Details about the attachments:
 
-`1. Reisepass und Blaue Karte`  A single PDF containing scan copy of:
+`1. Reisepass und Blaue Karte`  A single PDF containing the scan copies of:
     my current passport,
     my expired passport (which is mentioned in my blue card), 
     my blue card front and back page,
@@ -159,6 +165,6 @@ So this confirms that online ID feature of my card is disabled. Hence I tried to
 I found [here](https://www.ausweisapp.bund.de/en/online-identification/what-you-need) that there is anther way to activate, which is to visit Bürgeramt.
 ![](./images/What if the eID function of my ID card is deactivated.png)
 
-I booked an appointment via the [Berlin service portal](https://service.berlin.de/dienstleistung/329830/)
+I booked an appointment via the [Online-Ausweisfunktion (eID) - nachträglich aktivieren](https://service.berlin.de/dienstleistung/329830/) page on Berlin Service Portal
 
 This is an upcoming appointment, I'll update the details after the visit to Bürgeramt
