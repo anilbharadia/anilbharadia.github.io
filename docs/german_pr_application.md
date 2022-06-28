@@ -167,4 +167,30 @@ I found [here](https://www.ausweisapp.bund.de/en/online-identification/what-you-
 
 I booked an appointment via the [Online-Ausweisfunktion (eID) - nachträglich aktivieren](https://service.berlin.de/dienstleistung/329830/) page on Berlin Service Portal
 
-This is an upcoming appointment, I'll update the details after the visit to Bürgeramt
+I went to the Bürgeramt. The person from Burgeramt asked me if I received the card via mail. She said the cards sent via mail are not activated for online id function.
+Also she informed that she cannot activate the card, she can only reset the PIN. To activate I need to send and email to landesamt. I need to look at the letter that came along with the card, on that letter on the top right corner there will be the email id which I should send an email to. 
+
+(When I looked at that letter, it is also mentioned there that the OnlineId function is not activated. 🤦‍♂️)
+
+So I sent an email to the Landesamt.
+    
+    Subject: Antrag auf Aktivierung der Online-Ausweisfunktion für den elektronischen Aufenthaltstitel
+
+    Geschäftszeichen: {file number mentioned in the letter in the top right corner}
+
+    Sehr geehrter Herr {name of the person},
+
+    Mein Name ist Anil Bharadia (geboren am {DD.MM.YYYY}).
+    Ich habe kürzlich den elektronischen Aufenthaltstitel mit deaktivierter Online-Ausweisfunktion erhalten.
+
+    Ich habe versucht, den Aktivierungsbrief online zu bestellen, aber ich erhalte eine Meldung, dass meine Karte nicht unterstützt wird. Bitte sehen Sie sich den Screenshot unten an.
+    {image.png}
+
+    Ich habe dafür auch ein Bürgeramt aufgesucht, und die Antwort von dort war, Ihnen eine E-Mail zu schicken.
+
+    Können Sie mir bitte helfen, die Online-Ausweisfunktion zu aktivieren?
+
+    Ich freue mich auf deine Antwort.
+
+    Mit freundlichen Grüße,
+    Anil Bharadia
