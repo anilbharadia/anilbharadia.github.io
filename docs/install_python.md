@@ -51,3 +51,13 @@ source ~/.zshrc
 python --version  
 ```
 --> `Python 3.10.5`
+
+
+## Install poetry
+
+```sh
+curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+source $HOME/.poetry/env
+poetry --version
+```
+--> `Poetry version 1.1.13`
