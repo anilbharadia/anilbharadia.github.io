@@ -194,3 +194,40 @@ So I sent an email to the Landesamt.
 
     Mit freundlichen Grüße,
     Anil Bharadia
+
+
+I got a reply next day morning:
+
+    Sehr geehrter Herr Bharadia,
+
+    ich habe Ihnen gerade einen Termin gebucht. Bitte schauen Sie in Ihrem Email Postfach nach.
+
+    Mit freundlichen Grüßen
+    Im Auftrag
+    Herr {name}
+
+
+There was an email for Termin (2 months in future) with the following information:
+
+    Voraussetzungen / Erforderliche Unterlagen:
+
+    - Bestellung des eAT ist erfolgt
+        Ein Antrag auf Erteilung eines Aufenthaltstitels
+    (Aufenthaltserlaubnis, Blaue Karte EU, Niederlassungserlaubnis oder
+    Erlaubnis zum Daueraufenthalt-EU) muss positiv entschieden und der eAT
+    bei der Bundesdruckerei bestellt worden sein.
+
+    - Persönliche Abholung oder durch eine bevollmächtigte Person
+    - Pass oder Passersatz
+    - Bisheriger eAT
+        Soweit vorhanden, ist der eAT zum bisherigen Aufenthaltstitel
+    mitzubringen.
+
+    - Vollmacht und Pass / Personalausweis des oder der Bevollmächtigten
+        Der eAT kann durch eine bevollmächtigte Person abgeholt werden.
+
+
+    Kosten:
+    keine
+
+I will update after this visit.
