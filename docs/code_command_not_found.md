@@ -6,7 +6,7 @@
 
 ## Solution:
 
-from: https://stackoverflow.com/a/39604469s
+from: https://stackoverflow.com/a/39604469
 
 1. open vs code
 
