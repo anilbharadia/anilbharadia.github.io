@@ -9,4 +9,14 @@ pip install mkdocs-material
 ```
 
 ## Serve on local
-`mkdocs serve`
+
+```shell
+mkdocs serve
+```
+
+
+## Deploy to github pages
+
+```shell
+mkdocs gh-deploy
+```
