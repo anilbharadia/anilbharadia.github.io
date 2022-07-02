@@ -234,6 +234,20 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#find-the-schema-owner" class="md-nav__link">
+    Find the schema owner
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#find-the-table-owner" class="md-nav__link">
+    Find the table owner
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -251,6 +265,13 @@
 <h1 id="exasol">Exasol</h1>
 <h2 id="find-users-with-a-given-role">Find users with a given role</h2>
 <pre><code class="language-sql">select * from exa_dba_role_privs where granted_role = 'MY_ROLE';
+</code></pre>
+<h2 id="find-the-schema-owner">Find the schema owner</h2>
+<p>check the owner of the schema unsing:</p>
+<pre><code class="language-sql">select * from exa_schemas where schema_name = 'MY_SCHEMA';
+</code></pre>
+<h2 id="find-the-table-owner">Find the table owner</h2>
+<pre><code class="language-sql">select * from EXA_USER_TABLES where table_schema = 'MY_SCHEMA' and table_name = 'MY_TABLE';
 </code></pre>
 
               
