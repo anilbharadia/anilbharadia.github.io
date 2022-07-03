@@ -13,7 +13,7 @@
     
     
       
-        <title>Git - Anil Bharadia</title>
+        <title>Ubuntu - Create a new systemd service - Anil Bharadia</title>
       
     
     
@@ -60,7 +60,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#change-git-user-for-a-repository" class="md-skip">
+        <a href="#ubuntu-create-a-new-systemd-service" class="md-skip">
           Skip to content
         </a>
       
@@ -93,7 +93,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Git
+              Ubuntu - Create a new systemd service
             
           </span>
         </div>
@@ -177,69 +177,11 @@
 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Git
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../git/" class="md-nav__link">
         Git
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#change-git-user-for-a-repository" class="md-nav__link">
-    Change Git user for a repository
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#use-github-token" class="md-nav__link">
-    Use Github token
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#use-atom-as-a-git-editor" class="md-nav__link">
-    Use atom as a git editor
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#git-change-the-user-of-a-commit" class="md-nav__link">
-    git change the user of a commit
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -276,42 +218,8 @@
   
   
   
+    
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#change-git-user-for-a-repository" class="md-nav__link">
-    Change Git user for a repository
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#use-github-token" class="md-nav__link">
-    Use Github token
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#use-atom-as-a-git-editor" class="md-nav__link">
-    Use atom as a git editor
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#git-change-the-user-of-a-commit" class="md-nav__link">
-    git change the user of a commit
-  </a>
-  
-</li>
-      
-    </ul>
   
 </nav>
                   </div>
@@ -325,40 +233,7 @@
                 
 
 
-  <h1>Git</h1>
-
-<h2 id="change-git-user-for-a-repository">Change Git user for a repository</h2>
-<pre><code class="language-sh">git config user.name &quot;anilbhradia&quot;
-git config user.email &quot;anil.bharadia@gmail.com&quot;
-</code></pre>
-<h2 id="use-github-token">Use Github token</h2>
-<p>Open <code>nano .git/config</code></p>
-<p>Replace the following line</p>
-<pre><code>[remote &quot;origin&quot;]
-        url = https://github.com/anilbharadia/anilbharadia.github.io.git
-</code></pre>
-<p>With</p>
-<pre><code>[remote &quot;origin&quot;]
-        url = https://xxx@github.com/anilbharadia/anilbharadia.github.io.git
-</code></pre>
-<p>Where <code>xxx</code> is the token</p>
-<h2 id="use-atom-as-a-git-editor">Use atom as a git editor</h2>
-<pre><code class="language-shell">git config --global core.editor &quot;atom --wait&quot;
-</code></pre>
-<h2 id="git-change-the-user-of-a-commit">git change the user of a commit</h2>
-<p>Ref: https://stackoverflow.com/a/3042512</p>
-<p><code>git rebase -i HEAD~1</code></p>
-<p>This opened editor (atom) with content</p>
-<pre><code class="language-txt">pick 049c296 update instructions for local env setup in README.md
-
-# ...
-</code></pre>
-<p>Changed <code>pick</code> to <code>edit</code>, saved, and closed atom.</p>
-<p><code>git commit --amend --author="Author Name &lt;email@address.com&gt;"</code></p>
-<p>It opened editor again to set the commit message. Updated message, saved, and closed atom.</p>
-<p><code>git rebase --continue</code></p>
-<p><code>git push -f</code></p>
-<p>done.</p>
+<h1 id="ubuntu-create-a-new-systemd-service">Ubuntu - Create a new systemd service</h1>
 
               
             </article>
@@ -369,27 +244,6 @@ git config user.email &quot;anil.bharadia@gmail.com&quot;
       </main>
       
         <footer class="md-footer">
-  
-    
-    <nav class="md-footer__inner md-grid" aria-label="Footer" >
-      
-      
-        
-        <a href="../german_pr_application/" class="md-footer__link md-footer__link--next" aria-label="Next: How I applied for German PR" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              How I applied for German PR
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
