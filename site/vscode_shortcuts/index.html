@@ -13,7 +13,7 @@
     
     
       
-        <title>GPG Key - Anil Bharadia</title>
+        <title>VS Code shortcuts - Anil Bharadia</title>
       
     
     
@@ -60,7 +60,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#gpg-key" class="md-skip">
+        <a href="#vs-code-shortcuts" class="md-skip">
           Skip to content
         </a>
       
@@ -93,7 +93,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              GPG Key
+              VS Code shortcuts
             
           </span>
         </div>
@@ -228,29 +228,43 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#install-gpg" class="md-nav__link">
-    Install GPG
+  <a href="#open-cpmmand-palette" class="md-nav__link">
+    Open cpmmand palette
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#import-private-key" class="md-nav__link">
-    Import private key
+  <a href="#view-markdown-preview" class="md-nav__link">
+    View markdown preview
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#find-the-key-id" class="md-nav__link">
-    Find the key id
+  <a href="#copy-line" class="md-nav__link">
+    copy line
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#create-a-secring-file" class="md-nav__link">
-    Create a secring file
+  <a href="#move-line" class="md-nav__link">
+    Move line
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reveal-file-in-explorer" class="md-nav__link">
+    Reveal file in explorer
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-file" class="md-nav__link">
+    Delete file
   </a>
   
 </li>
@@ -269,39 +283,19 @@
                 
 
 
-<h1 id="gpg-key">GPG Key</h1>
-<p>check if gpg is installed </p>
-<p><code>gpg -h</code> -&gt; <code>zsh: command not found: gpg</code></p>
-<p>not installed.</p>
-<h2 id="install-gpg">Install GPG</h2>
-<pre><code class="language-shell">brew install gnupg
-</code></pre>
-<h2 id="import-private-key">Import private key</h2>
-<p>If you have it generared it in another machine.</p>
-<pre><code class="language-shell">gpg --import ~/Downloads/Secret.asc
-</code></pre>
-<h2 id="find-the-key-id">Find the key id</h2>
-<pre><code class="language-shell">gpg --list-keys
-</code></pre>
-<p>This prints following</p>
-<pre><code class="language-shell">/Users/abharadia/.gnupg/pubring.kbx
------------------------------------
-pub   rsa4096 2022-06-18 [SC] [expires: 2026-06-18]
-      ACACACACACACAC1111111111QQQQZZZZABCDEFGH
-uid           [ unknown] username &lt;user.name@gmail.com&gt;
-sub   rsa4096 2022-06-18 [E] [expires: 2026-06-18]
-</code></pre>
-<p>Here the last 8 characters <code>ABCDEFGH</code> is the key id</p>
-<h2 id="create-a-secring-file">Create a secring file</h2>
-<p>This can be used to sign the artifacts before publishing to maven repo.</p>
-<pre><code class="language-shell">gpg --keyring secring.gpg --export-secret-key ABCDEFGH &gt; secring.gpg
-</code></pre>
-<p>returns <code>gpg: keyblock resource '/Users/abharadia/.gnupg/secring.gpg': No such file or directory</code></p>
-<pre><code class="language-shell">gpg --export-secret-key ABCDEFGH &gt; secring.gpg
-</code></pre>
-<p>This worked</p>
-<h1 id="todo">TODO</h1>
-<p>How to generate GPG key to sign maven packages before publishing to maven central repo</p>
+<h1 id="vs-code-shortcuts">VS Code shortcuts</h1>
+<h2 id="open-cpmmand-palette">Open cpmmand palette</h2>
+<p><code>⌘</code> <code>⇧</code> <code>P</code></p>
+<h2 id="view-markdown-preview">View markdown preview</h2>
+<p><code>⌘</code> <code>⇧</code> <code>V</code></p>
+<h2 id="copy-line">copy line</h2>
+<p><code>⌥</code> <code>⇧</code> <code>↓</code> OR <code>⌥</code> <code>⇧</code> <code>↑</code></p>
+<h2 id="move-line">Move line</h2>
+<p><code>⌥</code> <code>↓</code> OR <code>⌥</code> <code>↑</code></p>
+<h2 id="reveal-file-in-explorer">Reveal file in explorer</h2>
+<p><code>⌘</code> <code>⇧</code> <code>P</code> -&gt; type <code>reveal</code> -&gt;  choose <code>reveal active file in explorer view</code></p>
+<h2 id="delete-file">Delete file</h2>
+<p><code>⌘</code> <code>⌫</code></p>
 
               
             </article>

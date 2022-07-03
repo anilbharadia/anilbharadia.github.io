@@ -11,3 +11,7 @@ or
 ```shell
 cat file.txt | pbcopy
 ```
+
+## Key Symbols
+
+`⇧` `⌃` `⌥` `⌘` `⌫` `⏎` `↑` `↓` `←` `→`
