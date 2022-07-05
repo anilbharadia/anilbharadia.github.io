@@ -13,7 +13,7 @@
     
     
       
-        <title>Fastai - Anil Bharadia</title>
+        <title>Python - Poetry - isort - No such file or directory ~/.local/bin/isort - Anil Bharadia</title>
       
     
     
@@ -60,7 +60,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#lesson-1" class="md-skip">
+        <a href="#python-poetry-isort-no-such-file-or-directory-localbinisort" class="md-skip">
           Skip to content
         </a>
       
@@ -93,7 +93,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Fastai
+              Python - Poetry - isort - No such file or directory ~/.local/bin/isort
             
           </span>
         </div>
@@ -218,6 +218,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -226,22 +228,16 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#lesson-1" class="md-nav__link">
-    Lesson 1
-  </a>
-  
-    <nav class="md-nav" aria-label="Lesson 1">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#error-installing-fastbook" class="md-nav__link">
-    Error installing fastbook
+  <a href="#problem-no-such-file-or-directory-localbinisort" class="md-nav__link">
+    Problem: No such file or directory ~/.local/bin/isort
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#solution" class="md-nav__link">
+    Solution
+  </a>
   
 </li>
       
@@ -259,72 +255,69 @@
                 
 
 
-  <h1>Fastai</h1>
-
-<p>course: https://course.fast.ai/</p>
-<h2 id="lesson-1">Lesson 1</h2>
-<ul>
-<li>
-<p>https://course.fast.ai/videos/?lesson=1</p>
-</li>
-<li>
-<p>https://www.youtube.com/watch?v=_QUEXsHfsA0</p>
-</li>
-</ul>
-<p>Source: https://github.com/fastai/fastbook</p>
-<h3 id="error-installing-fastbook">Error installing fastbook</h3>
-<pre><code>pip install fastbook
+<h1 id="python-poetry-isort-no-such-file-or-directory-localbinisort">Python - Poetry - isort - No such file or directory ~/.local/bin/isort</h1>
+<h2 id="problem-no-such-file-or-directory-localbinisort">Problem: No such file or directory ~/.local/bin/isort</h2>
+<pre><code class="language-shell">poetry run isort
 </code></pre>
 <p>returns</p>
-<pre><code>...
-Collecting MarkupSafe&gt;=2.0
-  Using cached MarkupSafe-2.1.1-cp310-cp310-macosx_10_9_universal2.whl (17 kB)
-Using legacy 'setup.py install' for sentencepiece, since package 'wheel' is not installed.
-Building wheels for collected packages: tokenizers
-  Building wheel for tokenizers (pyproject.toml) ... error
-  error: subprocess-exited-with-error
+<pre><code>  FileNotFoundError
 
-  × Building wheel for tokenizers (pyproject.toml) did not run successfully.
-  │ exit code: 1
-  ╰─&gt; [51 lines of output]
-      running bdist_wheel
-      running build
-      running build_py
-      creating build
-      creating build/lib.macosx-12.1-arm64-cpython-310
-      creating build/lib.macosx-12.1-arm64-cpython-310/tokenizers
-      copying py_src/tokenizers/__init__.py -&gt; build/lib.macosx-12.1-arm64-cpython-310/tokenizers
-      ...
-      copying py_src/tokenizers/tools/visualizer-styles.css -&gt; build/lib.macosx-12.1-arm64-cpython-310/tokenizers/tools
-      running build_ext
-      running build_rust
-      error: can't find Rust compiler
+  [Errno 2] No such file or directory: b'/Users/anil/.local/bin/isort'
 
-      If you are using an outdated pip version, it is possible a prebuilt wheel is available for this package but pip is not able to install from it. Installing from the wheel would avoid the need for a Rust compiler.
+  at ~/.pyenv/versions/3.10.5/lib/python3.10/os.py:607 in _execvpe
+       603│         path_list = map(fsencode, path_list)
+       604│     for dir in path_list:
+       605│         fullname = path.join(dir, file)
+       606│         try:
+    →  607│             exec_func(fullname, *argrest)
+       608│         except (FileNotFoundError, NotADirectoryError) as e:
+       609│             last_exc = e
+       610│         except OSError as e:
+       611│             last_exc = e
 
-      To update pip, run:
-
-          pip install --upgrade pip
-
-      and then retry package installation.
-
-      If you did intend to build this package from source, try installing a Rust compiler from your system package manager and ensure it is on the PATH during installation. Alternatively, rustup (available at https://rustup.rs) is the recommended way to download and update the Rust compiler toolchain.
-      [end of output]
-
-  note: This error originates from a subprocess, and is likely not a problem with pip.
-  ERROR: Failed building wheel for tokenizers
-Failed to build tokenizers
-ERROR: Could not build wheels for tokenizers, which is required to install pyproject.toml-based projects
-WARNING: You are using pip version 22.0.4; however, version 22.1.2 is available.
-You should consider upgrading via the '/Users/anil/github/fastai/fastbook/clean/venv/bin/python -m pip install --upgrade pip' command.
 </code></pre>
-<p>It seems I need to install rust compiler</p>
-<pre><code>curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+<h2 id="solution">Solution</h2>
+<p>Check if all the dependencies are installed properly.</p>
+<pre><code class="language-shell">poetry install
 </code></pre>
-<p>verify the installation via <code>rustc -h</code>. I needed to close and reopen terminal again.</p>
-<p>install again</p>
-<pre><code>pip install fastbook
+<p>returns</p>
+<pre><code>Installing dependencies from lock file
+
+Package operations: 323 installs, 1 update, 0 removals
+
+    • Installing numpy (1.21.1):
+...
+----------------------------------------
+    ERROR: Failed building wheel for numpy
+  Failed to build numpy
+  ERROR: Could not build wheels for numpy, which is required to install pyproject.toml-based projects
+  WARNING: You are using pip version 21.3.1; however, version 22.1.2 is available.
+  You should consider upgrading via the '/Users/anil/.../venv/bin/python -m pip install --upgrade pip' command.
+
+
+  at ~/.poetry/lib/poetry/utils/env.py:1195 in _run
+      1191│                 output = subprocess.check_output(
+      1192│                     cmd, stderr=subprocess.STDOUT, **kwargs
+      1193│                 )
+      1194│         except CalledProcessError as e:
+    → 1195│             raise EnvCommandError(e, input=input_)
+      1196│ 
+      1197│         return decode(output)
+      1198│ 
+      1199│     def execute(self, bin, *args, **kwargs):
 </code></pre>
+<p>try to install directly via pip</p>
+<pre><code class="language-shell">pip install numpy
+</code></pre>
+<p>and then try again</p>
+<pre><code class="language-shell">poetry install                                                                                                 
+</code></pre>
+<p>returns</p>
+<pre><code>Installing dependencies from lock file
+
+No dependencies to install or update
+</code></pre>
+<p>Done</p>
 
               
             </article>

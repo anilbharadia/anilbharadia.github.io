@@ -13,7 +13,7 @@
     
     
       
-        <title>Fastai - Anil Bharadia</title>
+        <title>Python create venv - Anil Bharadia</title>
       
     
     
@@ -60,7 +60,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#lesson-1" class="md-skip">
+        <a href="#create-a-new-venv" class="md-skip">
           Skip to content
         </a>
       
@@ -93,7 +93,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Fastai
+              Python create venv
             
           </span>
         </div>
@@ -226,22 +226,16 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#lesson-1" class="md-nav__link">
-    Lesson 1
-  </a>
-  
-    <nav class="md-nav" aria-label="Lesson 1">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#error-installing-fastbook" class="md-nav__link">
-    Error installing fastbook
+  <a href="#create-a-new-venv" class="md-nav__link">
+    create a new venv
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#activate-it" class="md-nav__link">
+    activate it
+  </a>
   
 </li>
       
@@ -259,71 +253,14 @@
                 
 
 
-  <h1>Fastai</h1>
+  <h1>Python create venv</h1>
 
-<p>course: https://course.fast.ai/</p>
-<h2 id="lesson-1">Lesson 1</h2>
-<ul>
-<li>
-<p>https://course.fast.ai/videos/?lesson=1</p>
-</li>
-<li>
-<p>https://www.youtube.com/watch?v=_QUEXsHfsA0</p>
-</li>
-</ul>
-<p>Source: https://github.com/fastai/fastbook</p>
-<h3 id="error-installing-fastbook">Error installing fastbook</h3>
-<pre><code>pip install fastbook
+<h2 id="create-a-new-venv">create a new venv</h2>
+<pre><code class="language-shell">python -m venv venv
 </code></pre>
-<p>returns</p>
-<pre><code>...
-Collecting MarkupSafe&gt;=2.0
-  Using cached MarkupSafe-2.1.1-cp310-cp310-macosx_10_9_universal2.whl (17 kB)
-Using legacy 'setup.py install' for sentencepiece, since package 'wheel' is not installed.
-Building wheels for collected packages: tokenizers
-  Building wheel for tokenizers (pyproject.toml) ... error
-  error: subprocess-exited-with-error
-
-  × Building wheel for tokenizers (pyproject.toml) did not run successfully.
-  │ exit code: 1
-  ╰─&gt; [51 lines of output]
-      running bdist_wheel
-      running build
-      running build_py
-      creating build
-      creating build/lib.macosx-12.1-arm64-cpython-310
-      creating build/lib.macosx-12.1-arm64-cpython-310/tokenizers
-      copying py_src/tokenizers/__init__.py -&gt; build/lib.macosx-12.1-arm64-cpython-310/tokenizers
-      ...
-      copying py_src/tokenizers/tools/visualizer-styles.css -&gt; build/lib.macosx-12.1-arm64-cpython-310/tokenizers/tools
-      running build_ext
-      running build_rust
-      error: can't find Rust compiler
-
-      If you are using an outdated pip version, it is possible a prebuilt wheel is available for this package but pip is not able to install from it. Installing from the wheel would avoid the need for a Rust compiler.
-
-      To update pip, run:
-
-          pip install --upgrade pip
-
-      and then retry package installation.
-
-      If you did intend to build this package from source, try installing a Rust compiler from your system package manager and ensure it is on the PATH during installation. Alternatively, rustup (available at https://rustup.rs) is the recommended way to download and update the Rust compiler toolchain.
-      [end of output]
-
-  note: This error originates from a subprocess, and is likely not a problem with pip.
-  ERROR: Failed building wheel for tokenizers
-Failed to build tokenizers
-ERROR: Could not build wheels for tokenizers, which is required to install pyproject.toml-based projects
-WARNING: You are using pip version 22.0.4; however, version 22.1.2 is available.
-You should consider upgrading via the '/Users/anil/github/fastai/fastbook/clean/venv/bin/python -m pip install --upgrade pip' command.
-</code></pre>
-<p>It seems I need to install rust compiler</p>
-<pre><code>curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-</code></pre>
-<p>verify the installation via <code>rustc -h</code>. I needed to close and reopen terminal again.</p>
-<p>install again</p>
-<pre><code>pip install fastbook
+<p>creates a directory <code>venv</code> in current directory</p>
+<h2 id="activate-it">activate it</h2>
+<pre><code class="language-shell">source ./venv/bin/activate
 </code></pre>
 
               
