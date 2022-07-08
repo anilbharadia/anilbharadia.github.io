@@ -13,7 +13,7 @@
     
     
       
-        <title>IDEA Shortcuts - Anil Bharadia</title>
+        <title>mkdocs serve use another different port - Anil Bharadia</title>
       
     
     
@@ -60,7 +60,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#idea-shortcuts" class="md-skip">
+        <a href="#mkdocs-serve-use-another-different-port" class="md-skip">
           Skip to content
         </a>
       
@@ -93,7 +93,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              IDEA Shortcuts
+              mkdocs serve use another different port
             
           </span>
         </div>
@@ -221,21 +221,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#idea-navigate-through-the-changes-in-the-file" class="md-nav__link">
-    Idea - Navigate through the changes in the file
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -248,10 +233,16 @@
                 
 
 
-<h1 id="idea-shortcuts">IDEA Shortcuts</h1>
-<h2 id="idea-navigate-through-the-changes-in-the-file">Idea - Navigate through the changes in the file</h2>
-<p>idea move to the next change</p>
-<p><code>⌃</code> <code>⌥</code> <code>⇧</code> <code>↓</code> or <code>⌃</code> <code>⌥</code> <code>⇧</code> <code>↑</code></p>
+<h1 id="mkdocs-serve-use-another-different-port">mkdocs serve use another different port</h1>
+<pre><code class="language-shell">$ mkdocs serve
+INFO     -  Building documentation...
+INFO     -  Cleaning site directory
+INFO     -  Documentation built in 0.62 seconds
+OSError: [Errno 48] Address already in use
+</code></pre>
+<pre><code class="language-shell">$ mkdocs serve -a localhost:9000
+</code></pre>
+<p>worked!</p>
 
               
             </article>
