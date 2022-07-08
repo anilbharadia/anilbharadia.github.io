@@ -24,3 +24,7 @@
 ## Delete file
 
 `⌘` `⌫`
+
+## vscode change / switch editor tab or files
+
+`⌘` `⌥` `←` or `⌘` `⌥` `→`

@@ -11,7 +11,7 @@ Returns
 ```shell
   FileNotFoundError
 
-  [Errno 2] No such file or directory: b'/Users/abharadia/.local/bin/black'
+  [Errno 2] No such file or directory: b'~/.local/bin/black'
 
   at ~/.pyenv/versions/3.10.5/lib/python3.10/os.py:607 in _execvpe
        603│         path_list = map(fsencode, path_list)

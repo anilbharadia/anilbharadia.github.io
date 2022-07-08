@@ -248,6 +248,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#exasol-any-true" class="md-nav__link">
+    Exasol any true
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -273,6 +280,48 @@
 <h2 id="find-the-table-owner">Find the table owner</h2>
 <pre><code class="language-sql">select * from EXA_USER_TABLES where table_schema = 'MY_SCHEMA' and table_name = 'MY_TABLE';
 </code></pre>
+<h2 id="exasol-any-true">Exasol any true</h2>
+<p><a href="https://docs.exasol.com/db/latest/sql_references/functions/alphabeticallistfunctions/any.htm">ref</a></p>
+<pre><code class="language-sql">with
+    base(dept, name, is_tech) as (
+        values
+            ('D1', 'P1', true), ('D1', 'P2', false),
+            ('D2', 'P3', false), ('D2', 'P4', false),
+            ('D3', 'P5', null),
+            ('D4', 'P6', false), ('D4', 'P7', null)
+    )
+select dept, any(is_tech) as is_any_tech
+from base
+group by dept
+order by dept;
+</code></pre>
+<p>returns</p>
+<table>
+<thead>
+<tr>
+<th>DEPT</th>
+<th>IS_ANY_TECH</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D1</td>
+<td>true</td>
+</tr>
+<tr>
+<td>D2</td>
+<td>false</td>
+</tr>
+<tr>
+<td>D3</td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td>D4</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
 
               
             </article>

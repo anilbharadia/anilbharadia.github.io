@@ -17,12 +17,12 @@ Package operations: 1 install, 0 updates, 0 removals
 
   EnvCommandError
 
-  Command ['/Users/anil/.../venv/bin/pip', 'install', '--no-deps', 'file:///Users/anil/Library/Caches/pypoetry/artifacts/.../psycopg2-binary-2.9.3.tar.gz'] errored with the following return code 1, and output: 
-  Processing /Users/anil/Library/Caches/pypoetry/artifacts/.../psycopg2-binary-2.9.3.tar.gz
+  Command ['~/.../venv/bin/pip', 'install', '--no-deps', 'file://~/Library/Caches/pypoetry/artifacts/.../psycopg2-binary-2.9.3.tar.gz'] errored with the following return code 1, and output: 
+  Processing ~/Library/Caches/pypoetry/artifacts/.../psycopg2-binary-2.9.3.tar.gz
     Preparing metadata (setup.py): started
     Preparing metadata (setup.py): finished with status 'error'
     ERROR: Command errored out with exit status 1:
-     command: /Users/anil/.../venv/bin/python -c 'import io, os, sys, setuptools, tokenize; sys.argv[0] = '"'"'/private/var/folders/47/.../T/pip-req-build-lvsj6n0r/setup.py'"'"'; __file__='"'"'/private/var/folders/47/.../T/pip-req-build-lvsj6n0r/setup.py'"'"';f = getattr(tokenize, '"'"'open'"'"', open)(__file__) if os.path.exists(__file__) else io.StringIO('"'"'from setuptools import setup; setup()'"'"');code = f.read().replace('"'"'\r\n'"'"', '"'"'\n'"'"');f.close();exec(compile(code, __file__, '"'"'exec'"'"'))' egg_info --egg-base /private/var/folders/47/.../T/pip-pip-egg-info-lgklgcy5
+     command: ~/.../venv/bin/python -c 'import io, os, sys, setuptools, tokenize; sys.argv[0] = '"'"'/private/var/folders/47/.../T/pip-req-build-lvsj6n0r/setup.py'"'"'; __file__='"'"'/private/var/folders/47/.../T/pip-req-build-lvsj6n0r/setup.py'"'"';f = getattr(tokenize, '"'"'open'"'"', open)(__file__) if os.path.exists(__file__) else io.StringIO('"'"'from setuptools import setup; setup()'"'"');code = f.read().replace('"'"'\r\n'"'"', '"'"'\n'"'"');f.close();exec(compile(code, __file__, '"'"'exec'"'"'))' egg_info --egg-base /private/var/folders/47/.../T/pip-pip-egg-info-lgklgcy5
          cwd: /private/var/folders/47/.../T/pip-req-build-lvsj6n0r/
     Complete output (20 lines):
     running egg_info
@@ -46,10 +46,10 @@ Package operations: 1 install, 0 updates, 0 removals
     <https://www.psycopg.org/docs/install.html>).
     
     ----------------------------------------
-  WARNING: Discarding file:///Users/anil/Library/Caches/pypoetry/artifacts/ba/42/10/.../psycopg2-binary-2.9.3.tar.gz. Command errored out with exit status 1: python setup.py egg_info Check the logs for full command output.
+  WARNING: Discarding file://~/Library/Caches/pypoetry/artifacts/ba/42/10/.../psycopg2-binary-2.9.3.tar.gz. Command errored out with exit status 1: python setup.py egg_info Check the logs for full command output.
   ERROR: Command errored out with exit status 1: python setup.py egg_info Check the logs for full command output.
   WARNING: You are using pip version 21.3.1; however, version 22.1.2 is available.
-  You should consider upgrading via the '/Users/anil/.../venv/bin/python -m pip install --upgrade pip' command.
+  You should consider upgrading via the '~/.../venv/bin/python -m pip install --upgrade pip' command.
   
 
   at ~/.poetry/lib/poetry/utils/env.py:1195 in _run
