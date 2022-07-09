@@ -13,7 +13,7 @@
     
     
       
-        <title>Ubuntu - Create a new systemd service - Anil Bharadia</title>
+        <title>Ubuntu - Enable ssh from local network - Anil Bharadia</title>
       
     
     
@@ -60,7 +60,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#ubuntu-create-a-new-systemd-service" class="md-skip">
+        <a href="#ubuntu-enable-ssh-from-local-network" class="md-skip">
           Skip to content
         </a>
       
@@ -93,7 +93,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Ubuntu - Create a new systemd service
+              Ubuntu - Enable ssh from local network
             
           </span>
         </div>
@@ -233,38 +233,20 @@
                 
 
 
-<h1 id="ubuntu-create-a-new-systemd-service">Ubuntu - Create a new systemd service</h1>
-<h1 id="how-to-create-a-new-systemd-service-on-ubuntu">How to create a new systemd service on ubuntu</h1>
-<p>create a file <code>/etc/systemd/system/my-app.service</code> with the following content</p>
-<pre><code class="language-service">[Unit]
-Description=My Service 
-After=network.target
-
-
-[Service]
-Environment=&quot;HOME=/root&quot;
-EnvironmentFile=/home/anil/prod.env
-ExecStart=/home/anil/jdk-15.0.1/bin/java -jar /home/anil/my-app.jar
-Type=simple
-Restart=always
-
-[Install]
-WantedBy=default.target
+<h1 id="ubuntu-enable-ssh-from-local-network">Ubuntu - Enable ssh from local network</h1>
+<p>How can I ssh into a ubuntu machine which is connected to the same wifi?</p>
+<p>try</p>
+<pre><code class="language-shell">$ ssh anil@192.168.0.20
+ssh: connect to host 192.168.0.20 port 22: Connection refused
 </code></pre>
-<p>Check if the service is created:</p>
-<pre><code class="language-shell">$ systemctl status my-app.service
-● my-app.service - My Service
-     Loaded: loaded (/etc/systemd/system/my-app.service; disabled; vendor preset: enabled)
-     Active: inactive (dead)
+<p>Install openssh server on ubuntu.</p>
+<pre><code class="language-shell">sudo apt-get install openssh-server
 </code></pre>
-<p>Create aliases to manage service</p>
-<pre><code class="language-shell">echo &quot;alias myapp-status='systemctl status my-app.service'&quot; &gt;&gt; ~/.bashrc
-echo &quot;alias myapp-start='systemctl start my-app.service'&quot; &gt;&gt; ~/.bashrc
-echo &quot;alias myapp-restart='systemctl restart my-app.service'&quot; &gt;&gt; ~/.bashrc
-echo &quot;alias myapp-stop='systemctl stop my-app.service'&quot; &gt;&gt; ~/.bashrc
-echo &quot;alias myapp-logs='journalctl -u my-app.service -e -f'&quot; &gt;&gt; ~/.bashrc
+<p>try again:</p>
+<pre><code class="language-shell">$ ssh anil@192.168.0.20
+anil@anil-notebook:~$ 
 </code></pre>
-<p>ref: <a href="https://manpages.ubuntu.com/manpages/focal/man5/systemd.service.5.html">manpage</a></p>
+<p>It worked!</p>
 
               
             </article>
