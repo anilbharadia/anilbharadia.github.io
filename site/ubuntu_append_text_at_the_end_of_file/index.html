@@ -13,7 +13,7 @@
     
     
       
-        <title>Ubuntu - Create a new systemd service - Anil Bharadia</title>
+        <title>Ubuntu append text at the end of file - Anil Bharadia</title>
       
     
     
@@ -59,11 +59,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#ubuntu-create-a-new-systemd-service" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -93,7 +88,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Ubuntu - Create a new systemd service
+              Ubuntu append text at the end of file
             
           </span>
         </div>
@@ -218,8 +213,6 @@
   
   
   
-    
-  
   
 </nav>
                   </div>
@@ -233,38 +226,9 @@
                 
 
 
-<h1 id="ubuntu-create-a-new-systemd-service">Ubuntu - Create a new systemd service</h1>
-<h1 id="how-to-create-a-new-systemd-service-on-ubuntu">How to create a new systemd service on ubuntu</h1>
-<p>create a file <code>/etc/systemd/system/my-app.service</code> with the following content</p>
-<pre><code class="language-service">[Unit]
-Description=My Service 
-After=network.target
+  <h1>Ubuntu append text at the end of file</h1>
 
-
-[Service]
-Environment=&quot;HOME=/root&quot;
-EnvironmentFile=/home/anil/prod.env
-ExecStart=/home/anil/jdk-15.0.1/bin/java -jar /home/anil/my-app.jar
-Type=simple
-Restart=always
-
-[Install]
-WantedBy=default.target
-</code></pre>
-<p>Check if the service is created:</p>
-<pre><code class="language-shell">$ systemctl status my-app.service
-● my-app.service - My Service
-     Loaded: loaded (/etc/systemd/system/my-app.service; disabled; vendor preset: enabled)
-     Active: inactive (dead)
-</code></pre>
-<p>Create aliases to manage service</p>
-<pre><code class="language-shell">echo &quot;alias myapp-status='systemctl status my-app.service'&quot; &gt;&gt; ~/.bashrc
-echo &quot;alias myapp-start='systemctl start my-app.service'&quot; &gt;&gt; ~/.bashrc
-echo &quot;alias myapp-restart='systemctl restart my-app.service'&quot; &gt;&gt; ~/.bashrc
-echo &quot;alias myapp-stop='systemctl stop my-app.service'&quot; &gt;&gt; ~/.bashrc
-echo &quot;alias myapp-logs='journalctl -u my-app.service -e -f'&quot; &gt;&gt; ~/.bashrc
-</code></pre>
-<p>ref: <a href="https://manpages.ubuntu.com/manpages/focal/man5/systemd.service.5.html">manpage</a></p>
+<p>echo "alias myapp-status='systemctl status my-app.service'" &gt;&gt; ~/.bashrc</p>
 
               
             </article>
