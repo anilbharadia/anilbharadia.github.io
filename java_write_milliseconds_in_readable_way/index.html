@@ -13,7 +13,7 @@
     
     
       
-        <title>Java create a new thread with executor - Anil Bharadia</title>
+        <title>Java write milliseconds in a readable way - Anil Bharadia</title>
       
     
     
@@ -60,7 +60,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#java-create-a-new-thread-with-executor" class="md-skip">
+        <a href="#java-write-milliseconds-in-a-readable-way" class="md-skip">
           Skip to content
         </a>
       
@@ -93,7 +93,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Java create a new thread with executor
+              Java write milliseconds in a readable way
             
           </span>
         </div>
@@ -233,7 +233,24 @@
                 
 
 
-<h1 id="java-create-a-new-thread-with-executor">Java create a new thread with executor</h1>
+<h1 id="java-write-milliseconds-in-a-readable-way">Java write milliseconds in a readable way</h1>
+<p>While writing java code where let's say I need to pass an argument which takes milliseconds. </p>
+<p>example:</p>
+<pre><code class="language-kt">import java.util.Timer
+
+Timer(&quot;refresher&quot;, true).schedule(refresh(), 300000)
+</code></pre>
+<p>I find that confusing about what does <code>300000</code> mean. </p>
+<p>I know it is millis but it doesn't click immediately what duration it represents. </p>
+<p>One alternative is </p>
+<pre><code class="language-kt">Timer(&quot;refresher&quot;, true).schedule(refresh(), 1000*60*5)
+</code></pre>
+<p>This give a hint that it is 5 minutes. However, it still puts a small cognitive load.</p>
+<p>A better alternative is </p>
+<pre><code class="language-kt">import java.util.concurrent.TimeUnit
+
+Timer(&quot;refresher&quot;, true).schedule(refresh(), TimeUnit.MINUTES.toMillis(5))
+</code></pre>
 
               
             </article>
