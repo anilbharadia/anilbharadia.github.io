@@ -229,8 +229,8 @@
   <h1>Gradle dependency import incompatible error</h1>
 
 <p>added <code>implementation("io.github.xxx:xxx:0.2.0")</code> as dependency and run <code>Refresh Dradle Depenceies</code> from idea.</p>
-<pre><code>Incompatible because this component declares an API of a component compatible with Java 18 and the consumer needed a runtime of a component compatible with Java 16
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Incompatible because this component declares an API of a component compatible with Java 18 and the consumer needed a runtime of a component compatible with Java 16
+</code></pre></div>
 <p>Running <code>./gradlew clean build</code> is wrking fine.</p>
 <p>It seems idea is using different jdk than terminal. It was.</p>
 <p>Changed the SDK from idea settings, from 16 to 18. And try again.</p>

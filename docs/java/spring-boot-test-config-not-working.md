@@ -2,7 +2,7 @@
 
 I have a class that defines the mock beans for test
 
-```kt
+``` kotlin
 import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.zalando.fahrschein.NakadiClient
@@ -12,12 +12,11 @@ class NakadiTestConfig {
 
     @MockBean(name = "nakadiClient")
     private lateinit var nakadiClient: NakadiClient
-
 ```
 
 And a base integration test class like this, that other integration tests extend to: 
 
-```kt
+``` kotlin
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
 abstract class BaseIntegrationTest {
@@ -30,7 +29,7 @@ When I run the tests, the `nakadiClient` bean defined in the `NakadiTestConfig` 
 
 Import the `@TestConfiguration` class to `@SpringBootTest` class
 
-```kt
+``` kotlin title="BaseIntegrationTest.kt"
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import(NakadiTestConfig::class)
 @ActiveProfiles("test")

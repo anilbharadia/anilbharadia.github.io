@@ -259,10 +259,10 @@
 <p>After installing homebrew, I am geting this error:
 Getting error: <code>zsh: command not found: brew</code></p>
 <h2 id="solution">Solution:</h2>
-<p>Run</p>
-<pre><code class="language-sh">echo 'eval $(/opt/homebrew/bin/brew shellenv)' &gt;&gt; /Users/$USER/.zshrc
-source ~/.zshrc
-</code></pre>
+<p>Run
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">echo</span> <span class="s1">&#39;eval $(/opt/homebrew/bin/brew shellenv)&#39;</span> &gt;&gt; /Users/<span class="nv">$USER</span>/.zshrc
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">source</span> ~/.zshrc
+</code></pre></div></p>
 <p>Notes: brew was intalled in <code>/opt/homebrew/</code> location which was not added to the path automatically.</p>
 <p>Reference: https://stackoverflow.com/q/36657321</p>
 

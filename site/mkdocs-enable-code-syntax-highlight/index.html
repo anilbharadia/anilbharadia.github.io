@@ -13,7 +13,7 @@
     
     
       
-        <title>Mac Shortcuts - Anil Bharadia</title>
+        <title>MkDocs Material - Enable code syntax highlights - Anil Bharadia</title>
       
     
     
@@ -60,7 +60,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#mac-shortcuts" class="md-skip">
+        <a href="#mkdocs-material-enable-code-syntax-highlights" class="md-skip">
           Skip to content
         </a>
       
@@ -93,7 +93,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Mac Shortcuts
+              MkDocs Material - Enable code syntax highlights
             
           </span>
         </div>
@@ -221,42 +221,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#copy-file-content-to-clipboard" class="md-nav__link">
-    copy file content to clipboard
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#key-symbols" class="md-nav__link">
-    Key Symbols
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#show-hidden-files" class="md-nav__link">
-    Show hidden files
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#mac-enable-function-keys-by-default" class="md-nav__link">
-    mac - enable function keys by default
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -269,33 +233,25 @@
                 
 
 
-<h1 id="mac-shortcuts">Mac Shortcuts</h1>
-<h2 id="copy-file-content-to-clipboard">copy file content to clipboard</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pbcopy &lt; file.txt
+<h1 id="mkdocs-material-enable-code-syntax-highlights">MkDocs Material - Enable code syntax highlights</h1>
+<p>The code block in mkdocs code block are not highlighted with different colors.
+All the text is shown as grey like this:</p>
+<p><img alt="" src="../images/mkdocs/mkdocs-highlight-disabled.png" /></p>
+<p>Add following lines to <code>mkdocs.yml</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">markdown_extensions</span><span class="p">:</span><span class="w"></span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">pymdownx.highlight</span><span class="p">:</span><span class="w"></span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">      </span><span class="nt">anchor_linenums</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pymdownx.inlinehilite</span><span class="w"></span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pymdownx.snippets</span><span class="w"></span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pymdownx.superfences</span><span class="w"></span>
 </code></pre></div>
-<p>or</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>cat file.txt <span class="p">|</span> pbcopy
-</code></pre></div>
-<h2 id="key-symbols">Key Symbols</h2>
-<p><code>⇧</code> <code>⌃</code> <code>⌥</code> <code>⌘</code> <code>⌫</code> <code>⏎</code> <code>↑</code> <code>↓</code> <code>←</code> <code>→</code> <code></code></p>
-<h2 id="show-hidden-files">Show hidden files</h2>
-<p><code>⌘</code> <code>⇧</code> <code>.</code></p>
-<h2 id="mac-enable-function-keys-by-default">mac - enable function keys by default</h2>
-<p>ref: https://support.feralinteractive.com/en/faqs/fkeys/</p>
-<ul>
-<li>
-<p>Open System Preferences (<code></code> → <code>System Preferences...</code>).</p>
-</li>
-<li>
-<p>Select <code>Keyboard</code> (or <code>Keyboard and Mouse</code> depending on the version of Mac OS X you are running).</p>
-</li>
-<li>
-<p>Select the <code>Keyboard</code> tab.</p>
-</li>
-<li>
-<p>Check the checkbox <code>Use F1, F2, etc. keys as standard function keys</code></p>
-</li>
-</ul>
+<p>Still it did not work.</p>
+<p>It worked when I replaced<br />
+<code>```kt</code> </p>
+<p>with </p>
+<p><code>``` kotlin</code></p>
+<p><img alt="" src="../images/mkdocs/mkdocs-highlight-enabled.png" /></p>
+<p>ref: https://squidfunk.github.io/mkdocs-material/reference/code-blocks/</p>
 
               
             </article>

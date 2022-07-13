@@ -234,39 +234,39 @@
 
 
 <h1 id="gradle-build-failed-could-not-create-an-instance-of-type-orggradleinitializationdefaultsettings_decorated">Gradle build failed - Could not create an instance of type org.gradle.initialization.DefaultSettings_Decorated</h1>
-<pre><code class="language-shell">$ ./gradlew clean build
-
-FAILURE: Build failed with an exception.
-
-* What went wrong:
-Could not create an instance of type org.gradle.initialization.DefaultSettings_Decorated.
-&gt; Could not initialize class org.codehaus.groovy.runtime.InvokerHelper
-
-* Try:
-Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output. Run with --scan to get full insights.
-
-* Get more help at https://help.gradle.org
-
-BUILD FAILED in 0s
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$ ./gradlew clean build
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>FAILURE: Build failed with an exception.
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>* What went wrong:
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>Could not create an instance of <span class="nb">type</span> org.gradle.initialization.DefaultSettings_Decorated.
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>&gt; Could not initialize class org.codehaus.groovy.runtime.InvokerHelper
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>* Try:
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output. Run with --scan to get full insights.
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>* Get more <span class="nb">help</span> at https://help.gradle.org
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>BUILD FAILED <span class="k">in</span> 0s
+</code></pre></div>
 <p><a href="https://discuss.gradle.org/t/could-not-create-an-instance-of-type-org-gradle-initialization-defaultsettings-decorated/37349">This post</a> suggest to update gradle wrapper.</p>
 <p>Check the current version:</p>
-<pre><code class="language-shell">$ ./gradlew -version
-
-------------------------------------------------------------
-Gradle 5.0
-------------------------------------------------------------
-
-Build time:   2018-11-26 11:48:43 UTC
-Revision:     7fc6e5abf2fc5fe0824aec8a0f5462664dbcd987
-
-Kotlin DSL:   1.0.4
-Kotlin:       1.3.10
-Groovy:       2.5.4
-Ant:          Apache Ant(TM) version 1.9.13 compiled on July 10 2018
-JVM:          18.0.1.1 (Homebrew 18.0.1.1+0)
-OS:           Mac OS X 12.4 aarch64
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$ ./gradlew -version
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>------------------------------------------------------------
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>Gradle <span class="m">5</span>.0
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>------------------------------------------------------------
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>Build time:   <span class="m">2018</span>-11-26 <span class="m">11</span>:48:43 UTC
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>Revision:     7fc6e5abf2fc5fe0824aec8a0f5462664dbcd987
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>Kotlin DSL:   <span class="m">1</span>.0.4
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>Kotlin:       <span class="m">1</span>.3.10
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>Groovy:       <span class="m">2</span>.5.4
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>Ant:          Apache Ant<span class="o">(</span>TM<span class="o">)</span> version <span class="m">1</span>.9.13 compiled on July <span class="m">10</span> <span class="m">2018</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>JVM:          <span class="m">18</span>.0.1.1 <span class="o">(</span>Homebrew <span class="m">18</span>.0.1.1+0<span class="o">)</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>OS:           Mac OS X <span class="m">12</span>.4 aarch64
+</code></pre></div>
 
               
             </article>

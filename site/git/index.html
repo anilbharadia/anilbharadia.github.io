@@ -328,31 +328,31 @@
   <h1>Git</h1>
 
 <h2 id="change-git-user-for-a-repository">Change Git user for a repository</h2>
-<pre><code class="language-sh">git config user.name &quot;anilbhradia&quot;
-git config user.email &quot;anil.bharadia@gmail.com&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git config user.name <span class="s2">&quot;anilbhradia&quot;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>git config user.email <span class="s2">&quot;anil.bharadia@gmail.com&quot;</span>
+</code></pre></div>
 <h2 id="use-github-token">Use Github token</h2>
 <p>Open <code>nano .git/config</code></p>
-<p>Replace the following line</p>
-<pre><code>[remote &quot;origin&quot;]
-        url = https://github.com/anilbharadia/anilbharadia.github.io.git
-</code></pre>
-<p>With</p>
-<pre><code>[remote &quot;origin&quot;]
-        url = https://xxx@github.com/anilbharadia/anilbharadia.github.io.git
-</code></pre>
-<p>Where <code>xxx</code> is the token</p>
+<p>Replace the following line
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>[remote &quot;origin&quot;]
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>        url = https://github.com/anilbharadia/anilbharadia.github.io.git
+</code></pre></div>
+With
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>[remote &quot;origin&quot;]
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>        url = https://xxx@github.com/anilbharadia/anilbharadia.github.io.git
+</code></pre></div>
+Where <code>xxx</code> is the token</p>
 <h2 id="use-atom-as-a-git-editor">Use atom as a git editor</h2>
-<pre><code class="language-shell">git config --global core.editor &quot;atom --wait&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>git config --global core.editor <span class="s2">&quot;atom --wait&quot;</span>
+</code></pre></div>
 <h2 id="git-change-the-user-of-a-commit">git change the user of a commit</h2>
 <p>Ref: https://stackoverflow.com/a/3042512</p>
 <p><code>git rebase -i HEAD~1</code></p>
-<p>This opened editor (atom) with content</p>
-<pre><code class="language-txt">pick 049c296 update instructions for local env setup in README.md
-
-# ...
-</code></pre>
+<p>This opened editor (atom) with content
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>pick 049c296 update instructions for local env setup in README.md
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a># ...
+</code></pre></div></p>
 <p>Changed <code>pick</code> to <code>edit</code>, saved, and closed atom.</p>
 <p><code>git commit --amend --author="Author Name &lt;email@address.com&gt;"</code></p>
 <p>It opened editor again to set the commit message. Updated message, saved, and closed atom.</p>

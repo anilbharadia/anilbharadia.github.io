@@ -235,22 +235,22 @@
 
 <h1 id="java-write-milliseconds-in-a-readable-way">Java write milliseconds in a readable way</h1>
 <p>While writing java code where let's say I need to pass an argument which takes milliseconds. </p>
-<p>example:</p>
-<pre><code class="language-kt">import java.util.Timer
-
-Timer(&quot;refresher&quot;, true).schedule(refresh(), 300000)
-</code></pre>
+<p>example:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>import java.util.Timer
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Timer(&quot;refresher&quot;, true).schedule(refresh(), 300000)
+</code></pre></div></p>
 <p>I find that confusing about what does <code>300000</code> mean. </p>
 <p>I know it is millis but it doesn't click immediately what duration it represents. </p>
 <p>One alternative is </p>
-<pre><code class="language-kt">Timer(&quot;refresher&quot;, true).schedule(refresh(), 1000*60*5)
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Timer(&quot;refresher&quot;, true).schedule(refresh(), 1000*60*5)
+</code></pre></div>
 <p>This give a hint that it is 5 minutes. However, it still puts a small cognitive load.</p>
 <p>A better alternative is </p>
-<pre><code class="language-kt">import java.util.concurrent.TimeUnit
-
-Timer(&quot;refresher&quot;, true).schedule(refresh(), TimeUnit.MINUTES.toMillis(5))
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>import java.util.concurrent.TimeUnit
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Timer(&quot;refresher&quot;, true).schedule(refresh(), TimeUnit.MINUTES.toMillis(5))
+</code></pre></div>
 
               
             </article>

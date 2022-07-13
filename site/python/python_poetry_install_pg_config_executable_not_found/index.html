@@ -257,69 +257,69 @@
 
 <p>Error <code>pg_config executable not found</code> while installing psycopg2 via poetry.</p>
 <h2 id="problem">Problem</h2>
-<pre><code class="language-shell">poetry install
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>poetry install
+</code></pre></div>
 <p>returned following error.</p>
-<pre><code>Installing dependencies from lock file
-
-Package operations: 1 install, 0 updates, 0 removals
-
-  • Installing psycopg2-binary (2.9.3): Failed
-
-  EnvCommandError
-
-  Command ['~/.../venv/bin/pip', 'install', '--no-deps', 'file://~/Library/Caches/pypoetry/artifacts/.../psycopg2-binary-2.9.3.tar.gz'] errored with the following return code 1, and output: 
-  Processing ~/Library/Caches/pypoetry/artifacts/.../psycopg2-binary-2.9.3.tar.gz
-    Preparing metadata (setup.py): started
-    Preparing metadata (setup.py): finished with status 'error'
-    ERROR: Command errored out with exit status 1:
-     command: ~/.../venv/bin/python -c 'import io, os, sys, setuptools, tokenize; sys.argv[0] = '&quot;'&quot;'/private/var/folders/47/.../T/pip-req-build-lvsj6n0r/setup.py'&quot;'&quot;'; __file__='&quot;'&quot;'/private/var/folders/47/.../T/pip-req-build-lvsj6n0r/setup.py'&quot;'&quot;';f = getattr(tokenize, '&quot;'&quot;'open'&quot;'&quot;', open)(__file__) if os.path.exists(__file__) else io.StringIO('&quot;'&quot;'from setuptools import setup; setup()'&quot;'&quot;');code = f.read().replace('&quot;'&quot;'\r\n'&quot;'&quot;', '&quot;'&quot;'\n'&quot;'&quot;');f.close();exec(compile(code, __file__, '&quot;'&quot;'exec'&quot;'&quot;'))' egg_info --egg-base /private/var/folders/47/.../T/pip-pip-egg-info-lgklgcy5
-         cwd: /private/var/folders/47/.../T/pip-req-build-lvsj6n0r/
-    Complete output (20 lines):
-    running egg_info
-    creating /private/var/folders/47/.../T/pip-pip-egg-info-lgklgcy5/psycopg2_binary.egg-info
-    writing manifest file '/private/var/folders/47/.../T/pip-pip-egg-info-lgklgcy5/psycopg2_binary.egg-info/SOURCES.txt'
-
-    Error: pg_config executable not found.
-
-    pg_config is required to build psycopg2 from source.  Please add the directory
-    containing pg_config to the $PATH or specify the full executable path with the
-    option:
-
-        python setup.py build_ext --pg-config /path/to/pg_config build ...
-
-    or with the pg_config option in 'setup.cfg'.
-
-    If you prefer to avoid building psycopg2 from source, please install the PyPI
-    'psycopg2-binary' package instead.
-
-    For further information please check the 'doc/src/install.rst' file (also at
-    &lt;https://www.psycopg.org/docs/install.html&gt;).
-
-    ----------------------------------------
-  WARNING: Discarding file://~/Library/Caches/pypoetry/artifacts/ba/42/10/.../psycopg2-binary-2.9.3.tar.gz. Command errored out with exit status 1: python setup.py egg_info Check the logs for full command output.
-  ERROR: Command errored out with exit status 1: python setup.py egg_info Check the logs for full command output.
-  WARNING: You are using pip version 21.3.1; however, version 22.1.2 is available.
-  You should consider upgrading via the '~/.../venv/bin/python -m pip install --upgrade pip' command.
-
-
-  at ~/.poetry/lib/poetry/utils/env.py:1195 in _run
-      1191│                 output = subprocess.check_output(
-      1192│                     cmd, stderr=subprocess.STDOUT, **kwargs
-      1193│                 )
-      1194│         except CalledProcessError as e:
-    → 1195│             raise EnvCommandError(e, input=input_)
-      1196│ 
-      1197│         return decode(output)
-      1198│ 
-      1199│     def execute(self, bin, *args, **kwargs):
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Installing dependencies from lock file
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Package operations: 1 install, 0 updates, 0 removals
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  • Installing psycopg2-binary (2.9.3): Failed
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>  EnvCommandError
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>  Command [&#39;~/.../venv/bin/pip&#39;, &#39;install&#39;, &#39;--no-deps&#39;, &#39;file://~/Library/Caches/pypoetry/artifacts/.../psycopg2-binary-2.9.3.tar.gz&#39;] errored with the following return code 1, and output: 
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>  Processing ~/Library/Caches/pypoetry/artifacts/.../psycopg2-binary-2.9.3.tar.gz
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    Preparing metadata (setup.py): started
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    Preparing metadata (setup.py): finished with status &#39;error&#39;
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    ERROR: Command errored out with exit status 1:
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>     command: ~/.../venv/bin/python -c &#39;import io, os, sys, setuptools, tokenize; sys.argv[0] = &#39;&quot;&#39;&quot;&#39;/private/var/folders/47/.../T/pip-req-build-lvsj6n0r/setup.py&#39;&quot;&#39;&quot;&#39;; __file__=&#39;&quot;&#39;&quot;&#39;/private/var/folders/47/.../T/pip-req-build-lvsj6n0r/setup.py&#39;&quot;&#39;&quot;&#39;;f = getattr(tokenize, &#39;&quot;&#39;&quot;&#39;open&#39;&quot;&#39;&quot;&#39;, open)(__file__) if os.path.exists(__file__) else io.StringIO(&#39;&quot;&#39;&quot;&#39;from setuptools import setup; setup()&#39;&quot;&#39;&quot;&#39;);code = f.read().replace(&#39;&quot;&#39;&quot;&#39;\r\n&#39;&quot;&#39;&quot;&#39;, &#39;&quot;&#39;&quot;&#39;\n&#39;&quot;&#39;&quot;&#39;);f.close();exec(compile(code, __file__, &#39;&quot;&#39;&quot;&#39;exec&#39;&quot;&#39;&quot;&#39;))&#39; egg_info --egg-base /private/var/folders/47/.../T/pip-pip-egg-info-lgklgcy5
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>         cwd: /private/var/folders/47/.../T/pip-req-build-lvsj6n0r/
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    Complete output (20 lines):
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>    running egg_info
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>    creating /private/var/folders/47/.../T/pip-pip-egg-info-lgklgcy5/psycopg2_binary.egg-info
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>    writing manifest file &#39;/private/var/folders/47/.../T/pip-pip-egg-info-lgklgcy5/psycopg2_binary.egg-info/SOURCES.txt&#39;
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>    Error: pg_config executable not found.
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>    pg_config is required to build psycopg2 from source.  Please add the directory
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>    containing pg_config to the $PATH or specify the full executable path with the
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>    option:
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>        python setup.py build_ext --pg-config /path/to/pg_config build ...
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>    or with the pg_config option in &#39;setup.cfg&#39;.
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>    If you prefer to avoid building psycopg2 from source, please install the PyPI
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>    &#39;psycopg2-binary&#39; package instead.
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>    For further information please check the &#39;doc/src/install.rst&#39; file (also at
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>    &lt;https://www.psycopg.org/docs/install.html&gt;).
+<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>
+<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>    ----------------------------------------
+<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>  WARNING: Discarding file://~/Library/Caches/pypoetry/artifacts/ba/42/10/.../psycopg2-binary-2.9.3.tar.gz. Command errored out with exit status 1: python setup.py egg_info Check the logs for full command output.
+<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>  ERROR: Command errored out with exit status 1: python setup.py egg_info Check the logs for full command output.
+<a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>  WARNING: You are using pip version 21.3.1; however, version 22.1.2 is available.
+<a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>  You should consider upgrading via the &#39;~/.../venv/bin/python -m pip install --upgrade pip&#39; command.
+<a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>
+<a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a>
+<a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a>  at ~/.poetry/lib/poetry/utils/env.py:1195 in _run
+<a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a>      1191│                 output = subprocess.check_output(
+<a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a>      1192│                     cmd, stderr=subprocess.STDOUT, **kwargs
+<a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a>      1193│                 )
+<a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a>      1194│         except CalledProcessError as e:
+<a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a>    → 1195│             raise EnvCommandError(e, input=input_)
+<a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a>      1196│ 
+<a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a>      1197│         return decode(output)
+<a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a>      1198│ 
+<a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a>      1199│     def execute(self, bin, *args, **kwargs):
+</code></pre></div>
 <h2 id="solution">Solution</h2>
 <p>Check if pg_config is installed or not.</p>
 <p><code>which pg_config</code> -&gt; <code>pg_config not found</code></p>
 <p>Ref: https://stackoverflow.com/a/24645416</p>
-<pre><code class="language-shell">brew install postgresql
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>brew install postgresql
+</code></pre></div>
 <p><code>which pg_config</code> -&gt; <code>/opt/homebrew/bin/pg_config</code></p>
 <p><code>poetry install</code> -&gt; success</p>
 
