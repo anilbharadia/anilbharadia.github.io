@@ -13,7 +13,7 @@
     
     
       
-        <title>Exasol - Anil Bharadia</title>
+        <title>Spring boot test @SpringBootTest not using the bean defined in @TestConfiguration class - Anil Bharadia</title>
       
     
     
@@ -60,7 +60,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#exasol" class="md-skip">
+        <a href="#spring-boot-test-springboottest-not-using-the-bean-defined-in-testconfiguration-class" class="md-skip">
           Skip to content
         </a>
       
@@ -93,7 +93,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Exasol
+              Spring boot test @SpringBootTest not using the bean defined in @TestConfiguration class
             
           </span>
         </div>
@@ -228,36 +228,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#find-users-with-a-given-role" class="md-nav__link">
-    Find users with a given role
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#find-the-schema-owner" class="md-nav__link">
-    Find the schema owner
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#find-the-table-owner" class="md-nav__link">
-    Find the table owner
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#exasol-any-true" class="md-nav__link">
-    Exasol any true
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#view-all-system-tables" class="md-nav__link">
-    View all system tables
+  <a href="#solution" class="md-nav__link">
+    Solution
   </a>
   
 </li>
@@ -276,61 +248,31 @@
                 
 
 
-<h1 id="exasol">Exasol</h1>
-<h2 id="find-users-with-a-given-role">Find users with a given role</h2>
-<pre><code class="language-sql">select * from exa_dba_role_privs where granted_role = 'MY_ROLE';
+<h1 id="spring-boot-test-springboottest-not-using-the-bean-defined-in-testconfiguration-class">Spring boot test @SpringBootTest not using the bean defined in @TestConfiguration class</h1>
+<p>I have a class that defines the mock beans for test</p>
+<pre><code class="language-kt">import org.springframework.boot.test.context.TestConfiguration
+import org.springframework.boot.test.mock.mockito.MockBean
+import org.zalando.fahrschein.NakadiClient
+
+@TestConfiguration
+class NakadiTestConfig {
+
+    @MockBean(name = &quot;nakadiClient&quot;)
+    private lateinit var nakadiClient: NakadiClient
+
 </code></pre>
-<h2 id="find-the-schema-owner">Find the schema owner</h2>
-<p>check the owner of the schema unsing:</p>
-<pre><code class="language-sql">select * from exa_schemas where schema_name = 'MY_SCHEMA';
+<p>And a base integration test class like this, that other integration tests extend to: </p>
+<pre><code class="language-kt">@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles(&quot;test&quot;)
+abstract class BaseIntegrationTest {
 </code></pre>
-<h2 id="find-the-table-owner">Find the table owner</h2>
-<pre><code class="language-sql">select * from EXA_USER_TABLES where table_schema = 'MY_SCHEMA' and table_name = 'MY_TABLE';
-</code></pre>
-<h2 id="exasol-any-true">Exasol any true</h2>
-<p><a href="https://docs.exasol.com/db/latest/sql_references/functions/alphabeticallistfunctions/any.htm">ref</a></p>
-<pre><code class="language-sql">with
-    base(dept, name, is_tech) as (
-        values
-            ('D1', 'P1', true), ('D1', 'P2', false),
-            ('D2', 'P3', false), ('D2', 'P4', false),
-            ('D3', 'P5', null),
-            ('D4', 'P6', false), ('D4', 'P7', null)
-    )
-select dept, any(is_tech) as is_any_tech
-from base
-group by dept
-order by dept;
-</code></pre>
-<p>returns</p>
-<table>
-<thead>
-<tr>
-<th>DEPT</th>
-<th>IS_ANY_TECH</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>D1</td>
-<td>true</td>
-</tr>
-<tr>
-<td>D2</td>
-<td>false</td>
-</tr>
-<tr>
-<td>D3</td>
-<td><code>null</code></td>
-</tr>
-<tr>
-<td>D4</td>
-<td>false</td>
-</tr>
-</tbody>
-</table>
-<h2 id="view-all-system-tables">View all system tables</h2>
-<pre><code class="language-sql">select * from exa_syscat;
+<p>When I run the tests, the <code>nakadiClient</code> bean defined in the <code>NakadiTestConfig</code> is not created and it tries to create the actual bean from main code.</p>
+<h2 id="solution">Solution</h2>
+<p>Import the <code>@TestConfiguration</code> class to <code>@SpringBootTest</code> class</p>
+<pre><code class="language-kt">@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Import(NakadiTestConfig::class)
+@ActiveProfiles(&quot;test&quot;)
+abstract class BaseIntegrationTest {
 </code></pre>
 
               

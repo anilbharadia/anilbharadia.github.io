@@ -13,7 +13,7 @@
     
     
       
-        <title>Exasol - Anil Bharadia</title>
+        <title>Gradle build failed - Could not create an instance of type org.gradle.initialization.DefaultSettings_Decorated - Anil Bharadia</title>
       
     
     
@@ -60,7 +60,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#exasol" class="md-skip">
+        <a href="#gradle-build-failed-could-not-create-an-instance-of-type-orggradleinitializationdefaultsettings_decorated" class="md-skip">
           Skip to content
         </a>
       
@@ -93,7 +93,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Exasol
+              Gradle build failed - Could not create an instance of type org.gradle.initialization.DefaultSettings_Decorated
             
           </span>
         </div>
@@ -221,49 +221,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#find-users-with-a-given-role" class="md-nav__link">
-    Find users with a given role
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#find-the-schema-owner" class="md-nav__link">
-    Find the schema owner
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#find-the-table-owner" class="md-nav__link">
-    Find the table owner
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#exasol-any-true" class="md-nav__link">
-    Exasol any true
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#view-all-system-tables" class="md-nav__link">
-    View all system tables
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -276,61 +233,39 @@
                 
 
 
-<h1 id="exasol">Exasol</h1>
-<h2 id="find-users-with-a-given-role">Find users with a given role</h2>
-<pre><code class="language-sql">select * from exa_dba_role_privs where granted_role = 'MY_ROLE';
+<h1 id="gradle-build-failed-could-not-create-an-instance-of-type-orggradleinitializationdefaultsettings_decorated">Gradle build failed - Could not create an instance of type org.gradle.initialization.DefaultSettings_Decorated</h1>
+<pre><code class="language-shell">$ ./gradlew clean build
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Could not create an instance of type org.gradle.initialization.DefaultSettings_Decorated.
+&gt; Could not initialize class org.codehaus.groovy.runtime.InvokerHelper
+
+* Try:
+Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output. Run with --scan to get full insights.
+
+* Get more help at https://help.gradle.org
+
+BUILD FAILED in 0s
 </code></pre>
-<h2 id="find-the-schema-owner">Find the schema owner</h2>
-<p>check the owner of the schema unsing:</p>
-<pre><code class="language-sql">select * from exa_schemas where schema_name = 'MY_SCHEMA';
-</code></pre>
-<h2 id="find-the-table-owner">Find the table owner</h2>
-<pre><code class="language-sql">select * from EXA_USER_TABLES where table_schema = 'MY_SCHEMA' and table_name = 'MY_TABLE';
-</code></pre>
-<h2 id="exasol-any-true">Exasol any true</h2>
-<p><a href="https://docs.exasol.com/db/latest/sql_references/functions/alphabeticallistfunctions/any.htm">ref</a></p>
-<pre><code class="language-sql">with
-    base(dept, name, is_tech) as (
-        values
-            ('D1', 'P1', true), ('D1', 'P2', false),
-            ('D2', 'P3', false), ('D2', 'P4', false),
-            ('D3', 'P5', null),
-            ('D4', 'P6', false), ('D4', 'P7', null)
-    )
-select dept, any(is_tech) as is_any_tech
-from base
-group by dept
-order by dept;
-</code></pre>
-<p>returns</p>
-<table>
-<thead>
-<tr>
-<th>DEPT</th>
-<th>IS_ANY_TECH</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>D1</td>
-<td>true</td>
-</tr>
-<tr>
-<td>D2</td>
-<td>false</td>
-</tr>
-<tr>
-<td>D3</td>
-<td><code>null</code></td>
-</tr>
-<tr>
-<td>D4</td>
-<td>false</td>
-</tr>
-</tbody>
-</table>
-<h2 id="view-all-system-tables">View all system tables</h2>
-<pre><code class="language-sql">select * from exa_syscat;
+<p><a href="https://discuss.gradle.org/t/could-not-create-an-instance-of-type-org-gradle-initialization-defaultsettings-decorated/37349">This post</a> suggest to update gradle wrapper.</p>
+<p>Check the current version:</p>
+<pre><code class="language-shell">$ ./gradlew -version
+
+------------------------------------------------------------
+Gradle 5.0
+------------------------------------------------------------
+
+Build time:   2018-11-26 11:48:43 UTC
+Revision:     7fc6e5abf2fc5fe0824aec8a0f5462664dbcd987
+
+Kotlin DSL:   1.0.4
+Kotlin:       1.3.10
+Groovy:       2.5.4
+Ant:          Apache Ant(TM) version 1.9.13 compiled on July 10 2018
+JVM:          18.0.1.1 (Homebrew 18.0.1.1+0)
+OS:           Mac OS X 12.4 aarch64
 </code></pre>
 
               
