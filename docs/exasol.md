@@ -49,3 +49,9 @@ returns
 | D3   | `null`      |
 | D4   | false       |
 
+
+## View all system tables 
+
+```sql
+select * from exa_syscat;
+```
