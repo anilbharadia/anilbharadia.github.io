@@ -234,15 +234,15 @@
 
 
 <h1 id="java-create-a-new-thread-to-do-repeatative-task">Java create a new thread to do repeatative task</h1>
-<pre><code class="language-kt">import java.util.*
-import java.util.concurrent.TimeUnit
-import kotlin.concurrent.scheduleAtFixedRate
-...
-Timer(&quot;refresher&quot;, true).scheduleAtFixedRate(
-    TimeUnit.MINUTES.toMillis(5), // First run after 5 minutes
-    TimeUnit.MINUTES.toMillis(5)  // Repeat every 5 minutes
-) { refresh() }
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>import java.util.*
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>import java.util.concurrent.TimeUnit
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>import kotlin.concurrent.scheduleAtFixedRate
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>...
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>Timer(&quot;refresher&quot;, true).scheduleAtFixedRate(
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    TimeUnit.MINUTES.toMillis(5), // First run after 5 minutes
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    TimeUnit.MINUTES.toMillis(5)  // Repeat every 5 minutes
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>) { refresh() }
+</code></pre></div>
 <p>This code will call <code>refresh()</code> method every 5 minute.</p>
 
               

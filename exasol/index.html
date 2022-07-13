@@ -278,30 +278,30 @@
 
 <h1 id="exasol">Exasol</h1>
 <h2 id="find-users-with-a-given-role">Find users with a given role</h2>
-<pre><code class="language-sql">select * from exa_dba_role_privs where granted_role = 'MY_ROLE';
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">exa_dba_role_privs</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">granted_role</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;MY_ROLE&#39;</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
 <h2 id="find-the-schema-owner">Find the schema owner</h2>
 <p>check the owner of the schema unsing:</p>
-<pre><code class="language-sql">select * from exa_schemas where schema_name = 'MY_SCHEMA';
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">exa_schemas</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="k">schema_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;MY_SCHEMA&#39;</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
 <h2 id="find-the-table-owner">Find the table owner</h2>
-<pre><code class="language-sql">select * from EXA_USER_TABLES where table_schema = 'MY_SCHEMA' and table_name = 'MY_TABLE';
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">EXA_USER_TABLES</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">table_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;MY_SCHEMA&#39;</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;MY_TABLE&#39;</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
 <h2 id="exasol-any-true">Exasol any true</h2>
 <p><a href="https://docs.exasol.com/db/latest/sql_references/functions/alphabeticallistfunctions/any.htm">ref</a></p>
-<pre><code class="language-sql">with
-    base(dept, name, is_tech) as (
-        values
-            ('D1', 'P1', true), ('D1', 'P2', false),
-            ('D2', 'P3', false), ('D2', 'P4', false),
-            ('D3', 'P5', null),
-            ('D4', 'P6', false), ('D4', 'P7', null)
-    )
-select dept, any(is_tech) as is_any_tech
-from base
-group by dept
-order by dept;
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">with</span><span class="w"></span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="n">base</span><span class="p">(</span><span class="n">dept</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">is_tech</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">        </span><span class="k">values</span><span class="w"></span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">            </span><span class="p">(</span><span class="s1">&#39;D1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;P1&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">true</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;D1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;P2&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">false</span><span class="p">),</span><span class="w"></span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">            </span><span class="p">(</span><span class="s1">&#39;D2&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;P3&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">false</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;D2&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;P4&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">false</span><span class="p">),</span><span class="w"></span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">            </span><span class="p">(</span><span class="s1">&#39;D3&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;P5&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">null</span><span class="p">),</span><span class="w"></span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">            </span><span class="p">(</span><span class="s1">&#39;D4&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;P6&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">false</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;D4&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;P7&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">null</span><span class="p">)</span><span class="w"></span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="p">)</span><span class="w"></span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="k">select</span><span class="w"> </span><span class="n">dept</span><span class="p">,</span><span class="w"> </span><span class="k">any</span><span class="p">(</span><span class="n">is_tech</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">is_any_tech</span><span class="w"></span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="k">from</span><span class="w"> </span><span class="n">base</span><span class="w"></span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">dept</span><span class="w"></span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">dept</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
 <p>returns</p>
 <table>
 <thead>
@@ -330,8 +330,8 @@ order by dept;
 </tbody>
 </table>
 <h2 id="view-all-system-tables">View all system tables</h2>
-<pre><code class="language-sql">select * from exa_syscat;
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">exa_syscat</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
 
               
             </article>

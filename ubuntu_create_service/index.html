@@ -236,34 +236,34 @@
 <h1 id="ubuntu-create-a-new-systemd-service">Ubuntu - Create a new systemd service</h1>
 <h1 id="how-to-create-a-new-systemd-service-on-ubuntu">How to create a new systemd service on ubuntu</h1>
 <p>create a file <code>/etc/systemd/system/my-app.service</code> with the following content</p>
-<pre><code class="language-service">[Unit]
-Description=My Service 
-After=network.target
-
-
-[Service]
-Environment=&quot;HOME=/root&quot;
-EnvironmentFile=/home/anil/prod.env
-ExecStart=/home/anil/jdk-15.0.1/bin/java -jar /home/anil/my-app.jar
-Type=simple
-Restart=always
-
-[Install]
-WantedBy=default.target
-</code></pre>
-<p>Check if the service is created:</p>
-<pre><code class="language-shell">$ systemctl status my-app.service
-● my-app.service - My Service
-     Loaded: loaded (/etc/systemd/system/my-app.service; disabled; vendor preset: enabled)
-     Active: inactive (dead)
-</code></pre>
-<p>Create aliases to manage service</p>
-<pre><code class="language-shell">echo &quot;alias myapp-status='systemctl status my-app.service'&quot; &gt;&gt; ~/.bashrc
-echo &quot;alias myapp-start='systemctl start my-app.service'&quot; &gt;&gt; ~/.bashrc
-echo &quot;alias myapp-restart='systemctl restart my-app.service'&quot; &gt;&gt; ~/.bashrc
-echo &quot;alias myapp-stop='systemctl stop my-app.service'&quot; &gt;&gt; ~/.bashrc
-echo &quot;alias myapp-logs='journalctl -u my-app.service -e -f'&quot; &gt;&gt; ~/.bashrc
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[Unit]
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Description=My Service 
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>After=network.target
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>[Service]
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>Environment=&quot;HOME=/root&quot;
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>EnvironmentFile=/home/anil/prod.env
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>ExecStart=/home/anil/jdk-15.0.1/bin/java -jar /home/anil/my-app.jar
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>Type=simple
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>Restart=always
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>[Install]
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>WantedBy=default.target
+</code></pre></div>
+<p>Check if the service is created:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$ systemctl status my-app.service
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>● my-app.service - My Service
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>     Loaded: loaded <span class="o">(</span>/etc/systemd/system/my-app.service<span class="p">;</span> disabled<span class="p">;</span> vendor preset: enabled<span class="o">)</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>     Active: inactive <span class="o">(</span>dead<span class="o">)</span>
+</code></pre></div></p>
+<p>Create aliases to manage service
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">echo</span> <span class="s2">&quot;alias myapp-status=&#39;systemctl status my-app.service&#39;&quot;</span> &gt;&gt; ~/.bashrc
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">echo</span> <span class="s2">&quot;alias myapp-start=&#39;systemctl start my-app.service&#39;&quot;</span> &gt;&gt; ~/.bashrc
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nb">echo</span> <span class="s2">&quot;alias myapp-restart=&#39;systemctl restart my-app.service&#39;&quot;</span> &gt;&gt; ~/.bashrc
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nb">echo</span> <span class="s2">&quot;alias myapp-stop=&#39;systemctl stop my-app.service&#39;&quot;</span> &gt;&gt; ~/.bashrc
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="nb">echo</span> <span class="s2">&quot;alias myapp-logs=&#39;journalctl -u my-app.service -e -f&#39;&quot;</span> &gt;&gt; ~/.bashrc
+</code></pre></div></p>
 <p>ref: <a href="https://manpages.ubuntu.com/manpages/focal/man5/systemd.service.5.html">manpage</a></p>
 
               

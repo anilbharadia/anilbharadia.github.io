@@ -235,17 +235,17 @@
 
 <h1 id="ubuntu-enable-ssh-from-local-network">Ubuntu - Enable ssh from local network</h1>
 <p>How can I ssh into a ubuntu machine which is connected to the same wifi?</p>
-<p>try</p>
-<pre><code class="language-shell">$ ssh anil@192.168.0.20
-ssh: connect to host 192.168.0.20 port 22: Connection refused
-</code></pre>
+<p>try
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$ ssh anil@192.168.0.20
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>ssh: connect to host <span class="m">192</span>.168.0.20 port <span class="m">22</span>: Connection refused
+</code></pre></div></p>
 <p>Install openssh server on ubuntu.</p>
-<pre><code class="language-shell">sudo apt-get install openssh-server
-</code></pre>
-<p>try again:</p>
-<pre><code class="language-shell">$ ssh anil@192.168.0.20
-anil@anil-notebook:~$ 
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo apt-get install openssh-server
+</code></pre></div>
+<p>try again:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$ ssh anil@192.168.0.20
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>anil@anil-notebook:~$ 
+</code></pre></div></p>
 <p>It worked!</p>
 
               

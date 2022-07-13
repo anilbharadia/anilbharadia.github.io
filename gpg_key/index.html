@@ -274,31 +274,31 @@
 <p><code>gpg -h</code> -&gt; <code>zsh: command not found: gpg</code></p>
 <p>not installed.</p>
 <h2 id="install-gpg">Install GPG</h2>
-<pre><code class="language-shell">brew install gnupg
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>brew install gnupg
+</code></pre></div>
 <h2 id="import-private-key">Import private key</h2>
 <p>If you have it generared it in another machine.</p>
-<pre><code class="language-shell">gpg --import ~/Downloads/Secret.asc
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>gpg --import ~/Downloads/Secret.asc
+</code></pre></div>
 <h2 id="find-the-key-id">Find the key id</h2>
-<pre><code class="language-shell">gpg --list-keys
-</code></pre>
-<p>This prints following</p>
-<pre><code class="language-shell">/Users/abharadia/.gnupg/pubring.kbx
------------------------------------
-pub   rsa4096 2022-06-18 [SC] [expires: 2026-06-18]
-      ACACACACACACAC1111111111QQQQZZZZABCDEFGH
-uid           [ unknown] username &lt;user.name@gmail.com&gt;
-sub   rsa4096 2022-06-18 [E] [expires: 2026-06-18]
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>gpg --list-keys
+</code></pre></div>
+<p>This prints following
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>/Users/abharadia/.gnupg/pubring.kbx
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>-----------------------------------
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>pub   rsa4096 <span class="m">2022</span>-06-18 <span class="o">[</span>SC<span class="o">]</span> <span class="o">[</span>expires: <span class="m">2026</span>-06-18<span class="o">]</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>      ACACACACACACAC1111111111QQQQZZZZABCDEFGH
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>uid           <span class="o">[</span> unknown<span class="o">]</span> username &lt;user.name@gmail.com&gt;
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>sub   rsa4096 <span class="m">2022</span>-06-18 <span class="o">[</span>E<span class="o">]</span> <span class="o">[</span>expires: <span class="m">2026</span>-06-18<span class="o">]</span>
+</code></pre></div></p>
 <p>Here the last 8 characters <code>ABCDEFGH</code> is the key id</p>
 <h2 id="create-a-secring-file">Create a secring file</h2>
 <p>This can be used to sign the artifacts before publishing to maven repo.</p>
-<pre><code class="language-shell">gpg --keyring secring.gpg --export-secret-key ABCDEFGH &gt; secring.gpg
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>gpg --keyring secring.gpg --export-secret-key ABCDEFGH &gt; secring.gpg
+</code></pre></div>
 <p>returns <code>gpg: keyblock resource '/Users/abharadia/.gnupg/secring.gpg': No such file or directory</code></p>
-<pre><code class="language-shell">gpg --export-secret-key ABCDEFGH &gt; secring.gpg
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>gpg --export-secret-key ABCDEFGH &gt; secring.gpg
+</code></pre></div>
 <p>This worked</p>
 <h1 id="todo">TODO</h1>
 <p>How to generate GPG key to sign maven packages before publishing to maven central repo</p>

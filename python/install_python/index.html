@@ -291,38 +291,38 @@
 This erorr is because I need to configure the shell env</p>
 <h2 id="set-shell-env">Set shell env</h2>
 <p>ref: https://github.com/pyenv/pyenv#set-up-your-shell-environment-for-pyenv</p>
-<pre><code class="language-sh">echo 'export PYENV_ROOT=&quot;$HOME/.pyenv&quot;' &gt;&gt; ~/.zshrc
-echo 'command -v pyenv &gt;/dev/null || export PATH=&quot;$PYENV_ROOT/bin:$PATH&quot;' &gt;&gt; ~/.zshrc
-echo 'eval &quot;$(pyenv init -)&quot;' &gt;&gt; ~/.zshrc
-</code></pre>
-<p><code>source ~/.zshrc</code></p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">echo</span> <span class="s1">&#39;export PYENV_ROOT=&quot;$HOME/.pyenv&quot;&#39;</span> &gt;&gt; ~/.zshrc
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">echo</span> <span class="s1">&#39;command -v pyenv &gt;/dev/null || export PATH=&quot;$PYENV_ROOT/bin:$PATH&quot;&#39;</span> &gt;&gt; ~/.zshrc
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nb">echo</span> <span class="s1">&#39;eval &quot;$(pyenv init -)&quot;&#39;</span> &gt;&gt; ~/.zshrc
+</code></pre></div>
+<code>source ~/.zshrc</code></p>
 <p><code>pyenv versions</code> --&gt; <code>* system (set by /Users/abharadia/.pyenv/version)</code></p>
 <h2 id="install-python_1">install python</h2>
 <p><code>pyenv install 3.10.5</code></p>
-<p><code>pyenv versions</code> --&gt; </p>
-<pre><code class="language-sh">* system (set by /Users/abharadia/.pyenv/version)
-  3.10.5
-</code></pre>
+<p><code>pyenv versions</code> --&gt; 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>* system <span class="o">(</span><span class="nb">set</span> by /Users/abharadia/.pyenv/version<span class="o">)</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  <span class="m">3</span>.10.5
+</code></pre></div></p>
 <h2 id="set-python-version">set python version</h2>
 <p><code>python --version</code> --&gt; <code>Python 2.7.18</code> My python command is still set to use older version</p>
 <p><code>pyenv global 3.10.5</code></p>
 <p><code>python --version</code> --&gt; <code>Python 2.7.18</code></p>
-<p><code>pyenv versions</code> --&gt; </p>
-<pre><code class="language-sh">  system
-* 3.10.5 (set by /Users/abharadia/.pyenv/version)
-</code></pre>
-<p>So the * moved to the 3.10.5 but it is not used by python --version yet</p>
+<p><code>pyenv versions</code> --&gt; 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>  system
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>* <span class="m">3</span>.10.5 <span class="o">(</span><span class="nb">set</span> by /Users/abharadia/.pyenv/version<span class="o">)</span>
+</code></pre></div>
+So the * moved to the 3.10.5 but it is not used by python --version yet</p>
 <p>In the file <code>~/.zshrc</code> change line <code>eval "$(pyenv init -)"</code> to <code>eval "$(pyenv init --path)"</code> Ref: https://stackoverflow.com/a/68228627</p>
-<pre><code class="language-sh">source ~/.zshrc    
-python --version  
-</code></pre>
-<p>--&gt; <code>Python 3.10.5</code></p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">source</span> ~/.zshrc    
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>python --version  
+</code></pre></div>
+--&gt; <code>Python 3.10.5</code></p>
 <h2 id="install-poetry">Install poetry</h2>
-<pre><code class="language-sh">curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
-source $HOME/.poetry/env
-poetry --version
-</code></pre>
-<p>--&gt; <code>Poetry version 1.1.13</code></p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py <span class="p">|</span> python -
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nb">source</span> <span class="nv">$HOME</span>/.poetry/env
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>poetry --version
+</code></pre></div>
+--&gt; <code>Poetry version 1.1.13</code></p>
 
               
             </article>

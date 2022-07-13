@@ -274,220 +274,220 @@
 </ul>
 <p>Source: https://github.com/fastai/fastbook</p>
 <h3 id="error-installing-fastbook">Error installing fastbook</h3>
-<pre><code>pip install fastbook
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip install fastbook
+</code></pre></div>
 <p>returns</p>
-<pre><code>...
-Collecting MarkupSafe&gt;=2.0
-  Using cached MarkupSafe-2.1.1-cp310-cp310-macosx_10_9_universal2.whl (17 kB)
-Using legacy 'setup.py install' for sentencepiece, since package 'wheel' is not installed.
-Building wheels for collected packages: tokenizers
-  Building wheel for tokenizers (pyproject.toml) ... error
-  error: subprocess-exited-with-error
-
-  × Building wheel for tokenizers (pyproject.toml) did not run successfully.
-  │ exit code: 1
-  ╰─&gt; [51 lines of output]
-      running bdist_wheel
-      running build
-      running build_py
-      creating build
-      creating build/lib.macosx-12.1-arm64-cpython-310
-      creating build/lib.macosx-12.1-arm64-cpython-310/tokenizers
-      copying py_src/tokenizers/__init__.py -&gt; build/lib.macosx-12.1-arm64-cpython-310/tokenizers
-      ...
-      copying py_src/tokenizers/tools/visualizer-styles.css -&gt; build/lib.macosx-12.1-arm64-cpython-310/tokenizers/tools
-      running build_ext
-      running build_rust
-      error: can't find Rust compiler
-
-      If you are using an outdated pip version, it is possible a prebuilt wheel is available for this package but pip is not able to install from it. Installing from the wheel would avoid the need for a Rust compiler.
-
-      To update pip, run:
-
-          pip install --upgrade pip
-
-      and then retry package installation.
-
-      If you did intend to build this package from source, try installing a Rust compiler from your system package manager and ensure it is on the PATH during installation. Alternatively, rustup (available at https://rustup.rs) is the recommended way to download and update the Rust compiler toolchain.
-      [end of output]
-
-  note: This error originates from a subprocess, and is likely not a problem with pip.
-  ERROR: Failed building wheel for tokenizers
-Failed to build tokenizers
-ERROR: Could not build wheels for tokenizers, which is required to install pyproject.toml-based projects
-WARNING: You are using pip version 22.0.4; however, version 22.1.2 is available.
-You should consider upgrading via the '/Users/anil/.../venv/bin/python -m pip install --upgrade pip' command.
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>...
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Collecting MarkupSafe&gt;=2.0
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  Using cached MarkupSafe-2.1.1-cp310-cp310-macosx_10_9_universal2.whl (17 kB)
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>Using legacy &#39;setup.py install&#39; for sentencepiece, since package &#39;wheel&#39; is not installed.
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>Building wheels for collected packages: tokenizers
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>  Building wheel for tokenizers (pyproject.toml) ... error
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>  error: subprocess-exited-with-error
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>  × Building wheel for tokenizers (pyproject.toml) did not run successfully.
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>  │ exit code: 1
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>  ╰─&gt; [51 lines of output]
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>      running bdist_wheel
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>      running build
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>      running build_py
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>      creating build
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>      creating build/lib.macosx-12.1-arm64-cpython-310
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>      creating build/lib.macosx-12.1-arm64-cpython-310/tokenizers
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>      copying py_src/tokenizers/__init__.py -&gt; build/lib.macosx-12.1-arm64-cpython-310/tokenizers
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>      ...
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>      copying py_src/tokenizers/tools/visualizer-styles.css -&gt; build/lib.macosx-12.1-arm64-cpython-310/tokenizers/tools
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>      running build_ext
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>      running build_rust
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>      error: can&#39;t find Rust compiler
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>      If you are using an outdated pip version, it is possible a prebuilt wheel is available for this package but pip is not able to install from it. Installing from the wheel would avoid the need for a Rust compiler.
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>      To update pip, run:
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>          pip install --upgrade pip
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>      and then retry package installation.
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>      If you did intend to build this package from source, try installing a Rust compiler from your system package manager and ensure it is on the PATH during installation. Alternatively, rustup (available at https://rustup.rs) is the recommended way to download and update the Rust compiler toolchain.
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>      [end of output]
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>
+<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>  note: This error originates from a subprocess, and is likely not a problem with pip.
+<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>  ERROR: Failed building wheel for tokenizers
+<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>Failed to build tokenizers
+<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>ERROR: Could not build wheels for tokenizers, which is required to install pyproject.toml-based projects
+<a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>WARNING: You are using pip version 22.0.4; however, version 22.1.2 is available.
+<a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>You should consider upgrading via the &#39;/Users/anil/.../venv/bin/python -m pip install --upgrade pip&#39; command.
+</code></pre></div>
 <p>It seems I need to install rust compiler</p>
-<pre><code>curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl --proto &#39;=https&#39; --tlsv1.2 -sSf https://sh.rustup.rs | sh
+</code></pre></div>
 <p>verify the installation via <code>rustc -h</code>. I needed to close and reopen terminal again.</p>
 <p>install again</p>
-<pre><code>pip install fastbook
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>pip install fastbook
+</code></pre></div>
 <p>returns</p>
-<pre><code>...
-Using legacy 'setup.py install' for sentencepiece, since package 'wheel' is not installed.
-Installing collected packages: sentencepiece, murmurhash, cymem, xxhash, typing-extensions, typer, tqdm, threadpoolctl, spacy-loggers, spacy-legacy, smart-open, regex, preshed, pillow, numpy, multidict, langcodes, kiwisolver, joblib, graphviz, fsspec, frozenlist, fonttools, filelock, fastprogress, dill, cycler, catalogue, async-timeout, yarl, torch, srsly, scipy, responses, pydantic, pyarrow, pathy, pandas, multiprocess, matplotlib, huggingface-hub, fastcore, blis, aiosignal, transformers, torchvision, thinc, scikit-learn, fastdownload, aiohttp, spacy, fastai, datasets, fastbook
-  Running setup.py install for sentencepiece ... error
-  error: subprocess-exited-with-error
-
-  × Running setup.py install for sentencepiece did not run successfully.
-  │ exit code: 1
-  ╰─&gt; [43 lines of output]
-      ~/.pyenv/versions/3.10.5/lib/python3.10/site-packages/setuptools/dist.py:717: UserWarning: Usage of dash-separated 'description-file' will not be supported in future versions. Please use the underscore name 'description_file' instead
-        warnings.warn(
-      running install
-      running build
-      running build_py
-      creating build
-      creating build/lib.macosx-12.1-arm64-3.10
-      creating build/lib.macosx-12.1-arm64-3.10/sentencepiece
-      copying src/sentencepiece/__init__.py -&gt; build/lib.macosx-12.1-arm64-3.10/sentencepiece
-      copying src/sentencepiece/sentencepiece_model_pb2.py -&gt; build/lib.macosx-12.1-arm64-3.10/sentencepiece
-      copying src/sentencepiece/sentencepiece_pb2.py -&gt; build/lib.macosx-12.1-arm64-3.10/sentencepiece
-      running build_ext
-      Package sentencepiece was not found in the pkg-config search path.
-      Perhaps you should add the directory containing `sentencepiece.pc'
-      to the PKG_CONFIG_PATH environment variable
-      No package 'sentencepiece' found
-      Cloning into 'sentencepiece'...
-      Note: switching to 'd8711f55d9b2cb9c77a00adcc18108482b29b675'.
-
-      You are in 'detached HEAD' state. You can look around, make experimental
-      changes and commit them, and you can discard any commits you make in this
-      state without impacting any branches by switching back to a branch.
-
-      If you want to create a new branch to retain commits you create, you may
-      do so (now or later) by using -c with the switch command. Example:
-
-        git switch -c &lt;new-branch-name&gt;
-
-      Or undo this operation with:
-
-        git switch -
-
-      Turn off this advice by setting config variable advice.detachedHead to false
-
-      ./build_bundled.sh: line 15: cmake: command not found
-      ./build_bundled.sh: line 16: nproc: command not found
-      make: *** No targets specified and no makefile found.  Stop.
-      make: *** No rule to make target `install'.  Stop.
-      Package sentencepiece was not found in the pkg-config search path.
-      Perhaps you should add the directory containing `sentencepiece.pc'
-      to the PKG_CONFIG_PATH environment variable
-      No package 'sentencepiece' found
-      Failed to find sentencepiece pkg-config
-      [end of output]
-
-  note: This error originates from a subprocess, and is likely not a problem with pip.
-error: legacy-install-failure
-
-× Encountered error while trying to install package.
-╰─&gt; sentencepiece
-
-note: This is an issue with the package mentioned above, not pip.
-hint: See above for output from the failure.
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>...
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>Using legacy &#39;setup.py install&#39; for sentencepiece, since package &#39;wheel&#39; is not installed.
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>Installing collected packages: sentencepiece, murmurhash, cymem, xxhash, typing-extensions, typer, tqdm, threadpoolctl, spacy-loggers, spacy-legacy, smart-open, regex, preshed, pillow, numpy, multidict, langcodes, kiwisolver, joblib, graphviz, fsspec, frozenlist, fonttools, filelock, fastprogress, dill, cycler, catalogue, async-timeout, yarl, torch, srsly, scipy, responses, pydantic, pyarrow, pathy, pandas, multiprocess, matplotlib, huggingface-hub, fastcore, blis, aiosignal, transformers, torchvision, thinc, scikit-learn, fastdownload, aiohttp, spacy, fastai, datasets, fastbook
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  Running setup.py install for sentencepiece ... error
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>  error: subprocess-exited-with-error
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>  × Running setup.py install for sentencepiece did not run successfully.
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>  │ exit code: 1
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>  ╰─&gt; [43 lines of output]
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>      ~/.pyenv/versions/3.10.5/lib/python3.10/site-packages/setuptools/dist.py:717: UserWarning: Usage of dash-separated &#39;description-file&#39; will not be supported in future versions. Please use the underscore name &#39;description_file&#39; instead
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        warnings.warn(
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>      running install
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>      running build
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>      running build_py
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>      creating build
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>      creating build/lib.macosx-12.1-arm64-3.10
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>      creating build/lib.macosx-12.1-arm64-3.10/sentencepiece
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>      copying src/sentencepiece/__init__.py -&gt; build/lib.macosx-12.1-arm64-3.10/sentencepiece
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>      copying src/sentencepiece/sentencepiece_model_pb2.py -&gt; build/lib.macosx-12.1-arm64-3.10/sentencepiece
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>      copying src/sentencepiece/sentencepiece_pb2.py -&gt; build/lib.macosx-12.1-arm64-3.10/sentencepiece
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>      running build_ext
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>      Package sentencepiece was not found in the pkg-config search path.
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>      Perhaps you should add the directory containing `sentencepiece.pc&#39;
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>      to the PKG_CONFIG_PATH environment variable
+<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>      No package &#39;sentencepiece&#39; found
+<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>      Cloning into &#39;sentencepiece&#39;...
+<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>      Note: switching to &#39;d8711f55d9b2cb9c77a00adcc18108482b29b675&#39;.
+<a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>
+<a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>      You are in &#39;detached HEAD&#39; state. You can look around, make experimental
+<a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>      changes and commit them, and you can discard any commits you make in this
+<a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a>      state without impacting any branches by switching back to a branch.
+<a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a>
+<a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a>      If you want to create a new branch to retain commits you create, you may
+<a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a>      do so (now or later) by using -c with the switch command. Example:
+<a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a>
+<a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a>        git switch -c &lt;new-branch-name&gt;
+<a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a>
+<a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a>      Or undo this operation with:
+<a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a>
+<a id="__codelineno-4-40" name="__codelineno-4-40" href="#__codelineno-4-40"></a>        git switch -
+<a id="__codelineno-4-41" name="__codelineno-4-41" href="#__codelineno-4-41"></a>
+<a id="__codelineno-4-42" name="__codelineno-4-42" href="#__codelineno-4-42"></a>      Turn off this advice by setting config variable advice.detachedHead to false
+<a id="__codelineno-4-43" name="__codelineno-4-43" href="#__codelineno-4-43"></a>
+<a id="__codelineno-4-44" name="__codelineno-4-44" href="#__codelineno-4-44"></a>      ./build_bundled.sh: line 15: cmake: command not found
+<a id="__codelineno-4-45" name="__codelineno-4-45" href="#__codelineno-4-45"></a>      ./build_bundled.sh: line 16: nproc: command not found
+<a id="__codelineno-4-46" name="__codelineno-4-46" href="#__codelineno-4-46"></a>      make: *** No targets specified and no makefile found.  Stop.
+<a id="__codelineno-4-47" name="__codelineno-4-47" href="#__codelineno-4-47"></a>      make: *** No rule to make target `install&#39;.  Stop.
+<a id="__codelineno-4-48" name="__codelineno-4-48" href="#__codelineno-4-48"></a>      Package sentencepiece was not found in the pkg-config search path.
+<a id="__codelineno-4-49" name="__codelineno-4-49" href="#__codelineno-4-49"></a>      Perhaps you should add the directory containing `sentencepiece.pc&#39;
+<a id="__codelineno-4-50" name="__codelineno-4-50" href="#__codelineno-4-50"></a>      to the PKG_CONFIG_PATH environment variable
+<a id="__codelineno-4-51" name="__codelineno-4-51" href="#__codelineno-4-51"></a>      No package &#39;sentencepiece&#39; found
+<a id="__codelineno-4-52" name="__codelineno-4-52" href="#__codelineno-4-52"></a>      Failed to find sentencepiece pkg-config
+<a id="__codelineno-4-53" name="__codelineno-4-53" href="#__codelineno-4-53"></a>      [end of output]
+<a id="__codelineno-4-54" name="__codelineno-4-54" href="#__codelineno-4-54"></a>
+<a id="__codelineno-4-55" name="__codelineno-4-55" href="#__codelineno-4-55"></a>  note: This error originates from a subprocess, and is likely not a problem with pip.
+<a id="__codelineno-4-56" name="__codelineno-4-56" href="#__codelineno-4-56"></a>error: legacy-install-failure
+<a id="__codelineno-4-57" name="__codelineno-4-57" href="#__codelineno-4-57"></a>
+<a id="__codelineno-4-58" name="__codelineno-4-58" href="#__codelineno-4-58"></a>× Encountered error while trying to install package.
+<a id="__codelineno-4-59" name="__codelineno-4-59" href="#__codelineno-4-59"></a>╰─&gt; sentencepiece
+<a id="__codelineno-4-60" name="__codelineno-4-60" href="#__codelineno-4-60"></a>
+<a id="__codelineno-4-61" name="__codelineno-4-61" href="#__codelineno-4-61"></a>note: This is an issue with the package mentioned above, not pip.
+<a id="__codelineno-4-62" name="__codelineno-4-62" href="#__codelineno-4-62"></a>hint: See above for output from the failure.
+</code></pre></div>
 <p>check if cmake is installed</p>
 <p><code>cmake -h</code> -&gt; <code>zsh: command not found: cmake</code></p>
 <p>Install cmake <code>brew install cmake</code></p>
 <p>Try again <code>pip install fastbook</code></p>
 <p>It failed with following log</p>
-<pre><code>...
-                                              ^
-      In file included from src/sentencepiece/sentencepiece_wrap.cxx:2808:
-      /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cmath:642:26: error: no template named 'numeric_limits'
-          bool _FloatBigger = (numeric_limits&lt;_FloatT&gt;::digits &gt; numeric_limits&lt;_IntT&gt;::digits),
-                               ^
-      /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cmath:642:60: error: no template named 'numeric_limits'
-          bool _FloatBigger = (numeric_limits&lt;_FloatT&gt;::digits &gt; numeric_limits&lt;_IntT&gt;::digits),
-                                                                 ^
-      /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cmath:643:18: error: no template named 'numeric_limits'
-          int _Bits = (numeric_limits&lt;_IntT&gt;::digits - numeric_limits&lt;_FloatT&gt;::digits)&gt;
-                       ^
-      /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cmath:643:50: error: no template named 'numeric_limits'
-          int _Bits = (numeric_limits&lt;_IntT&gt;::digits - numeric_limits&lt;_FloatT&gt;::digits)&gt;
-                                                       ^
-      /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cmath:648:17: error: no template named 'numeric_limits'
-        static_assert(numeric_limits&lt;_FloatT&gt;::radix == 2, &quot;FloatT has incorrect radix&quot;);
-                      ^
-      /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cmath:651:25: error: no template named 'numeric_limits'
-        return _FloatBigger ? numeric_limits&lt;_IntT&gt;::max() :  (numeric_limits&lt;_IntT&gt;::max() &gt;&gt; _Bits &lt;&lt; _Bits);
-                              ^
-      /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cmath:651:58: error: no template named 'numeric_limits'
-        return _FloatBigger ? numeric_limits&lt;_IntT&gt;::max() :  (numeric_limits&lt;_IntT&gt;::max() &gt;&gt; _Bits &lt;&lt; _Bits);
-                                                               ^
-      /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cmath:645:25: error: no return statement in constexpr function
-      _LIBCPP_CONSTEXPR _IntT __max_representable_int_for_float() _NOEXCEPT {
-                              ^
-      /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cmath:661:16: error: no template named 'numeric_limits'
-        using _Lim = numeric_limits&lt;_IntT&gt;;
-                     ^
-      /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cmath:664:12: error: use of undeclared identifier '_Lim'
-          return _Lim::max();
-                 ^
-      /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cmath:665:21: error: use of undeclared identifier '_Lim'
-        } else if (__r &lt;= _Lim::lowest()) {
-                          ^
-      /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cmath:666:12: error: use of undeclared identifier '_Lim'
-          return _Lim::min();
-                 ^
-      197 warnings and 12 errors generated.
-      error: command '/usr/bin/clang' failed with exit code 1
-      [end of output]
-
-  note: This error originates from a subprocess, and is likely not a problem with pip.
-error: legacy-install-failure
-
-× Encountered error while trying to install package.
-╰─&gt; sentencepiece
-
-note: This is an issue with the package mentioned above, not pip.
-hint: See above for output from the failure.
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>...
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>                                              ^
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>      In file included from src/sentencepiece/sentencepiece_wrap.cxx:2808:
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>      /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cmath:642:26: error: no template named &#39;numeric_limits&#39;
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>          bool _FloatBigger = (numeric_limits&lt;_FloatT&gt;::digits &gt; numeric_limits&lt;_IntT&gt;::digits),
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>                               ^
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>      /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cmath:642:60: error: no template named &#39;numeric_limits&#39;
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>          bool _FloatBigger = (numeric_limits&lt;_FloatT&gt;::digits &gt; numeric_limits&lt;_IntT&gt;::digits),
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>                                                                 ^
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>      /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cmath:643:18: error: no template named &#39;numeric_limits&#39;
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>          int _Bits = (numeric_limits&lt;_IntT&gt;::digits - numeric_limits&lt;_FloatT&gt;::digits)&gt;
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>                       ^
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>      /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cmath:643:50: error: no template named &#39;numeric_limits&#39;
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>          int _Bits = (numeric_limits&lt;_IntT&gt;::digits - numeric_limits&lt;_FloatT&gt;::digits)&gt;
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>                                                       ^
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>      /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cmath:648:17: error: no template named &#39;numeric_limits&#39;
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>        static_assert(numeric_limits&lt;_FloatT&gt;::radix == 2, &quot;FloatT has incorrect radix&quot;);
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>                      ^
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>      /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cmath:651:25: error: no template named &#39;numeric_limits&#39;
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>        return _FloatBigger ? numeric_limits&lt;_IntT&gt;::max() :  (numeric_limits&lt;_IntT&gt;::max() &gt;&gt; _Bits &lt;&lt; _Bits);
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>                              ^
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>      /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cmath:651:58: error: no template named &#39;numeric_limits&#39;
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>        return _FloatBigger ? numeric_limits&lt;_IntT&gt;::max() :  (numeric_limits&lt;_IntT&gt;::max() &gt;&gt; _Bits &lt;&lt; _Bits);
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>                                                               ^
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>      /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cmath:645:25: error: no return statement in constexpr function
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>      _LIBCPP_CONSTEXPR _IntT __max_representable_int_for_float() _NOEXCEPT {
+<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>                              ^
+<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>      /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cmath:661:16: error: no template named &#39;numeric_limits&#39;
+<a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>        using _Lim = numeric_limits&lt;_IntT&gt;;
+<a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>                     ^
+<a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>      /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cmath:664:12: error: use of undeclared identifier &#39;_Lim&#39;
+<a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a>          return _Lim::max();
+<a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a>                 ^
+<a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a>      /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cmath:665:21: error: use of undeclared identifier &#39;_Lim&#39;
+<a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a>        } else if (__r &lt;= _Lim::lowest()) {
+<a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a>                          ^
+<a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a>      /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cmath:666:12: error: use of undeclared identifier &#39;_Lim&#39;
+<a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a>          return _Lim::min();
+<a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a>                 ^
+<a id="__codelineno-5-40" name="__codelineno-5-40" href="#__codelineno-5-40"></a>      197 warnings and 12 errors generated.
+<a id="__codelineno-5-41" name="__codelineno-5-41" href="#__codelineno-5-41"></a>      error: command &#39;/usr/bin/clang&#39; failed with exit code 1
+<a id="__codelineno-5-42" name="__codelineno-5-42" href="#__codelineno-5-42"></a>      [end of output]
+<a id="__codelineno-5-43" name="__codelineno-5-43" href="#__codelineno-5-43"></a>
+<a id="__codelineno-5-44" name="__codelineno-5-44" href="#__codelineno-5-44"></a>  note: This error originates from a subprocess, and is likely not a problem with pip.
+<a id="__codelineno-5-45" name="__codelineno-5-45" href="#__codelineno-5-45"></a>error: legacy-install-failure
+<a id="__codelineno-5-46" name="__codelineno-5-46" href="#__codelineno-5-46"></a>
+<a id="__codelineno-5-47" name="__codelineno-5-47" href="#__codelineno-5-47"></a>× Encountered error while trying to install package.
+<a id="__codelineno-5-48" name="__codelineno-5-48" href="#__codelineno-5-48"></a>╰─&gt; sentencepiece
+<a id="__codelineno-5-49" name="__codelineno-5-49" href="#__codelineno-5-49"></a>
+<a id="__codelineno-5-50" name="__codelineno-5-50" href="#__codelineno-5-50"></a>note: This is an issue with the package mentioned above, not pip.
+<a id="__codelineno-5-51" name="__codelineno-5-51" href="#__codelineno-5-51"></a>hint: See above for output from the failure.
+</code></pre></div>
 <p>try to install sentencepiece via pip directly <code>pip install sentencepiece</code></p>
 <p>Still getting the same error as above.</p>
 <p>Looks like there is no wheel for python 3.10 for mac os and it tries to build it in my local machine. There is a wheel for 3.9 so let's try that.</p>
-<pre><code class="language-shell">pyenv install 3.9.13
-pyenv local 3.9.13
-rm -rf venv
-python -m venv venv
-source ./venv/bin/activate
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>pyenv install <span class="m">3</span>.9.13
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>pyenv <span class="nb">local</span> <span class="m">3</span>.9.13
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>rm -rf venv
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>python -m venv venv
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="nb">source</span> ./venv/bin/activate
+</code></pre></div>
 <p>try again: <code>pip install fastbook</code></p>
 <p>Success!!</p>
 <hr />
-<pre><code class="language-python">import fastbook
-</code></pre>
-<p>-&gt; error <code>ModuleNotFoundError: No module named '_lzma'</code></p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">import</span> <span class="nn">fastbook</span>
+</code></pre></div>
+-&gt; error <code>ModuleNotFoundError: No module named '_lzma'</code></p>
 <p>Let's try the solution as per this post: https://stackoverflow.com/a/69517932</p>
-<pre><code class="language-shell">brew install xz
-pyenv uninstall 3.9.13
-pyenv install 3.9.13
-rm -rf venv
-python -m venv venv
-source ./venv/bin/activate
-pip install fastbook
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>brew install xz
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>pyenv uninstall <span class="m">3</span>.9.13
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>pyenv install <span class="m">3</span>.9.13
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>rm -rf venv
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>python -m venv venv
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="nb">source</span> ./venv/bin/activate
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>pip install fastbook
+</code></pre></div>
 <p>try again</p>
-<pre><code class="language-python">import fastbook
-</code></pre>
-<p>-&gt;</p>
-<pre><code>...
-except ModuleNotFoundError: warn(&quot;Missing `ipywidgets` - please install it&quot;)
-</code></pre>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">import</span> <span class="nn">fastbook</span>
+</code></pre></div>
+-&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>...
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>except ModuleNotFoundError: warn(&quot;Missing `ipywidgets` - please install it&quot;)
+</code></pre></div></p>
 <p>let's try <code>pip install ipywidgets</code></p>
 <p>try again</p>
-<pre><code class="language-python">import fastbook
-</code></pre>
-<p>This time got warning only</p>
-<pre><code>~/.../venv/lib/python3.9/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: dlopen(~/.../venv/lib/python3.9/site-packages/torchvision/image.so, 0x0006): Symbol not found: __ZN3c106detail19maybe_wrap_dim_slowExxb
-  Referenced from: ~/.../venv/lib/python3.9/site-packages/torchvision/image.so
-  Expected in: ~/.../venv/lib/python3.9/site-packages/torch/lib/libc10.dylib
-  warn(f&quot;Failed to load image Python extension: {e}&quot;)
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kn">import</span> <span class="nn">fastbook</span>
+</code></pre></div>
+<p>This time got warning only
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>~/.../venv/lib/python3.9/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: dlopen(~/.../venv/lib/python3.9/site-packages/torchvision/image.so, 0x0006): Symbol not found: __ZN3c106detail19maybe_wrap_dim_slowExxb
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>  Referenced from: ~/.../venv/lib/python3.9/site-packages/torchvision/image.so
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>  Expected in: ~/.../venv/lib/python3.9/site-packages/torch/lib/libc10.dylib
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>  warn(f&quot;Failed to load image Python extension: {e}&quot;)
+</code></pre></div></p>
 <p>The notebook from git repo is working now!!</p>
 
               

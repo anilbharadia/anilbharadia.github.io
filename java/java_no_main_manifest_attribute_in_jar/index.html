@@ -234,14 +234,14 @@
 
 
 <h1 id="java-no-main-manifest-attribute-in-myappjar">Java no main manifest attribute, in MyApp.jar</h1>
-<pre><code class="language-shell">$ java -jar ./build/libs/MyApp.jar 
-no main manifest attribute, in ./build/libs/MyApp.jar
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$ java -jar ./build/libs/MyApp.jar 
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>no main manifest attribute, <span class="k">in</span> ./build/libs/MyApp.jar
+</code></pre></div>
 <p>In <code>build.gradle.kts</code> file add:</p>
-<pre><code class="language-kt">tasks.jar {
-    manifest.attributes[&quot;Main-Class&quot;] = &quot;org.package.AppKt&quot;
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>tasks.jar {
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    manifest.attributes[&quot;Main-Class&quot;] = &quot;org.package.AppKt&quot;
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>}
+</code></pre></div>
 
               
             </article>

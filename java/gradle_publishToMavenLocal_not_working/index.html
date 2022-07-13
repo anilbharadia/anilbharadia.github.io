@@ -234,34 +234,34 @@
 
 
 <h1 id="gradle-publishtomavenlocal-not-putting-file-in-local-repo">Gradle publishToMavenLocal not putting file in local repo</h1>
-<pre><code class="language-shell">$ ./gradlew publishToMavenLocal
-
-BUILD SUCCESSFUL in 2s
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$ ./gradlew publishToMavenLocal
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>BUILD SUCCESSFUL <span class="k">in</span> 2s
+</code></pre></div>
 <p>The new file is not present in <code>~/.m2/repository/...</code></p>
 <p>Root cause:</p>
 <p>In the <code>build.gradle.kts</code> file, there were two places where I defined version and forgot to update the second one.</p>
-<pre><code class="language-kt">...
-version = &quot;0.2.0&quot;
-
-publishing {
-    publications {
-        create&lt;MavenPublication&gt;(&quot;mavenJava&quot;) {
-            ...
-            version = &quot;0.1.1&quot;
-            ...
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>...
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>version = &quot;0.2.0&quot;
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>publishing {
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    publications {
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        create&lt;MavenPublication&gt;(&quot;mavenJava&quot;) {
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>            ...
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>            version = &quot;0.1.1&quot;
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>            ...
+</code></pre></div>
 <p>Sollution is to change it like this:</p>
-<pre><code class="language-kt">...
-version = &quot;0.2.0&quot;
-
-publishing {
-    publications {
-        create&lt;MavenPublication&gt;(&quot;mavenJava&quot;) {
-            ...
-            version = project.version.toString()
-            ...
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>...
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>version = &quot;0.2.0&quot;
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>publishing {
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    publications {
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        create&lt;MavenPublication&gt;(&quot;mavenJava&quot;) {
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>            ...
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>            version = project.version.toString()
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>            ...
+</code></pre></div>
 <p>And it worked!</p>
 
               

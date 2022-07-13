@@ -256,58 +256,58 @@
   <h1>Python poetry black no such file</h1>
 
 <h2 id="problem">Problem</h2>
-<pre><code class="language-shell">poetry run black
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>poetry run black
+</code></pre></div>
 <p>Returns</p>
-<pre><code class="language-shell">  FileNotFoundError
-
-  [Errno 2] No such file or directory: b'~/.local/bin/black'
-
-  at ~/.pyenv/versions/3.10.5/lib/python3.10/os.py:607 in _execvpe
-       603│         path_list = map(fsencode, path_list)
-       604│     for dir in path_list:
-       605│         fullname = path.join(dir, file)
-       606│         try:
-    →  607│             exec_func(fullname, *argrest)
-       608│         except (FileNotFoundError, NotADirectoryError) as e:
-       609│             last_exc = e
-       610│         except OSError as e:
-       611│             last_exc = e
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>  FileNotFoundError
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  <span class="o">[</span>Errno <span class="m">2</span><span class="o">]</span> No such file or directory: b<span class="s1">&#39;~/.local/bin/black&#39;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  at ~/.pyenv/versions/3.10.5/lib/python3.10/os.py:607 <span class="k">in</span> _execvpe
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>       <span class="m">603</span>│         <span class="nv">path_list</span> <span class="o">=</span> map<span class="o">(</span>fsencode, path_list<span class="o">)</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>       <span class="m">604</span>│     <span class="k">for</span> dir <span class="k">in</span> path_list:
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>       <span class="m">605</span>│         <span class="nv">fullname</span> <span class="o">=</span> path.join<span class="o">(</span>dir, file<span class="o">)</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>       <span class="m">606</span>│         try:
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    →  <span class="m">607</span>│             exec_func<span class="o">(</span>fullname, *argrest<span class="o">)</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>       <span class="m">608</span>│         except <span class="o">(</span>FileNotFoundError, NotADirectoryError<span class="o">)</span> as e:
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>       <span class="m">609</span>│             <span class="nv">last_exc</span> <span class="o">=</span> e
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>       <span class="m">610</span>│         except OSError as e:
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>       <span class="m">611</span>│             <span class="nv">last_exc</span> <span class="o">=</span> e
+</code></pre></div>
 <h2 id="solution">Solution</h2>
 <ol>
 <li>make sure poetry installed properly.</li>
 </ol>
 <p>run <code>poetry install</code> --&gt; it failed with</p>
-<pre><code class="language-shell">  • Installing typed-ast (1.4.3)
-
-  EnvCommandError
-...
-        199 warnings and 1 error generated.
-        error: command '/usr/bin/clang' failed with exit code 1
-        [end of output]
-
-    note: This error originates from a subprocess, and is likely not a problem with pip.
-  error: legacy-install-failure
-
-
-  × Encountered error while trying to install package.
-  ╰─&gt; typed-ast
-
-  note: This is an issue with the package mentioned above, not pip.
-  hint: See above for output from the failure.
-
-  at ~/.poetry/lib/poetry/utils/env.py:1195 in _run
-      1191│                 output = subprocess.check_output(
-      1192│                     cmd, stderr=subprocess.STDOUT, **kwargs
-      1193│                 )
-      1194│         except CalledProcessError as e:
-    → 1195│             raise EnvCommandError(e, input=input_)
-      1196│ 
-      1197│         return decode(output)
-      1198│ 
-      1199│     def execute(self, bin, *args, **kwargs):
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>  • Installing typed-ast <span class="o">(</span><span class="m">1</span>.4.3<span class="o">)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  EnvCommandError
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>...
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        <span class="m">199</span> warnings and <span class="m">1</span> error generated.
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        error: <span class="nb">command</span> <span class="s1">&#39;/usr/bin/clang&#39;</span> failed with <span class="nb">exit</span> code <span class="m">1</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="o">[</span>end of output<span class="o">]</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    note: This error originates from a subprocess, and is likely not a problem with pip.
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>  error: legacy-install-failure
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>  × Encountered error <span class="k">while</span> trying to install package.
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>  ╰─&gt; typed-ast
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>  note: This is an issue with the package mentioned above, not pip.
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>  hint: See above <span class="k">for</span> output from the failure.
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>  at ~/.poetry/lib/poetry/utils/env.py:1195 <span class="k">in</span> _run
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>      <span class="m">1191</span>│                 <span class="nv">output</span> <span class="o">=</span> subprocess.check_output<span class="o">(</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>      <span class="m">1192</span>│                     cmd, <span class="nv">stderr</span><span class="o">=</span>subprocess.STDOUT, **kwargs
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>      <span class="m">1193</span>│                 <span class="o">)</span>
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>      <span class="m">1194</span>│         except CalledProcessError as e:
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>    → <span class="m">1195</span>│             raise EnvCommandError<span class="o">(</span>e, <span class="nv">input</span><span class="o">=</span>input_<span class="o">)</span>
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>      <span class="m">1196</span>│ 
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>      <span class="m">1197</span>│         <span class="k">return</span> decode<span class="o">(</span>output<span class="o">)</span>
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>      <span class="m">1198</span>│ 
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>      <span class="m">1199</span>│     def execute<span class="o">(</span>self, bin, *args, **kwargs<span class="o">)</span>:
+</code></pre></div>
 <p>This error is while installing <code>Installing typed-ast (1.4.3)</code></p>
 <p>This package was a dependency of mypy (0.761). </p>
 <p>I changed the mypy version to 0.961 and it does not have this dependency.</p>
