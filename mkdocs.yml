@@ -1,4 +1,4 @@
-site_name: Anil Bharadia
+site_name: Anil BhaBradia
 theme:
   name: material
   features:
@@ -26,3 +26,7 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.superfences
 repo_url: https://github.com/anilbharadia/anilbharadia.github.io
+# plugins:
+#   - search
+#   - git-revision-date-localized:
+#       enable_creation_date: true
