@@ -55,3 +55,47 @@ returns
 ```sql
 select * from exa_syscat;
 ```
+
+## Generate values in sequence
+
+``` .sql
+select level from dual connect by level <= 10;
+```
+
+## Subset using minus
+
+``` .sql
+with
+    l0(id) as (values (1), (2), (3), (4)),
+    l1(id) as (values (1), (2)),
+    l2(id) as (values (2), (3))
+select id from l0
+    minus
+select id from l1
+    minus
+select id from l2;
+```
+
+returns one row with id 4.
+
+
+## find installed python pacakges
+
+``` .sql
+create or replace python3 scalar script list_python_packages() emits (
+        name VARCHAR(500)
+    ) as
+
+import pkg_resources
+installed_packages = pkg_resources.working_set
+installed_packages_list = sorted(["%s==%s" % (i.key, i.version)
+     for i in installed_packages])
+
+def run(ctx):
+    for p in installed_packages_list:
+        ctx.emit(p)
+
+/
+
+select list_python_packages();
+```
