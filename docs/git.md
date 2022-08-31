@@ -35,18 +35,18 @@ Ref: https://stackoverflow.com/a/3042512
 
 `git rebase -i HEAD~1`
 
-This opened editor (atom) with content
+This opens editor (atom) with content like:
 ```txt
-pick 049c296 update instructions for local env setup in README.md
+pick 012a345 update instructions for local env setup in README.md
 
 # ...
 ```
 
-Changed `pick` to `edit`, saved, and closed atom.
+Change `pick` to `edit`, save, and close the editor.
 
 `git commit --amend --author="Author Name <email@address.com>"`
 
-It opened editor again to set the commit message. Updated message, saved, and closed atom.
+It will open the editor again to set the commit message. Update the message, save, and close atom.
 
 `git rebase --continue`
 
