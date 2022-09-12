@@ -92,7 +92,8 @@ The attachment in this email was a PDF file with the following information:
        
         I would ask you to bring the following documents with you (please also note the following page):
         - Passport
-        - Employer's confirmation of an ongoing employment relationship (not older than 14 days) and proof of net earnings from 03/2022
+        - Employer's confirmation of an ongoing employment relationship (not older than 14 days) 
+          and proof of net earnings from 03/2022
         - Current membership certificate of your health insurance
         - Registration certificate
         - A current biometric passport photo (35mm x 45mm, frontal photo with a neutral facial expression and closed mouth looking straight into the camera, light background)
@@ -107,6 +108,7 @@ So I went to the landesamt with the following documents
 - `Passport` (in my case the current and the expired one)
 - `Arbeitgeberbescheinigung`
     - I downloaded a new Arbeitgeberbescheinigung from Zalado's internal portal as it was more than 14 days since I sent it in the email.
+- `Pay slips` of March and April 2022
 - `Confirmation about the insurance cover with TK` Downloaded it from TK's website
 - `Anmeldung`
 - `Photo`
