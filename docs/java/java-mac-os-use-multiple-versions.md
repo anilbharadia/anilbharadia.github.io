@@ -1,4 +1,4 @@
-# Java MacOs use multiple versions - switch version
+# Java MacOS use multiple versions - switch version
 
 ## Check installed versions
 
@@ -28,36 +28,31 @@ jdk() {
     java -version
 }
 ```
+Update current termainal session with `source ~/.zshrc`
 
-## Create env vars for these versions
 
-``` .sh title="~/.zshrc"
-echo "export JAVA_18_HOME=$(/usr/libexec/java_home -v18)" >> ~/.zshrc
-echo "export JAVA_16_HOME=$(/usr/libexec/java_home -v16)" >> ~/.zshrc
-echo "alias java18='export JAVA_HOME=\$JAVA_18_HOME'" >> ~/.zshrc
-echo "alias java16='export JAVA_HOME=\$JAVA_16_HOME'" >> ~/.zshrc
+## Switch the version with this command
+
+```
+jdk 16
 ```
 
-Load the new env vars into current terminal
+Example
 ``` .sh
-source ~/.zshrc
-```
-
-## Swtich java versions
-
-``` .sh
-$ java16
-$ java -version
-openjdk version "16.0.2" 2021-07-20
-OpenJDK Runtime Environment Zulu16.32+15-CA (build 16.0.2+7)
-OpenJDK 64-Bit Server VM Zulu16.32+15-CA (build 16.0.2+7, mixed mode)
-
-$ java18       
 $ java -version
 openjdk version "18.0.1.1" 2022-04-22
 OpenJDK Runtime Environment Homebrew (build 18.0.1.1+0)
 OpenJDK 64-Bit Server VM Homebrew (build 18.0.1.1+0, mixed mode, sharing)
+$ jdk 16
+openjdk version "16.0.2" 2021-07-20
+OpenJDK Runtime Environment Zulu16.32+15-CA (build 16.0.2+7)
+OpenJDK 64-Bit Server VM Zulu16.32+15-CA (build 16.0.2+7, mixed mode)
+$ java -version
+openjdk version "16.0.2" 2021-07-20
+OpenJDK Runtime Environment Zulu16.32+15-CA (build 16.0.2+7)
+OpenJDK 64-Bit Server VM Zulu16.32+15-CA (build 16.0.2+7, mixed mode)
 ```
+
 
 
 
