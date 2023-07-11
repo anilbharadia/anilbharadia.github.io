@@ -8,19 +8,19 @@
       
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.8">
     
     
       
-        <title>Java MacOS use multiple versions - switch version - Anil Bharadia</title>
+        <title>Maven shortcuts / commands - Anil Bharadia</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.1d29e8d0.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.1d29e8d0.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cbb835fc.min.css">
         
       
       
@@ -36,7 +36,7 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#java-macos-use-multiple-versions-switch-version" class="md-skip">
+        <a href="#maven-shortcuts-commands" class="md-skip">
           Skip to content
         </a>
       
@@ -78,7 +78,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="Anil Bharadia" class="md-header__button md-logo" aria-label="Anil Bharadia" data-md-component="logo">
+    <a href="../../.." title="Anil Bharadia" class="md-header__button md-logo" aria-label="Anil Bharadia" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Java MacOS use multiple versions - switch version
+              Maven shortcuts / commands
             
           </span>
         </div>
@@ -198,7 +198,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Anil Bharadia" class="md-nav__button md-logo" aria-label="Anil Bharadia" data-md-component="logo">
+    <a href="../../.." title="Anil Bharadia" class="md-nav__button md-logo" aria-label="Anil Bharadia" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -229,7 +229,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../git/" class="md-nav__link">
+      <a href="../../../git/" class="md-nav__link">
         Git
       </a>
     </li>
@@ -244,7 +244,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../german_pr_application/" class="md-nav__link">
+      <a href="../../../german_pr_application/" class="md-nav__link">
         How I applied for German PR
       </a>
     </li>
@@ -278,29 +278,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#check-installed-versions" class="md-nav__link">
-    Check installed versions
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#get-java-home-for-specific-version" class="md-nav__link">
-    Get java home for specific version
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#create-a-sh-function-to-switch-versions" class="md-nav__link">
-    Create a sh function to switch versions
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#switch-the-version-with-this-command" class="md-nav__link">
-    Switch the version with this command
+  <a href="#find-active-profiles" class="md-nav__link">
+    Find active profiles
   </a>
   
 </li>
@@ -317,56 +296,16 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/anilbharadia/anilbharadia.github.io/edit/master/docs/java/java-mac-os-use-multiple-versions.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/anilbharadia/anilbharadia.github.io/edit/master/docs/java/maven/maven-shortcuts.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-<h1 id="java-macos-use-multiple-versions-switch-version">Java MacOS use multiple versions - switch version</h1>
-<h2 id="check-installed-versions">Check installed versions</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$ /usr/libexec/java_home -V  
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Matching Java Virtual Machines <span class="o">(</span><span class="m">2</span><span class="o">)</span>:
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="m">18</span>.0.1.1 <span class="o">(</span>arm64<span class="o">)</span> <span class="s2">&quot;Homebrew&quot;</span> - <span class="s2">&quot;OpenJDK 18.0.1.1&quot;</span> /opt/homebrew/Cellar/openjdk/18.0.1.1/libexec/openjdk.jdk/Contents/Home
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="m">16</span>.0.2 <span class="o">(</span>arm64<span class="o">)</span> <span class="s2">&quot;Azul Systems, Inc.&quot;</span> - <span class="s2">&quot;Zulu 16.32.15&quot;</span> /Users/anil/Library/Java/JavaVirtualMachines/azul-16.0.2/Contents/Home
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>/opt/homebrew/Cellar/openjdk/18.0.1.1/libexec/openjdk.jdk/Contents/Home
+<h1 id="maven-shortcuts-commands">Maven shortcuts / commands</h1>
+<h2 id="find-active-profiles">Find active profiles</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>./mvnw help:active-profiles
 </code></pre></div>
-<h2 id="get-java-home-for-specific-version">Get java home for specific version</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$ /usr/libexec/java_home -v18
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>/opt/homebrew/Cellar/openjdk/18.0.1.1/libexec/openjdk.jdk/Contents/Home
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>$ /usr/libexec/java_home -v16
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>/Users/anil/Library/Java/JavaVirtualMachines/azul-16.0.2/Contents/Home
-</code></pre></div>
-<h2 id="create-a-sh-function-to-switch-versions">Create a sh function to switch versions</h2>
-<p><div class="highlight"><span class="filename">~/.zshrc</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>jdk<span class="o">()</span> <span class="o">{</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="nv">version</span><span class="o">=</span><span class="nv">$1</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="nb">export</span> <span class="nv">JAVA_HOME</span><span class="o">=</span><span class="k">$(</span>/usr/libexec/java_home -v<span class="s2">&quot;</span><span class="nv">$version</span><span class="s2">&quot;</span><span class="k">)</span><span class="p">;</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    java -version
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="o">}</span>
-</code></pre></div>
-Update current termainal session with <code>source ~/.zshrc</code></p>
-<h2 id="switch-the-version-with-this-command">Switch the version with this command</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>jdk 16
-</code></pre></div>
-<p>Example
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>$ java -version
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>openjdk version <span class="s2">&quot;18.0.1.1&quot;</span> <span class="m">2022</span>-04-22
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>OpenJDK Runtime Environment Homebrew <span class="o">(</span>build <span class="m">18</span>.0.1.1+0<span class="o">)</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>OpenJDK <span class="m">64</span>-Bit Server VM Homebrew <span class="o">(</span>build <span class="m">18</span>.0.1.1+0, mixed mode, sharing<span class="o">)</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>$ jdk <span class="m">16</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>openjdk version <span class="s2">&quot;16.0.2&quot;</span> <span class="m">2021</span>-07-20
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>OpenJDK Runtime Environment Zulu16.32+15-CA <span class="o">(</span>build <span class="m">16</span>.0.2+7<span class="o">)</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>OpenJDK <span class="m">64</span>-Bit Server VM Zulu16.32+15-CA <span class="o">(</span>build <span class="m">16</span>.0.2+7, mixed mode<span class="o">)</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>$ java -version
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>openjdk version <span class="s2">&quot;16.0.2&quot;</span> <span class="m">2021</span>-07-20
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>OpenJDK Runtime Environment Zulu16.32+15-CA <span class="o">(</span>build <span class="m">16</span>.0.2+7<span class="o">)</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>OpenJDK <span class="m">64</span>-Bit Server VM Zulu16.32+15-CA <span class="o">(</span>build <span class="m">16</span>.0.2+7, mixed mode<span class="o">)</span>
-</code></pre></div></p>
-<p>Reference: </p>
-<ul>
-<li>https://medium.com/w-logs/installing-java-11-on-macos-with-homebrew-7f73c1e9fadf</li>
-<li>https://stackoverflow.com/a/52524114/411871</li>
-</ul>
 
               
             </article>
@@ -398,10 +337,10 @@ Update current termainal session with <code>source ~/.zshrc</code></p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.0238f547.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.0238f547.min.js"></script>
       
     
   </body>

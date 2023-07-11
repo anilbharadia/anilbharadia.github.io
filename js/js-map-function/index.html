@@ -13,7 +13,7 @@
     
     
       
-        <title>Java MacOS use multiple versions - switch version - Anil Bharadia</title>
+        <title>Js map function - Anil Bharadia</title>
       
     
     
@@ -63,11 +63,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#java-macos-use-multiple-versions-switch-version" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -97,7 +92,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Java MacOS use multiple versions - switch version
+              Js map function
             
           </span>
         </div>
@@ -268,44 +263,6 @@
   
   
   
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#check-installed-versions" class="md-nav__link">
-    Check installed versions
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#get-java-home-for-specific-version" class="md-nav__link">
-    Get java home for specific version
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#create-a-sh-function-to-switch-versions" class="md-nav__link">
-    Create a sh function to switch versions
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#switch-the-version-with-this-command" class="md-nav__link">
-    Switch the version with this command
-  </a>
-  
-</li>
-      
-    </ul>
   
 </nav>
                   </div>
@@ -317,56 +274,15 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/anilbharadia/anilbharadia.github.io/edit/master/docs/java/java-mac-os-use-multiple-versions.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/anilbharadia/anilbharadia.github.io/edit/master/docs/js/js-map-function.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-<h1 id="java-macos-use-multiple-versions-switch-version">Java MacOS use multiple versions - switch version</h1>
-<h2 id="check-installed-versions">Check installed versions</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$ /usr/libexec/java_home -V  
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Matching Java Virtual Machines <span class="o">(</span><span class="m">2</span><span class="o">)</span>:
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="m">18</span>.0.1.1 <span class="o">(</span>arm64<span class="o">)</span> <span class="s2">&quot;Homebrew&quot;</span> - <span class="s2">&quot;OpenJDK 18.0.1.1&quot;</span> /opt/homebrew/Cellar/openjdk/18.0.1.1/libexec/openjdk.jdk/Contents/Home
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="m">16</span>.0.2 <span class="o">(</span>arm64<span class="o">)</span> <span class="s2">&quot;Azul Systems, Inc.&quot;</span> - <span class="s2">&quot;Zulu 16.32.15&quot;</span> /Users/anil/Library/Java/JavaVirtualMachines/azul-16.0.2/Contents/Home
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>/opt/homebrew/Cellar/openjdk/18.0.1.1/libexec/openjdk.jdk/Contents/Home
-</code></pre></div>
-<h2 id="get-java-home-for-specific-version">Get java home for specific version</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$ /usr/libexec/java_home -v18
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>/opt/homebrew/Cellar/openjdk/18.0.1.1/libexec/openjdk.jdk/Contents/Home
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>$ /usr/libexec/java_home -v16
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>/Users/anil/Library/Java/JavaVirtualMachines/azul-16.0.2/Contents/Home
-</code></pre></div>
-<h2 id="create-a-sh-function-to-switch-versions">Create a sh function to switch versions</h2>
-<p><div class="highlight"><span class="filename">~/.zshrc</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>jdk<span class="o">()</span> <span class="o">{</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="nv">version</span><span class="o">=</span><span class="nv">$1</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="nb">export</span> <span class="nv">JAVA_HOME</span><span class="o">=</span><span class="k">$(</span>/usr/libexec/java_home -v<span class="s2">&quot;</span><span class="nv">$version</span><span class="s2">&quot;</span><span class="k">)</span><span class="p">;</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    java -version
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="o">}</span>
-</code></pre></div>
-Update current termainal session with <code>source ~/.zshrc</code></p>
-<h2 id="switch-the-version-with-this-command">Switch the version with this command</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>jdk 16
-</code></pre></div>
-<p>Example
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>$ java -version
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>openjdk version <span class="s2">&quot;18.0.1.1&quot;</span> <span class="m">2022</span>-04-22
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>OpenJDK Runtime Environment Homebrew <span class="o">(</span>build <span class="m">18</span>.0.1.1+0<span class="o">)</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>OpenJDK <span class="m">64</span>-Bit Server VM Homebrew <span class="o">(</span>build <span class="m">18</span>.0.1.1+0, mixed mode, sharing<span class="o">)</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>$ jdk <span class="m">16</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>openjdk version <span class="s2">&quot;16.0.2&quot;</span> <span class="m">2021</span>-07-20
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>OpenJDK Runtime Environment Zulu16.32+15-CA <span class="o">(</span>build <span class="m">16</span>.0.2+7<span class="o">)</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>OpenJDK <span class="m">64</span>-Bit Server VM Zulu16.32+15-CA <span class="o">(</span>build <span class="m">16</span>.0.2+7, mixed mode<span class="o">)</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>$ java -version
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>openjdk version <span class="s2">&quot;16.0.2&quot;</span> <span class="m">2021</span>-07-20
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>OpenJDK Runtime Environment Zulu16.32+15-CA <span class="o">(</span>build <span class="m">16</span>.0.2+7<span class="o">)</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>OpenJDK <span class="m">64</span>-Bit Server VM Zulu16.32+15-CA <span class="o">(</span>build <span class="m">16</span>.0.2+7, mixed mode<span class="o">)</span>
-</code></pre></div></p>
-<p>Reference: </p>
-<ul>
-<li>https://medium.com/w-logs/installing-java-11-on-macos-with-homebrew-7f73c1e9fadf</li>
-<li>https://stackoverflow.com/a/52524114/411871</li>
-</ul>
+  <h1>Js map function</h1>
+
+
 
               
             </article>

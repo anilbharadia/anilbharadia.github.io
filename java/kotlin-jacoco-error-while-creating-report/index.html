@@ -13,7 +13,7 @@
     
     
       
-        <title>Java MacOS use multiple versions - switch version - Anil Bharadia</title>
+        <title>Kotlin Jacoco - Error while creating report - Anil Bharadia</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#java-macos-use-multiple-versions-switch-version" class="md-skip">
+        <a href="#kotlin-jacoco-error-while-creating-report" class="md-skip">
           Skip to content
         </a>
       
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Java MacOS use multiple versions - switch version
+              Kotlin Jacoco - Error while creating report
             
           </span>
         </div>
@@ -278,29 +278,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#check-installed-versions" class="md-nav__link">
-    Check installed versions
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#get-java-home-for-specific-version" class="md-nav__link">
-    Get java home for specific version
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#create-a-sh-function-to-switch-versions" class="md-nav__link">
-    Create a sh function to switch versions
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#switch-the-version-with-this-command" class="md-nav__link">
-    Switch the version with this command
+  <a href="#solution-upgrade-gradle-wrapper-from-681-to-742" class="md-nav__link">
+    Solution: Upgrade gradle wrapper from 6.8.1 to 7.4.2
   </a>
   
 </li>
@@ -317,56 +296,49 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/anilbharadia/anilbharadia.github.io/edit/master/docs/java/java-mac-os-use-multiple-versions.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/anilbharadia/anilbharadia.github.io/edit/master/docs/java/kotlin-jacoco-error-while-creating-report.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-<h1 id="java-macos-use-multiple-versions-switch-version">Java MacOS use multiple versions - switch version</h1>
-<h2 id="check-installed-versions">Check installed versions</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$ /usr/libexec/java_home -V  
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Matching Java Virtual Machines <span class="o">(</span><span class="m">2</span><span class="o">)</span>:
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="m">18</span>.0.1.1 <span class="o">(</span>arm64<span class="o">)</span> <span class="s2">&quot;Homebrew&quot;</span> - <span class="s2">&quot;OpenJDK 18.0.1.1&quot;</span> /opt/homebrew/Cellar/openjdk/18.0.1.1/libexec/openjdk.jdk/Contents/Home
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="m">16</span>.0.2 <span class="o">(</span>arm64<span class="o">)</span> <span class="s2">&quot;Azul Systems, Inc.&quot;</span> - <span class="s2">&quot;Zulu 16.32.15&quot;</span> /Users/anil/Library/Java/JavaVirtualMachines/azul-16.0.2/Contents/Home
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>/opt/homebrew/Cellar/openjdk/18.0.1.1/libexec/openjdk.jdk/Contents/Home
+<h1 id="kotlin-jacoco-error-while-creating-report">Kotlin Jacoco - Error while creating report</h1>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$ ./gradlew --no-build-cache --rerun-tasks clean build --stacktrace
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>...
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Caused by: java.io.IOException: Error <span class="k">while</span> analyzing ~/project-x/build/classes/kotlin/main/de/org/MyClass.class.
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        at org.jacoco.core.analysis.Analyzer.analyzerError<span class="o">(</span>Analyzer.java:162<span class="o">)</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        at org.jacoco.core.analysis.Analyzer.analyzeClass<span class="o">(</span>Analyzer.java:134<span class="o">)</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        at org.jacoco.core.analysis.Analyzer.analyzeClass<span class="o">(</span>Analyzer.java:157<span class="o">)</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        at org.jacoco.core.analysis.Analyzer.analyzeAll<span class="o">(</span>Analyzer.java:193<span class="o">)</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        at org.jacoco.core.analysis.Analyzer.analyzeAll<span class="o">(</span>Analyzer.java:226<span class="o">)</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        at org.jacoco.core.analysis.Analyzer.analyzeAll<span class="o">(</span>Analyzer.java:221<span class="o">)</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        at org.jacoco.core.analysis.Analyzer.analyzeAll<span class="o">(</span>Analyzer.java:221<span class="o">)</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        at org.jacoco.core.analysis.Analyzer.analyzeAll<span class="o">(</span>Analyzer.java:221<span class="o">)</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        at org.jacoco.core.analysis.Analyzer.analyzeAll<span class="o">(</span>Analyzer.java:221<span class="o">)</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        at org.jacoco.core.analysis.Analyzer.analyzeAll<span class="o">(</span>Analyzer.java:221<span class="o">)</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        at org.jacoco.ant.ReportTask.createBundle<span class="o">(</span>ReportTask.java:570<span class="o">)</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        at org.jacoco.ant.ReportTask.createReport<span class="o">(</span>ReportTask.java:545<span class="o">)</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>        at org.jacoco.ant.ReportTask.execute<span class="o">(</span>ReportTask.java:496<span class="o">)</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>        ... <span class="m">151</span> more
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>Caused by: java.lang.IllegalStateException: Unexpected SMAP line: *S KotlinDebug
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>        at org.jacoco.core.internal.analysis.filter.KotlinInlineFilter.getFirstGeneratedLineNumber<span class="o">(</span>KotlinInlineFilter.java:98<span class="o">)</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>        at org.jacoco.core.internal.analysis.filter.KotlinInlineFilter.filter<span class="o">(</span>KotlinInlineFilter.java:44<span class="o">)</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>        at org.jacoco.core.internal.analysis.filter.Filters.filter<span class="o">(</span>Filters.java:59<span class="o">)</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>        at org.jacoco.core.internal.analysis.ClassAnalyzer.addMethodCoverage<span class="o">(</span>ClassAnalyzer.java:119<span class="o">)</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>        at org.jacoco.core.internal.analysis.ClassAnalyzer.access<span class="nv">$100</span><span class="o">(</span>ClassAnalyzer.java:33<span class="o">)</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>        at org.jacoco.core.internal.analysis.ClassAnalyzer<span class="nv">$1</span>.accept<span class="o">(</span>ClassAnalyzer.java:108<span class="o">)</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>        at org.jacoco.core.internal.flow.ClassProbesAdapter<span class="nv">$2</span>.visitEnd<span class="o">(</span>ClassProbesAdapter.java:91<span class="o">)</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>        at org.objectweb.asm.ClassReader.readMethod<span class="o">(</span>ClassReader.java:1492<span class="o">)</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>        at org.objectweb.asm.ClassReader.accept<span class="o">(</span>ClassReader.java:718<span class="o">)</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>        at org.objectweb.asm.ClassReader.accept<span class="o">(</span>ClassReader.java:401<span class="o">)</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>        at org.jacoco.core.analysis.Analyzer.analyzeClass<span class="o">(</span>Analyzer.java:116<span class="o">)</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>        at org.jacoco.core.analysis.Analyzer.analyzeClass<span class="o">(</span>Analyzer.java:132<span class="o">)</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>        ... <span class="m">162</span> more
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>...
 </code></pre></div>
-<h2 id="get-java-home-for-specific-version">Get java home for specific version</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$ /usr/libexec/java_home -v18
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>/opt/homebrew/Cellar/openjdk/18.0.1.1/libexec/openjdk.jdk/Contents/Home
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>$ /usr/libexec/java_home -v16
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>/Users/anil/Library/Java/JavaVirtualMachines/azul-16.0.2/Contents/Home
+<h2 id="solution-upgrade-gradle-wrapper-from-681-to-742">Solution: Upgrade gradle wrapper from <code>6.8.1</code> to <code>7.4.2</code></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>./gradlew wrapper --gradle-version <span class="m">7</span>.4.2 
 </code></pre></div>
-<h2 id="create-a-sh-function-to-switch-versions">Create a sh function to switch versions</h2>
-<p><div class="highlight"><span class="filename">~/.zshrc</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>jdk<span class="o">()</span> <span class="o">{</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="nv">version</span><span class="o">=</span><span class="nv">$1</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="nb">export</span> <span class="nv">JAVA_HOME</span><span class="o">=</span><span class="k">$(</span>/usr/libexec/java_home -v<span class="s2">&quot;</span><span class="nv">$version</span><span class="s2">&quot;</span><span class="k">)</span><span class="p">;</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    java -version
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="o">}</span>
-</code></pre></div>
-Update current termainal session with <code>source ~/.zshrc</code></p>
-<h2 id="switch-the-version-with-this-command">Switch the version with this command</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>jdk 16
-</code></pre></div>
-<p>Example
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>$ java -version
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>openjdk version <span class="s2">&quot;18.0.1.1&quot;</span> <span class="m">2022</span>-04-22
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>OpenJDK Runtime Environment Homebrew <span class="o">(</span>build <span class="m">18</span>.0.1.1+0<span class="o">)</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>OpenJDK <span class="m">64</span>-Bit Server VM Homebrew <span class="o">(</span>build <span class="m">18</span>.0.1.1+0, mixed mode, sharing<span class="o">)</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>$ jdk <span class="m">16</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>openjdk version <span class="s2">&quot;16.0.2&quot;</span> <span class="m">2021</span>-07-20
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>OpenJDK Runtime Environment Zulu16.32+15-CA <span class="o">(</span>build <span class="m">16</span>.0.2+7<span class="o">)</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>OpenJDK <span class="m">64</span>-Bit Server VM Zulu16.32+15-CA <span class="o">(</span>build <span class="m">16</span>.0.2+7, mixed mode<span class="o">)</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>$ java -version
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>openjdk version <span class="s2">&quot;16.0.2&quot;</span> <span class="m">2021</span>-07-20
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>OpenJDK Runtime Environment Zulu16.32+15-CA <span class="o">(</span>build <span class="m">16</span>.0.2+7<span class="o">)</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>OpenJDK <span class="m">64</span>-Bit Server VM Zulu16.32+15-CA <span class="o">(</span>build <span class="m">16</span>.0.2+7, mixed mode<span class="o">)</span>
-</code></pre></div></p>
-<p>Reference: </p>
-<ul>
-<li>https://medium.com/w-logs/installing-java-11-on-macos-with-homebrew-7f73c1e9fadf</li>
-<li>https://stackoverflow.com/a/52524114/411871</li>
-</ul>
 
               
             </article>
