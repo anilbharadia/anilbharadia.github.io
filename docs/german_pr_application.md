@@ -40,6 +40,11 @@ Mit freundlichen Grüße,
 Anil Bharadia
 ```
 
+!!! warning "Email address"
+
+    If you are not from India, the email address could be different than `E3@lea.berlin.de`. Refer [this page](https://www.berlin.de/einwanderung/en/services/appointments/artikel.1144334.en.php){:target="_blank"} to find the email based on your country/region.
+
+
 Details about the attachments:
 
 `1. Reisepass und Blaue Karte`  A single PDF containing the scan copies of:
