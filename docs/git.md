@@ -28,7 +28,7 @@ Where `xxx` is the token
 git config --global core.editor "atom --wait"
 ```
 
-## git change the user of a commit
+## Change user of a commit
 
 Ref: https://stackoverflow.com/a/3042512
 
@@ -53,3 +53,10 @@ It will open the editor again to set the commit message. Update the message, sav
 `git push -f`
 
 done.
+
+## Delete last commit
+
+```shell
+    git reset --hard HEAD~1 # remove commit and all changes
+    git reset --soft HEAD~1 # remove commit but keep all changes
+```
