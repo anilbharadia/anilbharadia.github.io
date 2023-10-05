@@ -280,8 +280,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#git-change-the-user-of-a-commit" class="md-nav__link">
-    git change the user of a commit
+  <a href="#change-user-of-a-commit" class="md-nav__link">
+    Change user of a commit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-last-commit" class="md-nav__link">
+    Delete last commit
   </a>
   
 </li>
@@ -355,8 +362,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#git-change-the-user-of-a-commit" class="md-nav__link">
-    git change the user of a commit
+  <a href="#change-user-of-a-commit" class="md-nav__link">
+    Change user of a commit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-last-commit" class="md-nav__link">
+    Delete last commit
   </a>
   
 </li>
@@ -399,7 +413,7 @@ Where <code>xxx</code> is the token</p>
 <h2 id="use-atom-as-a-git-editor">Use atom as a git editor</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>git config --global core.editor <span class="s2">&quot;atom --wait&quot;</span>
 </code></pre></div>
-<h2 id="git-change-the-user-of-a-commit">git change the user of a commit</h2>
+<h2 id="change-user-of-a-commit">Change user of a commit</h2>
 <p>Ref: https://stackoverflow.com/a/3042512</p>
 <p><code>git rebase -i HEAD~1</code></p>
 <p>This opens editor (atom) with content like:
@@ -413,6 +427,10 @@ Where <code>xxx</code> is the token</p>
 <p><code>git rebase --continue</code></p>
 <p><code>git push -f</code></p>
 <p>done.</p>
+<h2 id="delete-last-commit">Delete last commit</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>    git reset --hard HEAD~1 <span class="c1"># remove commit and all changes</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    git reset --soft HEAD~1 <span class="c1"># remove commit but keep all changes</span>
+</code></pre></div>
 
               
             </article>
