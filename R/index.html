@@ -291,12 +291,18 @@
 <ul>
 <li><code>paste()</code> -&gt; string concatenation</li>
 <li><code>fread()</code> -&gt; returns <code>data.table</code></li>
-<li><code>%&gt;%</code> -&gt; pipe operator</li>
+<li><code>%&gt;%</code> -&gt; pipe operator<ul>
 <li>Example: <code>data %&gt;% head() %&gt;% summary()</code> is the same as <code>summary(head(data))</code> </li>
-<li><code>mutate()</code></li>
+</ul>
+</li>
+<li><code>mutate()</code><ul>
 <li><code>mutate(data_table, column_name = value)</code> -&gt; set column value, if column does not exist, it will be created</li>
-<li><code>rbind()</code> -&gt; bind rows - similar to <code>UNION</code> in SQL</li>
+</ul>
+</li>
+<li><code>rbind()</code> -&gt; bind rows - similar to <code>UNION</code> in SQL<ul>
 <li>Note: The number of columns must match.</li>
+</ul>
+</li>
 </ul>
 
               
