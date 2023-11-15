@@ -8,3 +8,5 @@
     - `mutate(data_table, column_name = value)` -> set column value, if column does not exist, it will be created
 - `rbind()` -> bind rows - similar to `UNION` in SQL
     - Note: The number of columns must match.
+- `replace_na()` -> replace NA values
+    - Example: `replace_na(data, list(column_name = value))`
