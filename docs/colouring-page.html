@@ -111,6 +111,9 @@
         <h1 class="text-2xl font-bold text-slate-700 tracking-wide">Coloring<span class="text-pink-500">Fun</span></h1>
     </div>
     <div class="flex gap-2">
+        <button onclick="undo()" class="tool-btn flex items-center gap-2 px-4 py-2 rounded-full border-2 border-yellow-100 text-yellow-600 font-bold hover:bg-yellow-50">
+            <i data-lucide="undo-2" class="w-5 h-5"></i> <span class="hidden sm:inline">Undo</span>
+        </button>
         <button onclick="clearCanvas()" class="tool-btn flex items-center gap-2 px-4 py-2 rounded-full border-2 border-red-100 text-red-500 font-bold hover:bg-red-50">
             <i data-lucide="trash-2" class="w-5 h-5"></i> <span class="hidden sm:inline">Clear</span>
         </button>
@@ -308,6 +311,7 @@
     let isBucket = false;
     let isDrawing = false;
     let currentTemplate = templates[0];
+    let history = []; // History stack for undo
 
     // --- Elements ---
     const canvas = document.getElementById('drawingCanvas');
@@ -403,6 +407,22 @@
 
     // --- Logic ---
 
+    function saveState() {
+        if (history.length > 20) history.shift(); // Keep last 20 states
+        history.push(canvas.toDataURL());
+    }
+
+    function undo() {
+        if (history.length === 0) return;
+        const previousStateUrl = history.pop();
+        const img = new Image();
+        img.src = previousStateUrl;
+        img.onload = () => {
+            ctx.clearRect(0,0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        };
+    }
+
     function setColor(color, btnElement) {
         currentColor = color;
 
@@ -443,6 +463,7 @@
     }
 
     function loadTemplate(t, shouldClear) {
+        if (shouldClear) history = []; // Clear history for new template
         currentTemplate = t;
         // Visual Overlay
         overlay.innerHTML = t.svg;
@@ -474,6 +495,7 @@
     }
 
     function clearCanvas() {
+        saveState(); // Save before clearing
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 
@@ -522,11 +544,13 @@
         const p = getPoint(e);
 
         if (isBucket) {
+            saveState(); // Save before fill
             // If bucket tool is active, perform flood fill
             performFloodFill(p.x, p.y, currentColor);
             return;
         }
 
+        saveState(); // Save before stroke
         isDrawing = true;
         ctx.beginPath();
         ctx.moveTo(p.x, p.y);
