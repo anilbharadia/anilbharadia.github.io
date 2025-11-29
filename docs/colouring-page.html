@@ -25,6 +25,8 @@
             overflow: hidden;
             touch-action: none;
             cursor: crosshair;
+            transform-origin: top left;
+            transition: width 0.2s ease, height 0.2s ease; /* Smooth zoom */
         }
 
         /* 1. Background Layer (White paper) */
@@ -92,6 +94,20 @@
             border-color: #3b82f6; /* blue-500 */
         }
 
+        /* Added styling for the main tool selection buttons */
+        .tool-select-btn {
+            transition: all 0.2s;
+        }
+        .tool-select-btn:active {
+            transform: scale(0.95);
+        }
+        .tool-select-btn.active {
+            background-color: #dbeafe; /* blue-100 */
+            color: #1e40af; /* blue-800 */
+            border-color: #3b82f6; /* blue-500 */
+            box-shadow: 0 0 0 1px #3b82f6; /* Solid outline */
+        }
+
         .template-thumb {
             transition: all 0.2s;
             cursor: pointer;
@@ -108,25 +124,38 @@
 <header class="bg-white p-3 shadow-sm border-b border-blue-100 flex justify-between items-center z-30 shrink-0">
     <div class="flex items-center gap-2">
         <i data-lucide="palette" class="text-pink-500 w-8 h-8"></i>
-        <h1 class="text-2xl font-bold text-slate-700 tracking-wide">Coloring<span class="text-pink-500">Fun</span></h1>
+        <h1 class="text-2xl font-bold text-slate-700 tracking-wide hidden md:block">Coloring<span class="text-pink-500">Fun</span></h1>
     </div>
+
+    <!-- Center Controls (Zoom) -->
+    <div class="flex gap-1 bg-slate-100 rounded-full p-1">
+        <button onclick="changeZoom(-0.2)" class="w-8 h-8 flex items-center justify-center rounded-full bg-white text-slate-600 shadow-sm hover:bg-slate-50 active:scale-90" title="Zoom Out">
+            <i data-lucide="zoom-out" class="w-4 h-4"></i>
+        </button>
+        <span id="zoomDisplay" class="px-2 flex items-center text-xs font-bold text-slate-500 w-12 justify-center">100%</span>
+        <button onclick="changeZoom(0.2)" class="w-8 h-8 flex items-center justify-center rounded-full bg-white text-slate-600 shadow-sm hover:bg-slate-50 active:scale-90" title="Zoom In">
+            <i data-lucide="zoom-in" class="w-4 h-4"></i>
+        </button>
+    </div>
+
     <div class="flex gap-2">
-        <button onclick="undo()" class="tool-btn flex items-center gap-2 px-3 py-2 md:px-4 rounded-full border-2 border-yellow-100 text-yellow-600 font-bold hover:bg-yellow-50" title="Undo">
-            <i data-lucide="undo-2" class="w-5 h-5"></i> <span class="hidden sm:inline">Undo</span>
+        <button onclick="undo()" class="tool-btn flex items-center gap-2 px-3 py-2 rounded-full border-2 border-yellow-100 text-yellow-600 font-bold hover:bg-yellow-50" title="Undo">
+            <i data-lucide="undo-2" class="w-5 h-5"></i>
         </button>
-        <button onclick="redo()" class="tool-btn flex items-center gap-2 px-3 py-2 md:px-4 rounded-full border-2 border-yellow-100 text-yellow-600 font-bold hover:bg-yellow-50" title="Redo">
-            <i data-lucide="redo-2" class="w-5 h-5"></i> <span class="hidden sm:inline">Redo</span>
+        <button onclick="redo()" class="tool-btn flex items-center gap-2 px-3 py-2 rounded-full border-2 border-yellow-100 text-yellow-600 font-bold hover:bg-yellow-50" title="Redo">
+            <i data-lucide="redo-2" class="w-5 h-5"></i>
         </button>
-        <button onclick="clearCanvas()" class="tool-btn flex items-center gap-2 px-3 py-2 md:px-4 rounded-full border-2 border-red-100 text-red-500 font-bold hover:bg-red-50">
-            <i data-lucide="trash-2" class="w-5 h-5"></i> <span class="hidden sm:inline">Clear</span>
+        <button onclick="clearCanvas()" class="tool-btn flex items-center gap-2 px-3 py-2 rounded-full border-2 border-red-100 text-red-500 font-bold hover:bg-red-50">
+            <i data-lucide="trash-2" class="w-5 h-5"></i>
         </button>
-        <button onclick="downloadArtwork()" class="tool-btn flex items-center gap-2 px-3 py-2 md:px-4 rounded-full bg-green-500 text-white font-bold hover:bg-green-600 shadow-md transform active:scale-95">
-            <i data-lucide="download" class="w-5 h-5"></i> <span class="hidden sm:inline">Save</span>
+        <button onclick="downloadArtwork()" class="tool-btn flex items-center gap-2 px-3 py-2 rounded-full bg-green-500 text-white font-bold hover:bg-green-600 shadow-md transform active:scale-95">
+            <i data-lucide="download" class="w-5 h-5"></i>
         </button>
     </div>
 </header>
 
 <!-- Main Workspace -->
+<!-- Changed overflow-hidden to overflow-auto to allow scrolling when zoomed -->
 <main class="flex-1 flex flex-col md:flex-row overflow-hidden relative">
 
     <!-- Left Sidebar: Tools & Templates -->
@@ -176,9 +205,11 @@
         </div>
     </aside>
 
-    <!-- Center: Canvas -->
-    <div class="flex-1 bg-blue-50 relative p-4 flex items-center justify-center overflow-hidden">
-        <div id="workspace" class="canvas-container w-full h-full max-w-4xl max-h-[80vh] aspect-[4/3] relative">
+    <!-- Center: Canvas Area -->
+    <!-- Enabled overflow-auto and flex centering -->
+    <div class="flex-1 bg-blue-50 relative p-4 overflow-auto flex items-center justify-center">
+        <!-- Added flex-shrink-0 to prevent canvas from squishing when parent is smaller -->
+        <div id="workspace" class="canvas-container w-full max-w-4xl aspect-[4/3] relative flex-shrink-0">
             <div class="layer-bg"></div>
             <canvas id="drawingCanvas"></canvas>
             <div id="outlineOverlay">
@@ -316,6 +347,7 @@
     let currentTemplate = templates[0];
     let history = []; // History stack for undo
     let redoStack = []; // Stack for redo
+    let zoomLevel = 1.0; // Zoom State
 
     // --- Elements ---
     const canvas = document.getElementById('drawingCanvas');
@@ -328,6 +360,7 @@
     const overlay = document.getElementById('outlineOverlay');
     const colorPalette = document.getElementById('colorPalette');
     const templateGrid = document.getElementById('templateGrid');
+    const zoomDisplay = document.getElementById('zoomDisplay');
 
     // --- Initialization ---
 
@@ -335,6 +368,12 @@
         // Resize Canvas
         resizeCanvas();
         window.addEventListener('resize', () => {
+            // Guard: If zoomed, reset zoom to prevent glitching before resize logic
+            if (zoomLevel !== 1.0) {
+                zoomLevel = 1.0;
+                updateZoomUI();
+            }
+
             // 1. Guard against zero dimensions to prevent InvalidStateError
             if (canvas.width === 0 || canvas.height === 0) {
                 resizeCanvas();
@@ -393,6 +432,11 @@
     }
 
     function resizeCanvas() {
+        // To properly resize, we must first reset any specific width styles set by zoom
+        workspace.style.width = '100%';
+        workspace.style.height = 'auto'; // let aspect ratio handle it
+
+        // Wait for layout update then measure
         const rect = workspace.getBoundingClientRect();
         canvas.width = rect.width;
         canvas.height = rect.height;
@@ -410,6 +454,27 @@
     }
 
     // --- Logic ---
+
+    function changeZoom(delta) {
+        zoomLevel += delta;
+        // Clamp zoom between 0.5x and 3.0x
+        if (zoomLevel < 0.6) zoomLevel = 0.6;
+        if (zoomLevel > 3.0) zoomLevel = 3.0;
+
+        // Round to 1 decimal to avoid float errors
+        zoomLevel = Math.round(zoomLevel * 10) / 10;
+
+        updateZoomUI();
+    }
+
+    function updateZoomUI() {
+        zoomDisplay.innerText = Math.round(zoomLevel * 100) + '%';
+
+        // Apply zoom by changing the container width.
+        // Since it's inside an overflow-auto container, scrollbars will appear.
+        // We use 'width' instead of 'transform' to ensure native scrolling works perfectly.
+        workspace.style.width = (zoomLevel * 100) + '%';
+    }
 
     function saveState() {
         if (history.length > 20) history.shift(); // Keep last 20 states
@@ -541,9 +606,15 @@
             clientY = e.clientY;
         }
 
+        // Important: We must account for the ratio between the visual size (rect.width)
+        // and the internal canvas buffer size (canvas.width).
+        // When zoomed in, rect.width is larger than canvas.width, so we scale down coordinates.
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+
         return {
-            x: Math.round(clientX - rect.left),
-            y: Math.round(clientY - rect.top)
+            x: Math.round((clientX - rect.left) * scaleX),
+            y: Math.round((clientY - rect.top) * scaleY)
         };
     }
 
