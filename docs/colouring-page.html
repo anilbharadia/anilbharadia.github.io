@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kids Coloring Fun!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap');
+
+        body {
+            font-family: 'Fredoka', sans-serif;
+            background-color: #f0f9ff;
+            overscroll-behavior: none;
+            touch-action: none; /* Prevents pull-to-refresh on mobile */
+        }
+
+        /* The Canvas Stack */
+        .canvas-container {
+            position: relative;
+            background-color: white;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            border-radius: 1rem;
+            overflow: hidden;
+            touch-action: none;
+            cursor: crosshair;
+        }
+
+        /* 1. Background Layer (White paper) */
+        .layer-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            z-index: 0;
+        }
+
+        /* 2. Drawing Layer (Where the user paints) */
+        #drawingCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            touch-action: none;
+        }
+
+        /* 3. Outline Layer (The black lines on top) */
+        #outlineOverlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 20;
+            pointer-events: none; /* Let clicks pass through to canvas */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #outlineOverlay svg {
+            width: 90%;
+            height: 90%;
+            opacity: 0.9;
+        }
+
+        /* UI Elements */
+        .color-btn {
+            transition: transform 0.1s;
+        }
+        .color-btn:active {
+            transform: scale(0.9);
+        }
+        .color-btn.active {
+            ring: 4px;
+            --tw-ring-color: #3b82f6;
+            transform: scale(1.1);
+        }
+
+        .tool-btn {
+            transition: all 0.2s;
+        }
+        .tool-btn:active {
+            transform: scale(0.95);
+        }
+        .tool-btn.active {
+            background-color: #dbeafe;
+            color: #2563eb;
+            border-color: #2563eb;
+        }
+
+        .template-thumb {
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .template-thumb:hover {
+            transform: translateY(-2px);
+            border-color: #3b82f6;
+        }
+    </style>
+</head>
+<body class="h-screen flex flex-col overflow-hidden">
+
+<!-- Header -->
+<header class="bg-white p-3 shadow-sm border-b border-blue-100 flex justify-between items-center z-30 shrink-0">
+    <div class="flex items-center gap-2">
+        <i data-lucide="palette" class="text-pink-500 w-8 h-8"></i>
+        <h1 class="text-2xl font-bold text-slate-700 tracking-wide">Coloring<span class="text-pink-500">Fun</span></h1>
+    </div>
+    <div class="flex gap-2">
+        <button onclick="clearCanvas()" class="tool-btn flex items-center gap-2 px-4 py-2 rounded-full border-2 border-red-100 text-red-500 font-bold hover:bg-red-50">
+            <i data-lucide="trash-2" class="w-5 h-5"></i> <span class="hidden sm:inline">Clear</span>
+        </button>
+        <button onclick="downloadArtwork()" class="tool-btn flex items-center gap-2 px-4 py-2 rounded-full bg-green-500 text-white font-bold hover:bg-green-600 shadow-md transform active:scale-95">
+            <i data-lucide="download" class="w-5 h-5"></i> <span class="hidden sm:inline">Save</span>
+        </button>
+    </div>
+</header>
+
+<!-- Main Workspace -->
+<main class="flex-1 flex flex-col md:flex-row overflow-hidden relative">
+
+    <!-- Left Sidebar: Tools & Templates -->
+    <aside class="w-full md:w-64 bg-white border-r border-blue-100 flex flex-col z-20 shrink-0 h-auto md:h-full overflow-y-auto">
+
+        <!-- Brush Size -->
+        <div class="p-4 border-b border-blue-50">
+            <h3 class="text-sm font-bold text-slate-400 uppercase mb-3">Brush Size</h3>
+            <div class="flex justify-between items-center bg-slate-100 rounded-xl p-2">
+                <button onclick="setBrushSize(5)" class="tool-btn w-10 h-10 rounded-lg flex items-center justify-center hover:bg-white" id="size-5">
+                    <div class="bg-slate-800 rounded-full w-2 h-2"></div>
+                </button>
+                <button onclick="setBrushSize(15)" class="tool-btn w-10 h-10 rounded-lg flex items-center justify-center hover:bg-white active" id="size-15">
+                    <div class="bg-slate-800 rounded-full w-4 h-4"></div>
+                </button>
+                <button onclick="setBrushSize(30)" class="tool-btn w-10 h-10 rounded-lg flex items-center justify-center hover:bg-white" id="size-30">
+                    <div class="bg-slate-800 rounded-full w-7 h-7"></div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Templates -->
+        <div class="p-4 flex-1">
+            <h3 class="text-sm font-bold text-slate-400 uppercase mb-3">Pictures</h3>
+            <div class="grid grid-cols-3 md:grid-cols-2 gap-2" id="templateGrid">
+                <!-- Template thumbnails injected by JS -->
+            </div>
+        </div>
+    </aside>
+
+    <!-- Center: Canvas -->
+    <div class="flex-1 bg-blue-50 relative p-4 flex items-center justify-center overflow-hidden">
+        <div id="workspace" class="canvas-container w-full h-full max-w-4xl max-h-[80vh] aspect-[4/3] relative">
+            <div class="layer-bg"></div>
+            <canvas id="drawingCanvas"></canvas>
+            <div id="outlineOverlay">
+                <!-- SVG injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom/Right Bar: Colors -->
+    <div class="bg-white border-t md:border-t-0 md:border-l border-blue-100 p-2 md:p-4 z-20 flex md:flex-col items-center justify-center gap-2 overflow-x-auto md:overflow-y-auto md:w-24 shrink-0">
+        <!-- Eraser -->
+        <button onclick="setTool('eraser')" id="btn-eraser" class="tool-btn w-12 h-12 rounded-full border-2 border-slate-200 flex items-center justify-center mb-0 md:mb-4 bg-white text-slate-500 shrink-0">
+            <i data-lucide="eraser" class="w-6 h-6"></i>
+        </button>
+
+        <div class="w-px h-8 bg-slate-200 md:w-8 md:h-px md:my-2 shrink-0"></div>
+
+        <!-- Colors -->
+        <div id="colorPalette" class="flex md:flex-col gap-3 p-1">
+            <!-- Colors injected by JS -->
+        </div>
+    </div>
+</main>
+
+<script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // --- Configuration ---
+    const colors = [
+        '#ef4444', '#f97316', '#f59e0b', '#84cc16', '#10b981',
+        '#06b6d4', '#3b82f6', '#8b5cf6', '#d946ef', '#f43f5e',
+        '#881337', '#78350f', '#000000'
+    ];
+
+    // Simple SVG Paths for Kids
+    const templates = [
+        {
+            id: 'rocket',
+            name: 'Rocket',
+            svg: `<svg viewBox="0 0 100 100" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M50 5 L50 5 Q70 30 70 60 L85 85 L70 85 L70 95 L50 90 L30 95 L30 85 L15 85 L30 60 Q30 30 50 5 Z" fill="none" stroke-width="2"/>
+                    <circle cx="50" cy="40" r="10" stroke-width="2"/>
+                    <path d="M45 75 Q50 85 55 75" stroke-width="2"/>
+                    <path d="M30 60 L70 60" stroke-width="2"/>
+                    <path d="M40 92 L40 98 M50 90 L50 100 M60 92 L60 98" stroke="orange" stroke-width="2"/>
+                    <!-- Stars -->
+                    <path d="M10 20 L12 24 L16 24 L13 27 L14 31 L10 29 L6 31 L7 27 L4 24 L8 24 Z" />
+                    <path d="M80 15 L82 19 L86 19 L83 22 L84 26 L80 24 L76 26 L77 22 L74 19 L78 19 Z" />
+                </svg>`
+        },
+        {
+            id: 'fish',
+            name: 'Fish',
+            svg: `<svg viewBox="0 0 100 100" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M85 50 Q85 20 50 20 Q20 20 15 50 Q20 80 50 80 Q85 80 85 50 Z" />
+                    <path d="M85 50 L95 30 L95 70 Z" /> <!-- Tail -->
+                    <circle cx="30" cy="40" r="3" fill="black" /> <!-- Eye -->
+                    <path d="M60 25 Q55 35 60 45" /> <!-- Scales -->
+                    <path d="M65 45 Q60 55 65 65" />
+                    <path d="M50 30 Q45 40 50 50" />
+                    <path d="M55 50 Q50 60 55 70" />
+                    <path d="M40 55 Q45 60 40 65" /> <!-- Mouth -->
+                    <path d="M50 85 Q55 95 65 85" stroke="blue" opacity="0.5"/> <!-- Bubble -->
+                    <circle cx="20" cy="15" r="2" stroke="blue"/>
+                    <circle cx="10" cy="10" r="1.5" stroke="blue"/>
+                </svg>`
+        },
+        {
+            id: 'flower',
+            name: 'Flower',
+            svg: `<svg viewBox="0 0 100 100" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M50 95 L50 60" stroke-width="3" /> <!-- Stem -->
+                    <path d="M50 80 Q70 70 60 60" /> <!-- Leaf R -->
+                    <path d="M50 70 Q30 60 40 50" /> <!-- Leaf L -->
+                    <!-- Petals -->
+                    <path d="M50 40 Q65 20 80 40 Q65 60 50 40" />
+                    <path d="M50 40 Q65 60 50 70 Q35 60 50 40" />
+                    <path d="M50 40 Q35 60 20 40 Q35 20 50 40" />
+                    <path d="M50 40 Q35 20 50 10 Q65 20 50 40" />
+                    <circle cx="50" cy="40" r="8" fill="white"/>
+                    <circle cx="50" cy="40" r="2" fill="black" stroke="none"/>
+                </svg>`
+        },
+        {
+            id: 'butterfly',
+            name: 'Butterfly',
+            svg: `<svg viewBox="0 0 100 100" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M50 35 L50 75" stroke-width="3"/> <!-- Body -->
+                    <circle cx="50" cy="30" r="4" /> <!-- Head -->
+                    <!-- Wings Right -->
+                    <path d="M50 35 Q80 15 90 45 Q95 65 50 55" />
+                    <path d="M50 55 Q90 65 80 85 Q60 95 50 75" />
+                    <!-- Wings Left -->
+                    <path d="M50 35 Q20 15 10 45 Q5 65 50 55" />
+                    <path d="M50 55 Q10 65 20 85 Q40 95 50 75" />
+                    <!-- Antennae -->
+                    <path d="M48 27 L40 15 M52 27 L60 15" />
+                    <!-- Patterns -->
+                    <circle cx="70" cy="45" r="3" />
+                    <circle cx="30" cy="45" r="3" />
+                </svg>`
+        },
+        {
+            id: 'blank',
+            name: 'Blank',
+            svg: `<svg viewBox="0 0 100 100"></svg>`
+        }
+    ];
+
+    // --- State ---
+    let currentColor = '#ef4444';
+    let currentSize = 15;
+    let isEraser = false;
+    let isDrawing = false;
+    let currentTemplate = templates[0];
+
+    // --- Elements ---
+    const canvas = document.getElementById('drawingCanvas');
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    const workspace = document.getElementById('workspace');
+    const overlay = document.getElementById('outlineOverlay');
+    const colorPalette = document.getElementById('colorPalette');
+    const templateGrid = document.getElementById('templateGrid');
+
+    // --- Initialization ---
+
+    function init() {
+        // Resize Canvas
+        resizeCanvas();
+        window.addEventListener('resize', () => {
+            // We handle resize carefully to avoid losing drawing
+            // For a simple kids app, we might accept that resize clears,
+            // but let's try to save content
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = canvas.width;
+            tempCanvas.height = canvas.height;
+            tempCanvas.getContext('2d').drawImage(canvas, 0, 0);
+
+            resizeCanvas();
+
+            ctx.drawImage(tempCanvas, 0, 0, canvas.width, canvas.height);
+        });
+
+        // Generate Colors
+        colors.forEach(color => {
+            const btn = document.createElement('button');
+            btn.className = `color-btn w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-white shadow-sm shrink-0`;
+            btn.style.backgroundColor = color;
+            btn.onclick = () => setColor(color, btn);
+            if (color === currentColor) btn.classList.add('active');
+            colorPalette.appendChild(btn);
+        });
+
+        // Generate Templates
+        templates.forEach(t => {
+            const div = document.createElement('div');
+            div.className = 'template-thumb bg-slate-50 border-2 border-slate-200 rounded-lg p-2 flex flex-col items-center gap-1';
+            div.innerHTML = `
+                    <div class="w-full aspect-square relative text-slate-800">
+                        ${t.svg}
+                    </div>
+                    <span class="text-xs font-bold text-slate-500">${t.name}</span>
+                `;
+            div.onclick = () => loadTemplate(t);
+            templateGrid.appendChild(div);
+        });
+
+        // Load Initial Template
+        loadTemplate(templates[0]);
+
+        // Events
+        setupCanvasEvents();
+    }
+
+    function resizeCanvas() {
+        const rect = workspace.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+        // Retain settings
+        setCtxProperties();
+    }
+
+    function setCtxProperties() {
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.lineWidth = currentSize;
+        ctx.strokeStyle = currentColor;
+    }
+
+    // --- Logic ---
+
+    function setColor(color, btnElement) {
+        isEraser = false;
+        currentColor = color;
+        document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active', 'ring-2', 'ring-blue-500'));
+        if(btnElement) btnElement.classList.add('active');
+
+        document.getElementById('btn-eraser').classList.remove('active');
+        setCtxProperties();
+    }
+
+    function setTool(tool) {
+        if (tool === 'eraser') {
+            isEraser = true;
+            document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('btn-eraser').classList.add('active');
+        }
+    }
+
+    function setBrushSize(size) {
+        currentSize = size;
+        document.querySelectorAll('[id^="size-"]').forEach(b => b.classList.remove('active'));
+        document.getElementById(`size-${size}`).classList.add('active');
+        setCtxProperties();
+    }
+
+    function loadTemplate(t) {
+        currentTemplate = t;
+        // Just update HTML of overlay
+        overlay.innerHTML = t.svg;
+        clearCanvas();
+    }
+
+    function clearCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    // --- Drawing Logic ---
+
+    function getPoint(e) {
+        const rect = canvas.getBoundingClientRect();
+        let clientX, clientY;
+
+        if (e.touches && e.touches.length > 0) {
+            clientX = e.touches[0].clientX;
+            clientY = e.touches[0].clientY;
+        } else {
+            clientX = e.clientX;
+            clientY = e.clientY;
+        }
+
+        return {
+            x: clientX - rect.left,
+            y: clientY - rect.top
+        };
+    }
+
+    function setupCanvasEvents() {
+        // Mouse
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseout', stopDrawing);
+
+        // Touch
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // Prevent scrolling
+            startDrawing(e);
+        }, { passive: false });
+
+        canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            draw(e);
+        }, { passive: false });
+
+        canvas.addEventListener('touchend', stopDrawing);
+    }
+
+    function startDrawing(e) {
+        isDrawing = true;
+        const p = getPoint(e);
+
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+
+        // Logic for Eraser:
+        // Since we have an overlay, we can just use "destination-out" to erase pixels on canvas
+        // revealing the white background div underneath
+        if (isEraser) {
+            ctx.globalCompositeOperation = 'destination-out';
+        } else {
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.strokeStyle = currentColor;
+        }
+        ctx.lineWidth = currentSize;
+
+        // Draw a dot for single click
+        ctx.lineTo(p.x, p.y);
+        ctx.stroke();
+    }
+
+    function draw(e) {
+        if (!isDrawing) return;
+        const p = getPoint(e);
+        ctx.lineTo(p.x, p.y);
+        ctx.stroke();
+    }
+
+    function stopDrawing() {
+        if (!isDrawing) return;
+        isDrawing = false;
+        ctx.closePath();
+        ctx.globalCompositeOperation = 'source-over'; // Reset
+    }
+
+    // --- Save Functionality ---
+
+    function downloadArtwork() {
+        // We need to composite layers: White BG + User Drawing + SVG Outline
+        const saveCanvas = document.createElement('canvas');
+        saveCanvas.width = canvas.width;
+        saveCanvas.height = canvas.height;
+        const saveCtx = saveCanvas.getContext('2d');
+
+        // 1. Fill White
+        saveCtx.fillStyle = '#ffffff';
+        saveCtx.fillRect(0, 0, saveCanvas.width, saveCanvas.height);
+
+        // 2. Draw User Artwork
+        saveCtx.drawImage(canvas, 0, 0);
+
+        // 3. Draw SVG
+        // Converting SVG string to Image is tricky without external libs due to canvas tainting/parsing.
+        // We use the Blob method.
+        const svgString = overlay.innerHTML;
+
+        // We need to ensure the SVG scales correctly to the canvas
+        // The overlay is flex centered, svg is 90%.
+        // To make saving accurate, we actually just want the raw SVG logic drawn on top.
+        // Simplified approach: Serialize the SVG element
+        const svgEl = overlay.querySelector('svg');
+        if(svgEl) {
+            const s = new XMLSerializer().serializeToString(svgEl);
+            const encodedData = window.btoa(unescape(encodeURIComponent(s)));
+            const img = new Image();
+            img.src = "data:image/svg+xml;base64," + encodedData;
+
+            img.onload = () => {
+                // Calculate positioning to match CSS (centered, 90%)
+                const w = saveCanvas.width * 0.9;
+                const h = saveCanvas.height * 0.9;
+                const x = (saveCanvas.width - w) / 2;
+                const y = (saveCanvas.height - h) / 2;
+
+                saveCtx.drawImage(img, x, y, w, h);
+                triggerDownload(saveCanvas);
+            };
+        } else {
+            // Blank template
+            triggerDownload(saveCanvas);
+        }
+    }
+
+    function triggerDownload(c) {
+        const link = document.createElement('a');
+        link.download = `my-coloring-${Date.now()}.png`;
+        link.href = c.toDataURL();
+        link.click();
+    }
+
+    // Start
+    init();
+
+</script>
+</body>
+</html>
