@@ -87,9 +87,9 @@
             transform: scale(0.95);
         }
         .tool-btn.active {
-            background-color: #dbeafe;
-            color: #2563eb;
-            border-color: #2563eb;
+            background-color: #eff6ff; /* blue-50 */
+            color: #2563eb; /* blue-600 */
+            border-color: #3b82f6; /* blue-500 */
         }
 
         .template-thumb {
@@ -125,6 +125,25 @@
 
     <!-- Left Sidebar: Tools & Templates -->
     <aside class="w-full md:w-64 bg-white border-r border-blue-100 flex flex-col z-20 shrink-0 h-auto md:h-full overflow-y-auto">
+
+        <!-- Main Tools -->
+        <div class="p-4 border-b border-blue-50">
+            <h3 class="text-sm font-bold text-slate-400 uppercase mb-3">Tools</h3>
+            <div class="flex gap-2">
+                <button onclick="setTool('brush')" id="btn-brush" class="tool-select-btn flex-1 py-3 rounded-xl border-2 border-slate-200 flex flex-col items-center justify-center gap-1 hover:bg-slate-50 active transition-colors">
+                    <i data-lucide="pencil" class="w-6 h-6"></i>
+                    <span class="text-xs font-bold">Draw</span>
+                </button>
+                <button onclick="setTool('bucket')" id="btn-bucket" class="tool-select-btn flex-1 py-3 rounded-xl border-2 border-slate-200 flex flex-col items-center justify-center gap-1 hover:bg-slate-50 transition-colors">
+                    <i data-lucide="paint-bucket" class="w-6 h-6"></i>
+                    <span class="text-xs font-bold">Fill</span>
+                </button>
+                <button onclick="setTool('eraser')" id="btn-eraser" class="tool-select-btn flex-1 py-3 rounded-xl border-2 border-slate-200 flex flex-col items-center justify-center gap-1 hover:bg-slate-50 transition-colors">
+                    <i data-lucide="eraser" class="w-6 h-6"></i>
+                    <span class="text-xs font-bold">Erase</span>
+                </button>
+            </div>
+        </div>
 
         <!-- Brush Size -->
         <div class="p-4 border-b border-blue-50">
@@ -164,13 +183,6 @@
 
     <!-- Bottom/Right Bar: Colors -->
     <div class="bg-white border-t md:border-t-0 md:border-l border-blue-100 p-2 md:p-4 z-20 flex md:flex-col items-center justify-center gap-2 overflow-x-auto md:overflow-y-auto md:w-24 shrink-0">
-        <!-- Eraser -->
-        <button onclick="setTool('eraser')" id="btn-eraser" class="tool-btn w-12 h-12 rounded-full border-2 border-slate-200 flex items-center justify-center mb-0 md:mb-4 bg-white text-slate-500 shrink-0">
-            <i data-lucide="eraser" class="w-6 h-6"></i>
-        </button>
-
-        <div class="w-px h-8 bg-slate-200 md:w-8 md:h-px md:my-2 shrink-0"></div>
-
         <!-- Colors -->
         <div id="colorPalette" class="flex md:flex-col gap-3 p-1">
             <!-- Colors injected by JS -->
@@ -293,12 +305,17 @@
     let currentColor = '#ef4444';
     let currentSize = 15;
     let isEraser = false;
+    let isBucket = false;
     let isDrawing = false;
     let currentTemplate = templates[0];
 
     // --- Elements ---
     const canvas = document.getElementById('drawingCanvas');
     const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    // We create an invisible canvas to hold the boundary data (lines)
+    const collisionCanvas = document.createElement('canvas');
+    const collisionCtx = collisionCanvas.getContext('2d', { willReadFrequently: true });
+
     const workspace = document.getElementById('workspace');
     const overlay = document.getElementById('outlineOverlay');
     const colorPalette = document.getElementById('colorPalette');
@@ -310,17 +327,29 @@
         // Resize Canvas
         resizeCanvas();
         window.addEventListener('resize', () => {
-            // We handle resize carefully to avoid losing drawing
-            // For a simple kids app, we might accept that resize clears,
-            // but let's try to save content
+            // 1. Guard against zero dimensions to prevent InvalidStateError
+            if (canvas.width === 0 || canvas.height === 0) {
+                resizeCanvas();
+                return;
+            }
+
+            // Save current drawing
             const tempCanvas = document.createElement('canvas');
             tempCanvas.width = canvas.width;
             tempCanvas.height = canvas.height;
-            tempCanvas.getContext('2d').drawImage(canvas, 0, 0);
+
+            // 2. Only draw if valid dimensions
+            if (tempCanvas.width > 0 && tempCanvas.height > 0) {
+                tempCanvas.getContext('2d').drawImage(canvas, 0, 0);
+            }
 
             resizeCanvas();
 
-            ctx.drawImage(tempCanvas, 0, 0, canvas.width, canvas.height);
+            // 3. Restore drawing and re-render collision canvas
+            if (tempCanvas.width > 0 && tempCanvas.height > 0 && canvas.width > 0 && canvas.height > 0) {
+                ctx.drawImage(tempCanvas, 0, 0, canvas.width, canvas.height);
+            }
+            loadTemplate(currentTemplate, false); // Reload template lines without clearing drawing
         });
 
         // Generate Colors
@@ -343,12 +372,13 @@
                     </div>
                     <span class="text-xs font-bold text-slate-500">${t.name}</span>
                 `;
-            div.onclick = () => loadTemplate(t);
+            div.onclick = () => loadTemplate(t, true);
             templateGrid.appendChild(div);
         });
 
         // Load Initial Template
-        loadTemplate(templates[0]);
+        loadTemplate(templates[0], true);
+        setTool('brush'); // Set default tool logic
 
         // Events
         setupCanvasEvents();
@@ -358,6 +388,8 @@
         const rect = workspace.getBoundingClientRect();
         canvas.width = rect.width;
         canvas.height = rect.height;
+        collisionCanvas.width = rect.width;
+        collisionCanvas.height = rect.height;
         // Retain settings
         setCtxProperties();
     }
@@ -372,20 +404,34 @@
     // --- Logic ---
 
     function setColor(color, btnElement) {
-        isEraser = false;
         currentColor = color;
+
+        // Switch to brush automatically when picking a color
+        setTool('brush');
+
+        // UI Updates for Color
         document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active', 'ring-2', 'ring-blue-500'));
         if(btnElement) btnElement.classList.add('active');
 
-        document.getElementById('btn-eraser').classList.remove('active');
         setCtxProperties();
     }
 
     function setTool(tool) {
-        if (tool === 'eraser') {
+        // Remove active class from all tools
+        document.querySelectorAll('.tool-select-btn').forEach(b => b.classList.remove('active'));
+
+        if (tool === 'brush') {
+            isBucket = false;
+            isEraser = false;
+            document.getElementById('btn-brush').classList.add('active');
+        } else if (tool === 'eraser') {
             isEraser = true;
-            document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
+            isBucket = false;
             document.getElementById('btn-eraser').classList.add('active');
+        } else if (tool === 'bucket') {
+            isBucket = true;
+            isEraser = false;
+            document.getElementById('btn-bucket').classList.add('active');
         }
     }
 
@@ -396,11 +442,35 @@
         setCtxProperties();
     }
 
-    function loadTemplate(t) {
+    function loadTemplate(t, shouldClear) {
         currentTemplate = t;
-        // Just update HTML of overlay
+        // Visual Overlay
         overlay.innerHTML = t.svg;
-        clearCanvas();
+
+        if (shouldClear) clearCanvas();
+
+        // Render SVG to Hidden Collision Canvas for Bucket Tool
+        if (t.id === 'blank') {
+            collisionCtx.clearRect(0, 0, collisionCanvas.width, collisionCanvas.height);
+            return;
+        }
+
+        const svgEl = overlay.querySelector('svg');
+        if (svgEl) {
+            const s = new XMLSerializer().serializeToString(svgEl);
+            const encodedData = window.btoa(unescape(encodeURIComponent(s)));
+            const img = new Image();
+            img.onload = () => {
+                collisionCtx.clearRect(0, 0, collisionCanvas.width, collisionCanvas.height);
+                // Match scaling logic from downloadArtwork
+                const w = collisionCanvas.width * 0.9;
+                const h = collisionCanvas.height * 0.9;
+                const x = (collisionCanvas.width - w) / 2;
+                const y = (collisionCanvas.height - h) / 2;
+                collisionCtx.drawImage(img, x, y, w, h);
+            };
+            img.src = "data:image/svg+xml;base64," + encodedData;
+        }
     }
 
     function clearCanvas() {
@@ -422,8 +492,8 @@
         }
 
         return {
-            x: clientX - rect.left,
-            y: clientY - rect.top
+            x: Math.round(clientX - rect.left),
+            y: Math.round(clientY - rect.top)
         };
     }
 
@@ -436,7 +506,7 @@
 
         // Touch
         canvas.addEventListener('touchstart', (e) => {
-            e.preventDefault(); // Prevent scrolling
+            e.preventDefault();
             startDrawing(e);
         }, { passive: false });
 
@@ -449,15 +519,18 @@
     }
 
     function startDrawing(e) {
-        isDrawing = true;
         const p = getPoint(e);
 
+        if (isBucket) {
+            // If bucket tool is active, perform flood fill
+            performFloodFill(p.x, p.y, currentColor);
+            return;
+        }
+
+        isDrawing = true;
         ctx.beginPath();
         ctx.moveTo(p.x, p.y);
 
-        // Logic for Eraser:
-        // Since we have an overlay, we can just use "destination-out" to erase pixels on canvas
-        // revealing the white background div underneath
         if (isEraser) {
             ctx.globalCompositeOperation = 'destination-out';
         } else {
@@ -466,7 +539,6 @@
         }
         ctx.lineWidth = currentSize;
 
-        // Draw a dot for single click
         ctx.lineTo(p.x, p.y);
         ctx.stroke();
     }
@@ -482,7 +554,82 @@
         if (!isDrawing) return;
         isDrawing = false;
         ctx.closePath();
-        ctx.globalCompositeOperation = 'source-over'; // Reset
+        ctx.globalCompositeOperation = 'source-over';
+    }
+
+    // --- Flood Fill Algorithm ---
+
+    function hexToRgba(hex) {
+        // Remove hash
+        hex = hex.replace(/^#/, '');
+        // Parse
+        const bigint = parseInt(hex, 16);
+        const r = (bigint >> 16) & 255;
+        const g = (bigint >> 8) & 255;
+        const b = bigint & 255;
+        return [r, g, b, 255];
+    }
+
+    function performFloodFill(startX, startY, colorHex) {
+        // Get data from both drawing canvas (current state) AND collision canvas (boundaries)
+        const w = canvas.width;
+        const h = canvas.height;
+        const drawingData = ctx.getImageData(0, 0, w, h);
+        const collisionData = collisionCtx.getImageData(0, 0, w, h);
+
+        const pixelData = drawingData.data;
+        const boundaryData = collisionData.data; // The black lines
+
+        const [fillR, fillG, fillB, fillA] = hexToRgba(colorHex);
+
+        // Get start color
+        const startPos = (startY * w + startX) * 4;
+        const startR = pixelData[startPos];
+        const startG = pixelData[startPos + 1];
+        const startB = pixelData[startPos + 2];
+        const startA = pixelData[startPos + 3];
+
+        // If color is same as fill color, return (avoid infinite loop)
+        if (startR === fillR && startG === fillG && startB === fillB && startA === fillA) return;
+
+        // Stack-based flood fill
+        const stack = [[startX, startY]];
+
+        while(stack.length) {
+            const [x, y] = stack.pop();
+
+            // Bounds check
+            if (x < 0 || x >= w || y < 0 || y >= h) continue;
+
+            const pos = (y * w + x) * 4;
+
+            // 1. Check if pixel matches start color (on drawing canvas)
+            const matchesStart = pixelData[pos] === startR &&
+                pixelData[pos + 1] === startG &&
+                pixelData[pos + 2] === startB &&
+                pixelData[pos + 3] === startA;
+
+            if (!matchesStart) continue;
+
+            // 2. Check collision (is there a black line here on the hidden canvas?)
+            // Simple threshold: if alpha > 100, it's a line
+            if (boundaryData[pos + 3] > 100) continue;
+
+            // Color pixel
+            pixelData[pos] = fillR;
+            pixelData[pos + 1] = fillG;
+            pixelData[pos + 2] = fillB;
+            pixelData[pos + 3] = fillA;
+
+            // Push neighbors
+            stack.push([x + 1, y]);
+            stack.push([x - 1, y]);
+            stack.push([x, y + 1]);
+            stack.push([x, y - 1]);
+        }
+
+        // Put data back
+        ctx.putImageData(drawingData, 0, 0);
     }
 
     // --- Save Functionality ---
