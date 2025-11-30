@@ -24,9 +24,20 @@
             border-radius: 1rem;
             overflow: hidden;
             touch-action: none;
-            cursor: crosshair;
             transform-origin: top left;
             transition: width 0.2s ease, height 0.2s ease; /* Smooth zoom */
+            margin: auto; /* Center in scrollable area */
+        }
+
+        /* Custom Cursors */
+        .cursor-draw {
+            cursor: crosshair;
+        }
+        .cursor-fill {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 11L12 17L6 11l-3-3a4.24 4.24 0 0 1 6-6l3 3 6 6c1.17 1.17 1.17 3.07 0 4.24z"/><path d="m5 2 5 5"/></svg>') 0 24, auto;
+        }
+        .cursor-erase {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="black" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>') 12 12, auto;
         }
 
         /* 1. Background Layer (White paper) */
@@ -116,6 +127,30 @@
             transform: translateY(-2px);
             border-color: #3b82f6;
         }
+
+        /* Slider Styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #3b82f6;
+            cursor: pointer;
+            margin-top: -8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #cbd5e1;
+            border-radius: 2px;
+        }
     </style>
 </head>
 <body class="h-screen flex flex-col overflow-hidden">
@@ -155,7 +190,6 @@
 </header>
 
 <!-- Main Workspace -->
-<!-- Changed overflow-hidden to overflow-auto to allow scrolling when zoomed -->
 <main class="flex-1 flex flex-col md:flex-row overflow-hidden relative">
 
     <!-- Left Sidebar: Tools & Templates -->
@@ -180,19 +214,16 @@
             </div>
         </div>
 
-        <!-- Brush Size -->
+        <!-- Brush Size Slider -->
         <div class="p-4 border-b border-blue-50">
-            <h3 class="text-sm font-bold text-slate-400 uppercase mb-3">Brush Size</h3>
-            <div class="flex justify-between items-center bg-slate-100 rounded-xl p-2">
-                <button onclick="setBrushSize(5)" class="tool-btn w-10 h-10 rounded-lg flex items-center justify-center hover:bg-white" id="size-5">
-                    <div class="bg-slate-800 rounded-full w-2 h-2"></div>
-                </button>
-                <button onclick="setBrushSize(15)" class="tool-btn w-10 h-10 rounded-lg flex items-center justify-center hover:bg-white active" id="size-15">
-                    <div class="bg-slate-800 rounded-full w-4 h-4"></div>
-                </button>
-                <button onclick="setBrushSize(30)" class="tool-btn w-10 h-10 rounded-lg flex items-center justify-center hover:bg-white" id="size-30">
-                    <div class="bg-slate-800 rounded-full w-7 h-7"></div>
-                </button>
+            <div class="flex justify-between items-center mb-2">
+                <h3 class="text-sm font-bold text-slate-400 uppercase">Size</h3>
+                <div id="sizePreview" class="w-6 h-6 rounded-full bg-slate-800"></div>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="text-xs font-bold text-slate-400">2px</span>
+                <input type="range" min="2" max="50" value="15" id="brushSlider" oninput="updateBrushSize(this.value)">
+                <span class="text-xs font-bold text-slate-400">50px</span>
             </div>
         </div>
 
@@ -206,10 +237,9 @@
     </aside>
 
     <!-- Center: Canvas Area -->
-    <!-- Enabled overflow-auto and flex centering -->
-    <div class="flex-1 bg-blue-50 relative p-4 overflow-auto flex items-center justify-center">
-        <!-- Added flex-shrink-0 to prevent canvas from squishing when parent is smaller -->
-        <div id="workspace" class="canvas-container w-full max-w-4xl aspect-[4/3] relative flex-shrink-0">
+    <div class="flex-1 bg-blue-50 relative p-4 overflow-auto flex items-center justify-center" id="scrollContainer">
+        <!-- Removed max-w-4xl to allow free zooming -->
+        <div id="workspace" class="canvas-container w-full aspect-[4/3] relative flex-shrink-0 cursor-draw">
             <div class="layer-bg"></div>
             <canvas id="drawingCanvas"></canvas>
             <div id="outlineOverlay">
@@ -348,6 +378,8 @@
     let history = []; // History stack for undo
     let redoStack = []; // Stack for redo
     let zoomLevel = 1.0; // Zoom State
+    let baseCanvasWidth = 0; // Store the 100% width
+    let baseCanvasHeight = 0; // Store the 100% height
 
     // --- Elements ---
     const canvas = document.getElementById('drawingCanvas');
@@ -361,42 +393,33 @@
     const colorPalette = document.getElementById('colorPalette');
     const templateGrid = document.getElementById('templateGrid');
     const zoomDisplay = document.getElementById('zoomDisplay');
+    const sizePreview = document.getElementById('sizePreview');
 
     // --- Initialization ---
 
     function init() {
-        // Resize Canvas
-        resizeCanvas();
+        // Initial Resize to get base dimensions
+        // Reset width to ensure we measure natural size in container
+        workspace.style.width = '100%';
+        workspace.style.maxWidth = '56rem'; // match max-w-4xl initially
+        const rect = workspace.getBoundingClientRect();
+        baseCanvasWidth = rect.width;
+        baseCanvasHeight = rect.height;
+
+        // Set canvas buffer size ONCE
+        canvas.width = baseCanvasWidth;
+        canvas.height = baseCanvasHeight;
+        collisionCanvas.width = baseCanvasWidth;
+        collisionCanvas.height = baseCanvasHeight;
+
+        setCtxProperties();
+
+        // Handle Window Resize (responsive only when zoom is 100%)
         window.addEventListener('resize', () => {
-            // Guard: If zoomed, reset zoom to prevent glitching before resize logic
-            if (zoomLevel !== 1.0) {
-                zoomLevel = 1.0;
-                updateZoomUI();
+            if (zoomLevel === 1.0) {
+                // Logic to handle responsiveness could go here
+                // For now, we lock canvas resolution to initial load or reset
             }
-
-            // 1. Guard against zero dimensions to prevent InvalidStateError
-            if (canvas.width === 0 || canvas.height === 0) {
-                resizeCanvas();
-                return;
-            }
-
-            // Save current drawing
-            const tempCanvas = document.createElement('canvas');
-            tempCanvas.width = canvas.width;
-            tempCanvas.height = canvas.height;
-
-            // 2. Only draw if valid dimensions
-            if (tempCanvas.width > 0 && tempCanvas.height > 0) {
-                tempCanvas.getContext('2d').drawImage(canvas, 0, 0);
-            }
-
-            resizeCanvas();
-
-            // 3. Restore drawing and re-render collision canvas
-            if (tempCanvas.width > 0 && tempCanvas.height > 0 && canvas.width > 0 && canvas.height > 0) {
-                ctx.drawImage(tempCanvas, 0, 0, canvas.width, canvas.height);
-            }
-            loadTemplate(currentTemplate, false); // Reload template lines without clearing drawing
         });
 
         // Generate Colors
@@ -426,24 +449,10 @@
         // Load Initial Template
         loadTemplate(templates[0], true);
         setTool('brush'); // Set default tool logic
+        updateBrushSize(15);
 
         // Events
         setupCanvasEvents();
-    }
-
-    function resizeCanvas() {
-        // To properly resize, we must first reset any specific width styles set by zoom
-        workspace.style.width = '100%';
-        workspace.style.height = 'auto'; // let aspect ratio handle it
-
-        // Wait for layout update then measure
-        const rect = workspace.getBoundingClientRect();
-        canvas.width = rect.width;
-        canvas.height = rect.height;
-        collisionCanvas.width = rect.width;
-        collisionCanvas.height = rect.height;
-        // Retain settings
-        setCtxProperties();
     }
 
     function setCtxProperties() {
@@ -470,10 +479,19 @@
     function updateZoomUI() {
         zoomDisplay.innerText = Math.round(zoomLevel * 100) + '%';
 
-        // Apply zoom by changing the container width.
-        // Since it's inside an overflow-auto container, scrollbars will appear.
-        // We use 'width' instead of 'transform' to ensure native scrolling works perfectly.
-        workspace.style.width = (zoomLevel * 100) + '%';
+        // We scale the visual width of the container.
+        // The canvas buffer resolution remains fixed at baseCanvasWidth.
+        // This ensures drawing lines don't get pixelated/resampled.
+        // We unlock max-width when zooming in so it can overflow.
+
+        if (zoomLevel > 1.0) {
+            workspace.style.maxWidth = 'none';
+        } else {
+            workspace.style.maxWidth = '56rem'; // restore 4xl constraint
+        }
+
+        workspace.style.width = (baseCanvasWidth * zoomLevel) + 'px';
+        workspace.style.height = (baseCanvasHeight * zoomLevel) + 'px';
     }
 
     function saveState() {
@@ -523,6 +541,9 @@
         document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active', 'ring-2', 'ring-blue-500'));
         if(btnElement) btnElement.classList.add('active');
 
+        // Update preview color
+        sizePreview.style.backgroundColor = color;
+
         setCtxProperties();
     }
 
@@ -530,26 +551,43 @@
         // Remove active class from all tools
         document.querySelectorAll('.tool-select-btn').forEach(b => b.classList.remove('active'));
 
+        // Reset Cursors
+        workspace.classList.remove('cursor-draw', 'cursor-fill', 'cursor-erase');
+
         if (tool === 'brush') {
             isBucket = false;
             isEraser = false;
             document.getElementById('btn-brush').classList.add('active');
+            workspace.classList.add('cursor-draw');
         } else if (tool === 'eraser') {
             isEraser = true;
             isBucket = false;
             document.getElementById('btn-eraser').classList.add('active');
+            workspace.classList.add('cursor-erase');
         } else if (tool === 'bucket') {
             isBucket = true;
             isEraser = false;
             document.getElementById('btn-bucket').classList.add('active');
+            workspace.classList.add('cursor-fill');
         }
     }
 
-    function setBrushSize(size) {
+    function updateBrushSize(val) {
+        // Convert string to number
+        const size = parseInt(val);
         currentSize = size;
-        document.querySelectorAll('[id^="size-"]').forEach(b => b.classList.remove('active'));
-        document.getElementById(`size-${size}`).classList.add('active');
+
+        // Update visual preview
+        sizePreview.style.width = size + 'px';
+        sizePreview.style.height = size + 'px';
+
         setCtxProperties();
+    }
+
+    function setBrushSize(size) {
+        // Deprecated button handler, mapped to new slider logic
+        document.getElementById('brushSlider').value = size;
+        updateBrushSize(size);
     }
 
     function loadTemplate(t, shouldClear) {
@@ -606,9 +644,8 @@
             clientY = e.clientY;
         }
 
-        // Important: We must account for the ratio between the visual size (rect.width)
-        // and the internal canvas buffer size (canvas.width).
-        // When zoomed in, rect.width is larger than canvas.width, so we scale down coordinates.
+        // Map visual coordinates (rect) to buffer coordinates (canvas.width)
+        // This handles zoom perfectly without needing to resize the buffer.
         const scaleX = canvas.width / rect.width;
         const scaleY = canvas.height / rect.height;
 
