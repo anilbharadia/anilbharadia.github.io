@@ -56,8 +56,8 @@
             position: absolute;
             top: 0;
             left: 0;
-`            width: 100%;   /* FIX: Ensure canvas stretches with zoom */
-            height: 100%;  /* FIX: Ensure canvas stretches with zoom */
+            width: 100%;
+            height: 100%;
             z-index: 10;
             touch-action: none;
         }
@@ -90,9 +90,9 @@
             transform: scale(0.9);
         }
         .color-btn.active {
-            ring: 4px;
-            --tw-ring-color: #3b82f6;
+            box-shadow: 0 0 0 4px #3b82f6; /* Fixed valid CSS for highlight ring */
             transform: scale(1.1);
+            z-index: 10;
         }
 
         .tool-btn {
@@ -153,6 +153,28 @@
             background: #cbd5e1;
             border-radius: 2px;
         }
+
+        /* Color Picker Styling */
+        .color-picker-wrapper {
+            position: relative;
+            overflow: hidden;
+            background: conic-gradient(red, yellow, lime, aqua, blue, magenta, red);
+            border: 2px solid white;
+        }
+        .color-picker-input {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: 200%;
+            height: 200%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        /* Modal Overlay */
+        #modalOverlay {
+            backdrop-filter: blur(4px);
+        }
     </style>
 </head>
 <body class="h-screen flex flex-col overflow-hidden">
@@ -176,6 +198,11 @@
     </div>
 
     <div class="flex gap-2">
+        <!-- AI Story Button -->
+        <button onclick="tellStory()" class="tool-btn flex items-center gap-2 px-3 py-2 rounded-full border-2 border-purple-100 text-purple-600 font-bold hover:bg-purple-50" title="Tell a Story">
+            <span class="text-lg">✨</span> <span class="hidden sm:inline">Story</span>
+        </button>
+
         <button onclick="undo()" class="tool-btn flex items-center gap-2 px-3 py-2 rounded-full border-2 border-yellow-100 text-yellow-600 font-bold hover:bg-yellow-50" title="Undo">
             <i data-lucide="undo-2" class="w-5 h-5"></i>
         </button>
@@ -231,7 +258,15 @@
 
         <!-- Templates -->
         <div class="p-4 flex-1">
-            <h3 class="text-sm font-bold text-slate-400 uppercase mb-3">Pictures</h3>
+            <div class="flex justify-between items-end mb-3">
+                <h3 class="text-sm font-bold text-slate-400 uppercase">Pictures</h3>
+            </div>
+
+            <!-- AI Magic Button -->
+            <button onclick="openPromptModal()" class="w-full mb-3 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-bold shadow-md hover:shadow-lg transform active:scale-95 transition-all flex items-center justify-center gap-2">
+                <span class="text-xl">✨</span> Magic Picture
+            </button>
+
             <div class="grid grid-cols-3 md:grid-cols-2 gap-2" id="templateGrid">
                 <!-- Template thumbnails injected by JS -->
             </div>
@@ -239,8 +274,7 @@
     </aside>
 
     <!-- Center: Canvas Area -->
-    <div class="flex-1 bg-blue-50 relative p-4 overflow-auto flex items-center justify-center" id="scrollContainer">
-        <!-- Removed max-w-4xl to allow free zooming -->
+    <div class="flex-1 bg-blue-50 relative p-4 overflow-auto flex" id="scrollContainer">
         <div id="workspace" class="canvas-container w-full aspect-[4/3] relative flex-shrink-0 cursor-draw">
             <div class="layer-bg"></div>
             <canvas id="drawingCanvas"></canvas>
@@ -253,15 +287,57 @@
     <!-- Bottom/Right Bar: Colors -->
     <div class="bg-white border-t md:border-t-0 md:border-l border-blue-100 p-2 md:p-4 z-20 flex md:flex-col items-center justify-center gap-2 overflow-x-auto md:overflow-y-auto md:w-24 shrink-0">
         <!-- Colors -->
-        <div id="colorPalette" class="flex md:flex-col gap-3 p-1">
+        <div id="colorPalette" class="flex md:flex-col gap-3 p-1 items-center">
             <!-- Colors injected by JS -->
         </div>
     </div>
 </main>
 
+<!-- Modal Overlay -->
+<div id="modalOverlay" class="fixed inset-0 bg-black/40 z-50 hidden flex items-center justify-center p-4">
+    <!-- Prompt Modal -->
+    <div id="promptModal" class="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-md transform transition-all hidden">
+        <h2 class="text-2xl font-bold text-slate-800 mb-2 flex items-center gap-2">
+            <span class="text-3xl">✨</span> Magic Picture
+        </h2>
+        <p class="text-slate-500 mb-4">What do you want to color today?</p>
+
+        <input type="text" id="magicPromptInput" placeholder="e.g. A happy dinosaur eating pizza"
+               class="w-full border-2 border-indigo-100 rounded-xl p-3 text-lg focus:outline-none focus:border-indigo-500 mb-4">
+
+        <div class="flex gap-2 justify-end">
+            <button onclick="closeModals()" class="px-4 py-2 rounded-lg text-slate-500 font-bold hover:bg-slate-100">Cancel</button>
+            <button onclick="generateTemplate()" class="px-6 py-2 rounded-lg bg-indigo-500 text-white font-bold hover:bg-indigo-600 shadow-md">Create!</button>
+        </div>
+    </div>
+
+    <!-- Story Result Modal -->
+    <div id="storyModal" class="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-md transform transition-all hidden">
+        <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+            <span class="text-3xl">📖</span> Story Time
+        </h2>
+        <div id="storyContent" class="text-lg text-slate-700 leading-relaxed bg-amber-50 p-4 rounded-xl border border-amber-100 mb-4 font-medium">
+            <!-- Story goes here -->
+        </div>
+        <div class="flex justify-end">
+            <button onclick="closeModals()" class="px-6 py-2 rounded-lg bg-indigo-500 text-white font-bold hover:bg-indigo-600 shadow-md">Awesome!</button>
+        </div>
+    </div>
+
+    <!-- Loading Modal -->
+    <div id="loadingModal" class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-sm text-center transform transition-all hidden">
+        <div class="animate-spin text-4xl mb-4">✨</div>
+        <h3 class="text-xl font-bold text-slate-800 mb-2">Making Magic...</h3>
+        <p class="text-slate-500" id="loadingText">Asking the magic fairies...</p>
+    </div>
+</div>
+
 <script>
     // Initialize Lucide Icons
     lucide.createIcons();
+
+    // --- Gemini API Config ---
+    const apiKey = ""; // Set by environment
 
     // --- Configuration ---
     const colors = [
@@ -271,7 +347,7 @@
     ];
 
     // Simple SVG Paths for Kids
-    const templates = [
+    let templates = [
         {
             id: 'rocket',
             name: 'Rocket',
@@ -418,9 +494,23 @@
 
         // Handle Window Resize (responsive only when zoom is 100%)
         window.addEventListener('resize', () => {
+            // Recover from invisible start if app loaded in background
+            if (baseCanvasWidth === 0 || baseCanvasHeight === 0) {
+                const rect = workspace.getBoundingClientRect();
+                if (rect.width > 0 && rect.height > 0) {
+                    baseCanvasWidth = rect.width;
+                    baseCanvasHeight = rect.height;
+                    canvas.width = baseCanvasWidth;
+                    canvas.height = baseCanvasHeight;
+                    collisionCanvas.width = baseCanvasWidth;
+                    collisionCanvas.height = baseCanvasHeight;
+                    setCtxProperties();
+                    loadTemplate(currentTemplate, false);
+                }
+            }
+
             if (zoomLevel === 1.0) {
                 // Logic to handle responsiveness could go here
-                // For now, we lock canvas resolution to initial load or reset
             }
         });
 
@@ -434,19 +524,22 @@
             colorPalette.appendChild(btn);
         });
 
-        // Generate Templates
-        templates.forEach(t => {
-            const div = document.createElement('div');
-            div.className = 'template-thumb bg-slate-50 border-2 border-slate-200 rounded-lg p-2 flex flex-col items-center gap-1';
-            div.innerHTML = `
-                    <div class="w-full aspect-square relative text-slate-800">
-                        ${t.svg}
-                    </div>
-                    <span class="text-xs font-bold text-slate-500">${t.name}</span>
-                `;
-            div.onclick = () => loadTemplate(t, true);
-            templateGrid.appendChild(div);
-        });
+        // Add Custom Color Picker at the end
+        const pickerContainer = document.createElement('div');
+        pickerContainer.className = 'color-btn color-picker-wrapper w-10 h-10 md:w-12 md:h-12 rounded-full shadow-sm shrink-0 cursor-pointer';
+
+        const pickerInput = document.createElement('input');
+        pickerInput.type = 'color';
+        pickerInput.className = 'color-picker-input';
+        pickerInput.value = '#ffffff';
+        pickerInput.oninput = (e) => setColor(e.target.value, pickerContainer);
+
+        pickerContainer.appendChild(pickerInput);
+        colorPalette.appendChild(pickerContainer);
+
+
+        // Render initial list
+        renderTemplateList();
 
         // Load Initial Template
         loadTemplate(templates[0], true);
@@ -457,12 +550,192 @@
         setupCanvasEvents();
     }
 
+    function renderTemplateList() {
+        templateGrid.innerHTML = '';
+        // Generate Templates
+        templates.forEach(t => {
+            const div = document.createElement('div');
+            div.className = 'template-thumb bg-slate-50 border-2 border-slate-200 rounded-lg p-2 flex flex-col items-center gap-1';
+            // Add a delete button for custom templates if needed, but keeping simple for now
+            div.innerHTML = `
+                    <div class="w-full aspect-square relative text-slate-800">
+                        ${t.svg}
+                    </div>
+                    <span class="text-xs font-bold text-slate-500 truncate w-full text-center">${t.name}</span>
+                `;
+            div.onclick = () => loadTemplate(t, true);
+            templateGrid.appendChild(div);
+        });
+    }
+
     function setCtxProperties() {
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
         ctx.lineWidth = currentSize;
         ctx.strokeStyle = currentColor;
     }
+
+    // --- GEMINI AI FEATURES ---
+
+    // Helper function to call Gemini
+    async function callGemini(prompt, imageBase64 = null) {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+        let parts = [{ text: prompt }];
+        if (imageBase64) {
+            // Strip header if present
+            const cleanBase64 = imageBase64.replace(/^data:image\/(png|jpeg);base64,/, "");
+            parts.push({
+                inline_data: {
+                    mime_type: "image/png",
+                    data: cleanBase64
+                }
+            });
+        }
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    contents: [{ parts: parts }]
+                })
+            });
+
+            if (!response.ok) {
+                const err = await response.json();
+                throw new Error(err.error?.message || 'Gemini API Error');
+            }
+
+            const data = await response.json();
+            return data.candidates[0].content.parts[0].text;
+
+        } catch (error) {
+            console.error("Gemini Error:", error);
+            alert("Oops! The magic didn't work right now. Try again later!");
+            return null;
+        }
+    }
+
+    // 1. Magic Picture Generator
+    function openPromptModal() {
+        document.getElementById('modalOverlay').classList.remove('hidden');
+        document.getElementById('promptModal').classList.remove('hidden');
+        document.getElementById('magicPromptInput').focus();
+    }
+
+    async function generateTemplate() {
+        const promptInput = document.getElementById('magicPromptInput');
+        const userPrompt = promptInput.value.trim();
+
+        if (!userPrompt) return;
+
+        // Show Loading
+        document.getElementById('promptModal').classList.add('hidden');
+        document.getElementById('loadingModal').classList.remove('hidden');
+        document.getElementById('loadingText').innerText = "Dreaming up a " + userPrompt + "...";
+
+        const systemPrompt = `
+                You are an SVG generation engine for a coloring book.
+                Create a simple, cute black-and-white line drawing SVG of: ${userPrompt}.
+                Requirements:
+                1. viewBox="0 0 100 100"
+                2. fill="none"
+                3. stroke="black"
+                4. stroke-width="2"
+                5. Output ONLY the raw <svg>...</svg> code. No markdown code blocks. No explanations.
+            `;
+
+        const svgCode = await callGemini(systemPrompt);
+
+        // Hide Loading
+        document.getElementById('loadingModal').classList.add('hidden');
+        document.getElementById('modalOverlay').classList.add('hidden');
+
+        if (svgCode) {
+            // Clean up any potential markdown
+            const cleanSvg = svgCode.replace(/```xml|```svg|```/g, '').trim();
+
+            // Add to list
+            const newId = 'custom-' + Date.now();
+            const newTemplate = {
+                id: newId,
+                name: 'Magic: ' + userPrompt,
+                svg: cleanSvg
+            };
+
+            // Add to start of array (after first predefined ones or just append)
+            templates.splice(templates.length - 1, 0, newTemplate); // Insert before 'Blank'
+            renderTemplateList();
+            loadTemplate(newTemplate, true);
+
+            // Clear input
+            promptInput.value = '';
+        }
+    }
+
+    // 2. Story Time
+    async function tellStory() {
+        // Combine layers to send to Gemini
+        const storyCanvas = document.createElement('canvas');
+        storyCanvas.width = canvas.width;
+        storyCanvas.height = canvas.height;
+        const sCtx = storyCanvas.getContext('2d');
+
+        // Fill White
+        sCtx.fillStyle = '#ffffff';
+        sCtx.fillRect(0, 0, storyCanvas.width, storyCanvas.height);
+        // Draw Artwork
+        sCtx.drawImage(canvas, 0, 0);
+        // Draw Outline (need to serialize SVG like in download)
+        const svgEl = overlay.querySelector('svg');
+
+        // Show loading immediately
+        document.getElementById('modalOverlay').classList.remove('hidden');
+        document.getElementById('loadingModal').classList.remove('hidden');
+        document.getElementById('loadingText').innerText = "Reading your drawing...";
+
+        if(svgEl) {
+            const s = new XMLSerializer().serializeToString(svgEl);
+            const encodedData = window.btoa(unescape(encodeURIComponent(s)));
+            const img = new Image();
+            img.src = "data:image/svg+xml;base64," + encodedData;
+            img.onload = async () => {
+                // Draw SVG on top
+                const w = storyCanvas.width * 0.9;
+                const h = storyCanvas.height * 0.9;
+                const x = (storyCanvas.width - w) / 2;
+                const y = (storyCanvas.height - h) / 2;
+                sCtx.drawImage(img, x, y, w, h);
+
+                // Get Base64
+                const imageData = storyCanvas.toDataURL('image/png');
+
+                // Ask Gemini
+                const prompt = "Look at this child's coloring page. Tell a very short (2-3 sentences), cute, and whimsical story about the character or scene. Mention the colors they used if they are unique (e.g. 'purple dinosaur'). Speak directly to the child.";
+                const story = await callGemini(prompt, imageData);
+
+                // Show Result
+                document.getElementById('loadingModal').classList.add('hidden');
+                if (story) {
+                    document.getElementById('storyModal').classList.remove('hidden');
+                    document.getElementById('storyContent').innerText = story;
+                } else {
+                    document.getElementById('modalOverlay').classList.add('hidden');
+                }
+            };
+        } else {
+            // Fallback for blank/no-svg
+            document.getElementById('loadingModal').classList.add('hidden');
+            document.getElementById('modalOverlay').classList.add('hidden');
+        }
+    }
+
+    function closeModals() {
+        document.getElementById('modalOverlay').classList.add('hidden');
+        document.querySelectorAll('#modalOverlay > div').forEach(div => div.classList.add('hidden'));
+    }
+
 
     // --- Logic ---
 
@@ -648,6 +921,12 @@
 
         // Map visual coordinates (rect) to buffer coordinates (canvas.width)
         // This handles zoom perfectly without needing to resize the buffer.
+
+        // SAFETY FIX: If invisible, avoid division by zero
+        if (rect.width === 0 || rect.height === 0) {
+            return { x: 0, y: 0 };
+        }
+
         const scaleX = canvas.width / rect.width;
         const scaleY = canvas.height / rect.height;
 
@@ -679,6 +958,9 @@
     }
 
     function startDrawing(e) {
+        // SAFETY FIX: Prevent drawing if canvas has no size
+        if (canvas.width === 0 || canvas.height === 0) return;
+
         const p = getPoint(e);
 
         if (isBucket) {
@@ -736,6 +1018,10 @@
         // Get data from both drawing canvas (current state) AND collision canvas (boundaries)
         const w = canvas.width;
         const h = canvas.height;
+
+        // SAFETY FIX: Guard against zero dimensions
+        if (w < 1 || h < 1) return;
+
         const drawingData = ctx.getImageData(0, 0, w, h);
         const collisionData = collisionCtx.getImageData(0, 0, w, h);
 
