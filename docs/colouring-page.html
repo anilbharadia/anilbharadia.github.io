@@ -180,14 +180,14 @@
 <body class="h-screen flex flex-col overflow-hidden">
 
 <!-- Header -->
-<header class="bg-white p-3 shadow-sm border-b border-blue-100 flex justify-between items-center z-30 shrink-0">
+<header class="bg-white p-3 shadow-sm border-b border-blue-100 flex justify-between items-center z-30 shrink-0 gap-2">
     <div class="flex items-center gap-2">
         <i data-lucide="palette" class="text-pink-500 w-8 h-8"></i>
         <h1 class="text-2xl font-bold text-slate-700 tracking-wide hidden md:block">Coloring<span class="text-pink-500">Fun</span></h1>
     </div>
 
     <!-- Center Controls (Zoom) -->
-    <div class="flex gap-1 bg-slate-100 rounded-full p-1">
+    <div class="flex gap-1 bg-slate-100 rounded-full p-1 ml-auto mr-auto md:ml-0 md:mr-0">
         <button onclick="changeZoom(-0.2)" class="w-8 h-8 flex items-center justify-center rounded-full bg-white text-slate-600 shadow-sm hover:bg-slate-50 active:scale-90" title="Zoom Out">
             <i data-lucide="zoom-out" class="w-4 h-4"></i>
         </button>
@@ -198,6 +198,11 @@
     </div>
 
     <div class="flex gap-2">
+        <!-- Settings Button -->
+        <button onclick="openSettings()" class="tool-btn flex items-center justify-center w-10 h-10 rounded-full border-2 border-slate-200 text-slate-500 hover:bg-slate-50" title="Settings / API Key">
+            <i data-lucide="settings" class="w-5 h-5"></i>
+        </button>
+
         <!-- AI Story Button -->
         <button onclick="tellStory()" class="tool-btn flex items-center gap-2 px-3 py-2 rounded-full border-2 border-purple-100 text-purple-600 font-bold hover:bg-purple-50" title="Tell a Story">
             <span class="text-lg">✨</span> <span class="hidden sm:inline">Story</span>
@@ -295,6 +300,34 @@
 
 <!-- Modal Overlay -->
 <div id="modalOverlay" class="fixed inset-0 bg-black/40 z-50 hidden flex items-center justify-center p-4">
+
+    <!-- API Settings Modal -->
+    <div id="settingsModal" class="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-md transform transition-all hidden">
+        <h2 class="text-xl font-bold text-slate-800 mb-2 flex items-center gap-2">
+            <i data-lucide="key" class="w-6 h-6 text-slate-400"></i> Settings
+        </h2>
+        <p class="text-slate-500 mb-4 text-sm">To use the <b>Magic Picture</b> and <b>Story Time</b> features, you need a key from Google. It's free!</p>
+
+        <div class="bg-blue-50 border border-blue-100 rounded-lg p-3 mb-4">
+            <p class="text-xs text-blue-700 font-bold mb-1">How to get a key:</p>
+            <ol class="list-decimal list-inside text-xs text-blue-600 space-y-1">
+                <li>Go to <a href="https://aistudio.google.com/app/apikey" target="_blank" class="underline font-bold hover:text-blue-800">Google AI Studio</a></li>
+                <li>Click "Create API key"</li>
+                <li>Copy the text starting with "AIza..."</li>
+                <li>Paste it below 👇</li>
+            </ol>
+        </div>
+
+        <label class="block text-xs font-bold text-slate-400 uppercase mb-1">API Key</label>
+        <input type="password" id="apiKeyInput" placeholder="Paste key here (AIza...)"
+               class="w-full border-2 border-slate-200 rounded-xl p-3 text-sm focus:outline-none focus:border-indigo-500 mb-4">
+
+        <div class="flex gap-2 justify-end">
+            <button onclick="closeModals()" class="px-4 py-2 rounded-lg text-slate-500 font-bold hover:bg-slate-100">Close</button>
+            <button onclick="saveApiKey()" class="px-6 py-2 rounded-lg bg-green-500 text-white font-bold hover:bg-green-600 shadow-md">Save Key</button>
+        </div>
+    </div>
+
     <!-- Prompt Modal -->
     <div id="promptModal" class="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-md transform transition-all hidden">
         <h2 class="text-2xl font-bold text-slate-800 mb-2 flex items-center gap-2">
@@ -337,7 +370,8 @@
     lucide.createIcons();
 
     // --- Gemini API Config ---
-    const apiKey = ""; // Set by environment
+    // Try to get key from Local Storage first
+    let apiKey = localStorage.getItem('gemini_api_key') || "";
 
     // --- Configuration ---
     const colors = [
@@ -577,8 +611,37 @@
 
     // --- GEMINI AI FEATURES ---
 
+    // Settings Logic
+    function openSettings() {
+        document.getElementById('modalOverlay').classList.remove('hidden');
+        document.getElementById('settingsModal').classList.remove('hidden');
+        // Pre-fill if exists
+        if (apiKey) {
+            document.getElementById('apiKeyInput').value = apiKey;
+        }
+    }
+
+    function saveApiKey() {
+        const input = document.getElementById('apiKeyInput');
+        const val = input.value.trim();
+        if (val) {
+            apiKey = val;
+            localStorage.setItem('gemini_api_key', val);
+            closeModals();
+            alert("Key saved! You can now use the magic features.");
+        } else {
+            alert("Please paste a key first.");
+        }
+    }
+
     // Helper function to call Gemini
     async function callGemini(prompt, imageBase64 = null) {
+        // Guard: Check API Key
+        if (!apiKey) {
+            openSettings();
+            return null;
+        }
+
         const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
 
         let parts = [{ text: prompt }];
@@ -612,13 +675,17 @@
 
         } catch (error) {
             console.error("Gemini Error:", error);
-            alert("Oops! The magic didn't work right now. Try again later!");
+            alert("Oops! Something went wrong. Check your API key in Settings.");
             return null;
         }
     }
 
     // 1. Magic Picture Generator
     function openPromptModal() {
+        if (!apiKey) {
+            openSettings();
+            return;
+        }
         document.getElementById('modalOverlay').classList.remove('hidden');
         document.getElementById('promptModal').classList.remove('hidden');
         document.getElementById('magicPromptInput').focus();
@@ -676,6 +743,11 @@
 
     // 2. Story Time
     async function tellStory() {
+        if (!apiKey) {
+            openSettings();
+            return;
+        }
+
         // Combine layers to send to Gemini
         const storyCanvas = document.createElement('canvas');
         storyCanvas.width = canvas.width;
