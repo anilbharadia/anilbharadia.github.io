@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "coloringbook.pics Color Picker Adder",
+  "version": "2.0",
+  "description": "Adds as many custom color picker as you want",
+  "permissions": [
+    "storage"
+  ],
+  "action": {
+    "default_title": "coloringbook.pics Color Picket Adder"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://coloringbook.pics/coloring-books-for-kids/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
