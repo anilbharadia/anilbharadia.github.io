@@ -4,10 +4,13 @@
     // -----------------------------------------------------------------
     // TEST LOG: You can check the console (F12) to see if it's running.
     // -----------------------------------------------------------------
-    console.log("coloringbook.pics Color Picker Adder [Chrome Extension] is running!");
+    console.log("v2 coloringbook.pics Color Picker Adder [Chrome Extension] is running!");
     // -----------------------------------------------------------------
 
 
+    const box4 =  document.getElementById("box4")
+    let lastBox = box4
+    let lastBoxNumber = 4
 
     function createAddButton() {
         const button = document.createElement("button");
@@ -123,13 +126,36 @@
         });
     }
 
-    // --- Execution ---
+    function addColorPicker() {
+        let nextBoxNumber = lastBoxNumber + 1;
+        let nextBox = `<div id="box${nextBoxNumber}" class="box" style="border-color: rgb(255, 255, 0);">
+    <div id="customcolor${nextBoxNumber}" class="customcolorx" style="background: #000;fill:#000;" x="0" y="0"
+         onclick="selected(this.id)"></div>
+    <input type="color" value="#ffff00" id="colorPicker${nextBoxNumber}" class="farba"
+           title="Click on the palette and choose any color" onclick="selected(this.id)"></div>`
+        lastBox.after(nextBox);
+
+        let nextColorPicker = document.getElementById("colorPicker" + nextBoxNumber);
+        let nextCustomcolor = document.getElementById("customcolor"+ nextBoxNumber);
+        nextBox.style.borderColor = nextColorPicker.value;
+
+        nextColorPicker.addEventListener("input", function (event) {
+            nextBox.style.borderColor = event.target.value;
+        }, false);
+        nextColorPicker.addEventListener("input", function (event) {
+            nextCustomcolor.style.background = event.target.value;
+            nextCustomcolor.style.fill = event.target.value;
+        }, false);
+
+        lastBox = nextBox;
+        lastBoxNumber = nextBoxNumber;
+    }
 
     // Load settings and initialize
     (async function init() {
 
         // Run immediately on what's already on the page
-        document.getElementById("box4").after(createAddButton());
+        box4.after(createAddButton());
 
     })();
 
