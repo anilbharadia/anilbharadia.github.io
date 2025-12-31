@@ -66,12 +66,14 @@
 
     function addColorPicker() {
         let nextBoxNumber = lastBoxNumber + 1;
-        let nextBox = `<div id="box${nextBoxNumber}" class="box" style="border-color: rgb(255, 255, 0);">
+        let nextBoxHTML = `<div id="box${nextBoxNumber}" class="box selectioncustomcolor" style="border-color: rgb(255, 255, 0);">
     <div id="customcolor${nextBoxNumber}" class="customcolorx" style="background: #000;fill:#000;" x="0" y="0"
          onclick="selected(this.id)"></div>
     <input type="color" value="#ffff00" id="colorPicker${nextBoxNumber}" class="farba"
-           title="Click on the palette and choose any color" onclick="selected(this.id)"></div>`
-        lastBox.after(nextBox);
+           title="Click on the palette and choose any color" onclick="selected(this.id)"></div>`;
+        lastBox.insertAdjacentHTML('afterend', nextBoxHTML);
+
+        let nextBox = document.getElementById("box" + nextBoxNumber);
 
         let nextColorPicker = document.getElementById("colorPicker" + nextBoxNumber);
         let nextCustomcolor = document.getElementById("customcolor"+ nextBoxNumber);
