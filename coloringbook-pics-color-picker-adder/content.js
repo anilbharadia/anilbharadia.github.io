@@ -54,6 +54,10 @@
         button.addEventListener('mouseup', () => {
             button.style.transform = 'scale(1)';
         });
+``
+        button.onclick = () => {
+            addColorPicker()
+        }
 
         let addDiv = document.createElement("div")
         addDiv.appendChild(button);
