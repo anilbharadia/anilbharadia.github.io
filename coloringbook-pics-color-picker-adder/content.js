@@ -69,35 +69,34 @@
         let nextBoxHTML =
             `<div id="box${nextBoxNumber}" class="box" style="border-color: rgb(255, 255, 0);">
                 <div id="customcolor${nextBoxNumber}" class="customcolorx" style="background: #000;fill:#000;" x="0" y="0"></div>
-                <input type="color" value="#ffff00" id="colorPicker${nextBoxNumber}" class="farba"
+                <input type="color" value="#000" id="colorPicker${nextBoxNumber}" class="farba"
                     title="Click on the palette and choose any color">
             </div>
             `;
         lastBox.insertAdjacentHTML('afterend', nextBoxHTML);
 
         let nextBox = document.getElementById("box" + nextBoxNumber);
-
         let nextColorPicker = document.getElementById("colorPicker" + nextBoxNumber);
         let nextCustomcolor = document.getElementById("customcolor"+ nextBoxNumber);
+
         nextBox.style.borderColor = nextColorPicker.value;
 
         // Add click event listeners to call the page's selected() function
         nextCustomcolor.addEventListener("click", function() {
-            if (typeof selected === 'function') {
-                selected(nextCustomcolor.id);
+            if (typeof window.selected === 'function') {
+                window.selected(nextCustomcolor.id);
             }
         }, false);
 
         nextColorPicker.addEventListener("click", function() {
-            if (typeof selected === 'function') {
-                selected(nextColorPicker.id);
+            if (typeof window.selected === 'function') {
+                window.selected(nextColorPicker.id);
             }
         }, false);
 
+        // Update colors when color picker changes
         nextColorPicker.addEventListener("input", function (event) {
             nextBox.style.borderColor = event.target.value;
-        }, false);
-        nextColorPicker.addEventListener("input", function (event) {
             nextCustomcolor.style.background = event.target.value;
             nextCustomcolor.style.fill = event.target.value;
         }, false);
