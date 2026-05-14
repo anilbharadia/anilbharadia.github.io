@@ -34,13 +34,12 @@ for file_name in files:
     # Clean the DATA inside the column and then convert
     # .str.strip() removes the " 07/01/26  " extra spaces
     df['Date'] = pd.to_datetime(df['Date'].str.strip(), format='%d/%m/%y')
-
-    # 3. Convert the 'Date' column to datetime objects
-    # format='%d/%m/%y' matches the Day/Month/2-digit Year format
-    df['Date'] = pd.to_datetime(df['Date'], format='%d/%m/%y')
-
     # 4. Convert the datetime objects back to strings in the 'YYYY.MM.DD' format
     df['Date'] = df['Date'].dt.strftime('%Y.%m.%d')
+
+    df['Value Dat'] = pd.to_datetime(df['Value Dat'].str.strip(), format='%d/%m/%y')
+    # Convert the datetime objects back to strings in the 'YYYY.MM.DD' format
+    df['Value Dat'] = df['Value Dat'].dt.strftime('%Y.%m.%d')
 
     # 5. Save the updated data back to a new CSV file
     output_path = os.path.join(directory_path, f"{file_name}.csv")
