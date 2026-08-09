@@ -2,7 +2,7 @@
 ## Change Git user for a repository
 
 ```sh
-git config user.name "anilbhradia"
+git config user.name "anilbharadia"
 git config user.email "anil.bharadia@gmail.com"
 ```
 
